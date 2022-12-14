@@ -41,8 +41,12 @@ dependencies:
   # Svg
   flutter_svg: ^1.1.6
 
-  # Navigation Bar
+  # UI
+  sign_button: ^2.0.2
   persistent_bottom_nav_bar_v2: ^4.2.6
+
+  # Dependency Injection
+  get_it: ^7.2.0
 
 dev_dependencies:
   flutter_test:
