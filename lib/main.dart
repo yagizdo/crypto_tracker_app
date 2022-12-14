@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import 'firebase_options.dart';
+import 'services/navigation_service.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -22,9 +23,10 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return ScreenUtilInit(
       designSize: const Size(375, 845),
-      builder: (context, child) => const MaterialApp(
+      builder: (context, child) => MaterialApp(
         title: 'Crypto Tracker',
-        home: BaseView(),
+        home: const BaseView(),
+        navigatorKey: getIt<NavigationService>().navigatorKey,
       ),
     );
   }
