@@ -2,15 +2,17 @@ import 'package:crypto_tracker/widgets/auth/auth_textfield.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+import '../../../services/auth/auth_service.dart';
+import '../../../services/locator.dart';
 import '../../../services/validator.dart';
 import '../../../utils/app_colors.dart';
 import '../../../utils/app_constants.dart';
-import '../../../utils/app_textstyles.dart';
+import '../../../views/auth_view.dart';
 import '../../main_widgets/tapWrapper.dart';
 
 class RegisterComponent extends StatefulWidget {
   const RegisterComponent({Key? key, required this.onRegisterChanged}) : super(key: key);
-  final ValueSetter<bool> onRegisterChanged;
+  final ValueSetter<AuthFormState> onRegisterChanged;
 
   @override
   State<RegisterComponent> createState() => _RegisterComponentState();
@@ -22,7 +24,7 @@ class _RegisterComponentState extends State<RegisterComponent> {
   late TextEditingController _passwordController;
   late TextEditingController _passwordConfirmController;
 
-  //final AuthService _authService = getIt<AuthService>();
+  final AuthService _authService = getIt<AuthService>();
   bool isLoading = false;
 
   @override
@@ -36,8 +38,8 @@ class _RegisterComponentState extends State<RegisterComponent> {
     setState(() {
       isLoading =true;
     });
-    //await _authService.registerWithEmailAndPassword(userEmail: _emailController.text, userPassword: _passwordController.text);
-    //await _authService.sendVerificationMail();
+    await _authService.registerWithEmailAndPassword(userEmail: _emailController.text, userPassword: _passwordController.text);
+    await _authService.sendVerificationMail();
     setState(() {
       isLoading =false;
     });
@@ -110,7 +112,7 @@ class _RegisterComponentState extends State<RegisterComponent> {
           height10Per(context: context),
           TextButton(
               onPressed: () {
-                widget.onRegisterChanged(true);
+                widget.onRegisterChanged(AuthFormState.login);
               },
               child: const Text('You have an account? Sign In!')),
         ],

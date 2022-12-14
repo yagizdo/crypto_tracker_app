@@ -1,7 +1,10 @@
+import 'package:crypto_tracker/views/auth_view.dart';
 import 'package:crypto_tracker/widgets/social_auth_btns.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+import '../../../services/auth/auth_service.dart';
+import '../../../services/locator.dart';
 import '../../../services/validator.dart';
 import '../../../utils/app_constants.dart';
 import '../../main_widgets/tapWrapper.dart';
@@ -10,7 +13,7 @@ import '../auth_textfield.dart';
 class LoginComponent extends StatefulWidget {
   const LoginComponent({Key? key, required this.onRegisterChanged})
       : super(key: key);
-  final ValueSetter<bool> onRegisterChanged;
+  final ValueSetter<AuthFormState> onRegisterChanged;
   @override
   State<LoginComponent> createState() => _LoginComponentState();
 }
@@ -19,7 +22,7 @@ class _LoginComponentState extends State<LoginComponent> {
   late GlobalKey<FormState> _formKey;
   late TextEditingController _emailController;
   late TextEditingController _passwordController;
-  //final AuthService _authService = getIt<AuthService>();
+  final AuthService _authService = getIt<AuthService>();
   bool isLoading = false;
 
   Future<void> loginWithAnonymously() async {
@@ -37,9 +40,9 @@ class _LoginComponentState extends State<LoginComponent> {
       isLoading = true;
     });
 
-   /* await _authService.signInWithEmailAndPassword(
+   await _authService.signInWithEmailAndPassword(
         userEmail: _emailController.text,
-        userPassword: _passwordController.text);*/
+        userPassword: _passwordController.text);
     setState(() {
       isLoading = false;
     });
@@ -82,12 +85,12 @@ class _LoginComponentState extends State<LoginComponent> {
         height5Per(context: context),
         TextButton(
             onPressed: () {
-              widget.onRegisterChanged(true);
+              widget.onRegisterChanged(AuthFormState.resetPassword);
             },
             child: const Text('Forgot Password?')),
         TextButton(
             onPressed: () {
-              widget.onRegisterChanged(true);
+              widget.onRegisterChanged(AuthFormState.register);
             },
             child: const Text('You don\'t have an account? Register')),
         height5Per(context: context),
