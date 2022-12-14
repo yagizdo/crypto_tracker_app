@@ -1,5 +1,6 @@
 import 'package:crypto_tracker/services/auth/i_auth_service.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
 import '../../utils/extensions/auth_exception_handler.dart';
@@ -38,9 +39,11 @@ class AuthService extends IAuthService {
   Future<void> sendResetPasswordMail({required String userEmail}) async {
     try {
       await _firebaseAuth.sendPasswordResetEmail(email: userEmail);
+      _navigationService.showSuccessSnackbar(errorMessage: 'If the email address is valid, you will receive a password reset email shortly.');
     } on FirebaseAuthException catch (e) {
       var exceptionMessage = AuthExceptionHandler.generateExceptionMessage(e);
-      _navigationService.showErrorSnackbar(errorMessage: exceptionMessage);
+      _navigationService.showSuccessSnackbar(errorMessage: 'If the email address is valid, you will receive a password reset email shortly.');
+      debugPrint('Error: $exceptionMessage');
 
     } catch(e) {
       _navigationService.showErrorSnackbar(errorMessage: 'Tanimlanmamis bir hata olustu..');

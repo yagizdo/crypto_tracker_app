@@ -24,4 +24,21 @@ class NavigationService {
     ScaffoldMessenger.of(navigatorKey.currentContext!).clearSnackBars();
     ScaffoldMessenger.of(navigatorKey.currentContext!).showSnackBar(snackbar);
   }
+
+  void showSuccessSnackbar({required String errorMessage}) {
+    SnackBar snackbar = SnackBar(
+      content: SizedBox(
+        height: 30.w,
+        child: Center(
+          child: Text(
+            errorMessage,
+          ),
+        ),
+      ),
+      backgroundColor: CupertinoColors.activeGreen,
+      duration: const Duration(seconds: 2),
+    );
+    ScaffoldMessenger.of(navigatorKey.currentContext!).clearSnackBars();
+    ScaffoldMessenger.of(navigatorKey.currentContext!).showSnackBar(snackbar);
+  }
 }
