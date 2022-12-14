@@ -1,3 +1,4 @@
+import 'package:crypto_tracker/widgets/social_auth_btns.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -62,7 +63,12 @@ class _LoginComponentState extends State<LoginComponent> {
 
   @override
   Widget build(BuildContext context) {
-    return _loginComponent();
+    return Column(
+      children: [
+        _loginComponent(),
+        const SocialAuthButtons(),
+      ],
+    );
   }
 
   Widget _loginComponent() {
