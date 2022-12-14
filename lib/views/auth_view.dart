@@ -5,6 +5,7 @@ import '../utils/app_constants.dart';
 import '../utils/app_textstyles.dart';
 import '../widgets/auth/login/login_component.dart';
 import '../widgets/auth/register/register_component.dart';
+import '../widgets/auth/reset_password_comp.dart';
 import '../widgets/main_widgets/main_layout.dart';
 
 enum AuthFormState { login, register, resetPassword }
@@ -17,7 +18,6 @@ class AuthView extends StatefulWidget {
 }
 
 class _AuthViewState extends State<AuthView> {
-
   AuthFormState _authFormState = AuthFormState.login;
 
   Map<AuthFormState, String> appbarTitles = {
@@ -70,22 +70,22 @@ class _AuthViewState extends State<AuthView> {
         return RegisterComponent(
           onRegisterChanged: (authFormStateVal) {
             setState(
-                  () {
+              () {
                 _authFormState = authFormStateVal;
               },
             );
           },
         );
-     /* case AuthFormState.resetPassword:
+      case AuthFormState.resetPassword:
         return ResetPasswordComp(
           onRegisterChanged: (authFormStateVal) {
             setState(
-                  () {
+              () {
                 _authFormState = authFormStateVal;
               },
             );
           },
-        );*/
+        );
 
       default:
         LoginComponent(
