@@ -1,5 +1,6 @@
 import 'package:crypto_tracker/services/locator.dart';
 import 'package:crypto_tracker/views/base_view.dart';
+import 'package:crypto_tracker/views/onboarding_view.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -25,7 +26,7 @@ class MyApp extends StatelessWidget {
       designSize: const Size(375, 845),
       builder: (context, child) => MaterialApp(
         title: 'Crypto Tracker',
-        home: const BaseView(),
+        home: OnboardingView(),
         navigatorKey: getIt<NavigationService>().navigatorKey,
       ),
     );

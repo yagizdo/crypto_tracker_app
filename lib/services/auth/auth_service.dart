@@ -11,6 +11,7 @@ class AuthService extends IAuthService {
   final NavigationService _navigationService = getIt<NavigationService>();
   late User? _user;
   get currentUser => _firebaseAuth.currentUser;
+  get isUserEmailVerified => _firebaseAuth.currentUser?.emailVerified;
 
 
 

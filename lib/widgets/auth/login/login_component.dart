@@ -94,7 +94,6 @@ class _LoginComponentState extends State<LoginComponent> {
             },
             child: const Text('You don\'t have an account? Register')),
         height5Per(context: context),
-        signWithAnonymouslyBtn(),
       ],
     );
   }
@@ -122,27 +121,6 @@ class _LoginComponentState extends State<LoginComponent> {
         ],
       ),
     );
-  }
-
-  Widget signWithAnonymouslyBtn() {
-    return TapWrapper(
-        onTap: loginWithAnonymously,
-        child: Container(
-          width: 250.w,
-          height: 50.w,
-          decoration: BoxDecoration(
-            color: Colors.orangeAccent,
-            borderRadius: BorderRadius.circular(20),
-          ),
-          alignment: Alignment.center,
-          child: isLoading
-              ? const Center(
-            child: CircularProgressIndicator(
-              color: Colors.white,
-            ),
-          )
-              : const Text('Login Anonymously'),
-        ));
   }
 
   Widget _loginButton() {
