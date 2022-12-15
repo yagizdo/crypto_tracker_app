@@ -30,7 +30,7 @@ class _EmailVerifyViewState extends State<EmailVerifyView> {
       const Duration(seconds: 3),
           (timer) async {
         await _authService.reloadUser();
-        if(_authService.currentUser.emailVerified!){
+        if(_authService.currentUser.emailVerified){
           timer.cancel();
           if (!mounted) return;
           Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => const BaseView(),),);

@@ -44,7 +44,7 @@ class AuthService extends IAuthService {
 
   @override
   Future<void> reloadUser() async {
-    await _firebaseAuth.currentUser!.reload();
+    await _firebaseAuth.currentUser?.reload();
   }
 
   @override
@@ -68,7 +68,7 @@ class AuthService extends IAuthService {
       _navigationService.showSuccessSnackbar(errorMessage: LocaleKeys.errors_email_send.tr());
     } on FirebaseAuthException catch (e) {
       var exceptionMessage = AuthExceptionHandler.generateExceptionMessage(e);
-      _navigationService.showSuccessSnackbar(errorMessage: LocaleKeys.errors_email_send.tr());
+      _navigationService.showSuccessSnackbar(errorMessage: exceptionMessage);
 
     } catch(e) {
       _navigationService.showErrorSnackbar(errorMessage: LocaleKeys.errors_undefinied.tr());
@@ -80,6 +80,7 @@ class AuthService extends IAuthService {
   Future<void> sendVerificationMail() async {
     try {
       await _firebaseAuth.currentUser!.sendEmailVerification();
+      _navigationService.showSuccessSnackbar(errorMessage: LocaleKeys.errors_email_send.tr());
     } on FirebaseAuthException catch (e) {
       var exceptionMessage = AuthExceptionHandler.generateExceptionMessage(e);
       _navigationService.showErrorSnackbar(errorMessage: exceptionMessage);
