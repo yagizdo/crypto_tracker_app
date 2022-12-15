@@ -41,7 +41,11 @@ class _HomeViewState extends State<HomeView> {
           elevation: 0,
           title: Text(
             'Home',
-            //style: AppTextStyle.weaponsTitleTxt(),
+            style: TextStyle(
+              color: AppColors.white,
+              fontSize: 30.sp,
+              fontWeight: FontWeight.w600,
+            ),
           ),
           actions: [
             Padding(

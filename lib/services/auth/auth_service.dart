@@ -24,7 +24,7 @@ class AuthService extends IAuthService {
   /// Generates a cryptographically secure random nonce, to be included in a
   /// credential request.
   String generateNonce([int length = 32]) {
-    final charset =
+    const charset =
         '0123456789ABCDEFGHIJKLMNOPQRSTUVXYZabcdefghijklmnopqrstuvwxyz-._';
     final random = Random.secure();
     return List.generate(length, (_) => charset[random.nextInt(charset.length)])
@@ -71,7 +71,6 @@ class AuthService extends IAuthService {
 
     } catch(e) {
       _navigationService.showErrorSnackbar(errorMessage: 'Tanimlanmamis bir hata olustu..');
-      print('Tanimlanmamis hata kodu: ${e}');
     }
 
   }
@@ -86,7 +85,6 @@ class AuthService extends IAuthService {
 
     } catch(e) {
       _navigationService.showErrorSnackbar(errorMessage: 'Tanimlanmamis bir hata olustu..');
-      print('Tanimlanmamis hata kodu: ${e}');
     }
   }
 
@@ -103,7 +101,6 @@ class AuthService extends IAuthService {
 
     } catch(e) {
       _navigationService.showErrorSnackbar(errorMessage: 'Tanimlanmamis bir hata olustu..');
-      print('Tanimlanmamis hata kodu: ${e}');
     }
    _user = userCredential?.user;
    return _user;

@@ -31,7 +31,6 @@ class _EmailVerifyViewState extends State<EmailVerifyView> {
           (timer) async {
         await _authService.reloadUser();
         if(_authService.currentUser.emailVerified!){
-          print('Timer duraklatildi');
           timer.cancel();
           if (!mounted) return;
           Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => const BaseView(),),);
@@ -68,7 +67,6 @@ class _EmailVerifyViewState extends State<EmailVerifyView> {
                 TapWrapper(
                   onTap: () async {
                     await _authService.sendVerificationMail();
-                    print(['Email gonderildi']);
                   },
                   child: Container(
                     alignment: Alignment.center,
@@ -82,7 +80,6 @@ class _EmailVerifyViewState extends State<EmailVerifyView> {
                   onTap: () async {
                     timer.cancel();
                     await _authService.logout();
-                    print('Cikis yapildi');
                   },
                   child: Container(
                     alignment: Alignment.center,

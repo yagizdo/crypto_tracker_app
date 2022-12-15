@@ -1,3 +1,4 @@
+import 'package:crypto_tracker/services/navigation_service.dart';
 import 'package:crypto_tracker/widgets/auth/auth_textfield.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -7,6 +8,7 @@ import '../../../services/locator.dart';
 import '../../../services/validator.dart';
 import '../../../utils/app_colors.dart';
 import '../../../utils/app_constants.dart';
+import '../../../utils/app_textstyles.dart';
 import '../../../views/auth_view.dart';
 import '../../main_widgets/tapWrapper.dart';
 
@@ -25,6 +27,7 @@ class _RegisterComponentState extends State<RegisterComponent> {
   late TextEditingController _passwordConfirmController;
 
   final AuthService _authService = getIt<AuthService>();
+  final NavigationService _navigationService = getIt<NavigationService>();
   bool isLoading = false;
 
   @override
@@ -128,11 +131,7 @@ class _RegisterComponentState extends State<RegisterComponent> {
         if (_formKey.currentState!.validate()) {
           if (_passwordController.text == _passwordConfirmController.text) {
             registerWithEmailAndPassword();
-          } else {
-            print('Passwords not same');
           }
-        } else {
-          print('Form not valid');
         }
       },
       child: Container(
@@ -146,7 +145,7 @@ class _RegisterComponentState extends State<RegisterComponent> {
         child: Center(
           child:isLoading ? SizedBox(width: 25.w, height: 25.w, child: CircularProgressIndicator(color: AppColors.blackBackground, strokeWidth: 2.5.w,)) : Text(
             'Register',
-            //style: AppTextStyle.loginBtnTitle(),
+            style: AppTextStyle.loginBtnTitle(),
           ),
         ),
       ),

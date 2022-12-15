@@ -54,9 +54,6 @@ class AuthExceptionHandler {
       case 'user-disabled':
         status = AuthResultStatus.userDisabled;
         break;
-      case 'user-dısabled':
-        status = AuthResultStatus.userDisabled;
-        break;
       case 'too-many-requests':
         status = AuthResultStatus.tooManyRequests;
         break;
@@ -66,13 +63,7 @@ class AuthExceptionHandler {
       case 'email-already-in-use':
         status = AuthResultStatus.emailAlreadyExists;
         break;
-      case 'emaıl-already-ın-use':
-        status = AuthResultStatus.emailAlreadyExists;
-        break;
       case 'invalid-credential':
-        status = AuthResultStatus.invalidCredential;
-        break;
-      case 'ınvalıd-credentıal':
         status = AuthResultStatus.invalidCredential;
         break;
       case 'ERROR_INVALID_CREDENTIAL':
@@ -84,13 +75,7 @@ class AuthExceptionHandler {
       case 'credential-already-in-use':
         status = AuthResultStatus.credentialAlreadyInUse;
         break;
-      case 'credentıal-already-ın-use':
-        status = AuthResultStatus.credentialAlreadyInUse;
-        break;
       case 'account-exists-with-different-credential':
-        status = AuthResultStatus.accountAlreadyExist;
-        break;
-      case 'account-exısts-wıth-dıfferent-credentıal':
         status = AuthResultStatus.accountAlreadyExist;
         break;
       case 'expired-action-code':

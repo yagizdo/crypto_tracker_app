@@ -7,6 +7,7 @@ import '../../../services/auth/auth_service.dart';
 import '../../../services/locator.dart';
 import '../../../services/validator.dart';
 import '../../../utils/app_constants.dart';
+import '../../../utils/app_textstyles.dart';
 import '../../main_widgets/tapWrapper.dart';
 import '../auth_textfield.dart';
 
@@ -24,16 +25,6 @@ class _LoginComponentState extends State<LoginComponent> {
   late TextEditingController _passwordController;
   final AuthService _authService = getIt<AuthService>();
   bool isLoading = false;
-
-  Future<void> loginWithAnonymously() async {
-    setState(() {
-      isLoading = true;
-    });
-    //await _authService.loginWithAnonymously();
-    setState(() {
-      isLoading = false;
-    });
-  }
 
   Future<void> loginWithEmailAndPassword() async {
     setState(() {
@@ -128,8 +119,6 @@ class _LoginComponentState extends State<LoginComponent> {
       onTap: () {
         if (_formKey.currentState!.validate()) {
           loginWithEmailAndPassword();
-        } else {
-          print('Form not valid');
         }
       },
       child: Container(
@@ -147,7 +136,7 @@ class _LoginComponentState extends State<LoginComponent> {
           )
               : Text(
             'Login',
-            //style: AppTextStyle.loginBtnTitle(),
+            style: AppTextStyle.loginBtnTitle(),
           ),
         ),
       ),
