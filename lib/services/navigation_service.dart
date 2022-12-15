@@ -19,7 +19,7 @@ class NavigationService {
         ),
       ),
       backgroundColor: CupertinoColors.destructiveRed,
-      duration: const Duration(seconds: 2),
+      duration: const Duration(seconds: 4),
     );
     ScaffoldMessenger.of(navigatorKey.currentContext!).clearSnackBars();
     ScaffoldMessenger.of(navigatorKey.currentContext!).showSnackBar(snackbar);

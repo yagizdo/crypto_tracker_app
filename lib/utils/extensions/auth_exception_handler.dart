@@ -111,7 +111,6 @@ class AuthExceptionHandler {
         break;
       // Apple Sign In End //
       default:
-        print('Case ${e} is not yet implemented');
         status = AuthResultStatus.undefined;
     }
     return status;

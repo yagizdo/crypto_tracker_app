@@ -6,10 +6,12 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../services/auth/auth_service.dart';
 import '../../../services/locator.dart';
 import '../../../services/validator.dart';
+import '../../../utils/app_colors.dart';
 import '../../../utils/app_constants.dart';
 import '../../../utils/app_textstyles.dart';
 import '../../main_widgets/tapWrapper.dart';
 import '../auth_textfield.dart';
+import '../horizantal_or_line.dart';
 
 class LoginComponent extends StatefulWidget {
   const LoginComponent({Key? key, required this.onRegisterChanged})
@@ -69,21 +71,26 @@ class _LoginComponentState extends State<LoginComponent> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
-        height10Per(context: context),
         _loginFormComp(),
-        height10Per(context: context),
+        height2Per(context: context),
+        Padding(
+          padding: EdgeInsets.only(right: 220.w),
+          child: TextButton(
+              onPressed: () {
+                widget.onRegisterChanged(AuthFormState.resetPassword);
+              },
+              child: const Text('Forgot Password?')),
+        ),
+        height5Per(context: context),
         _loginButton(),
         height5Per(context: context),
-        TextButton(
-            onPressed: () {
-              widget.onRegisterChanged(AuthFormState.resetPassword);
-            },
-            child: const Text('Forgot Password?')),
         TextButton(
             onPressed: () {
               widget.onRegisterChanged(AuthFormState.register);
             },
             child: const Text('You don\'t have an account? Register')),
+        height5Per(context: context),
+        HorizontalOrLine(label: 'OR', height: 15.w, color: AppColors.white,),
         height5Per(context: context),
       ],
     );
