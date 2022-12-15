@@ -1,0 +1,29 @@
+{
+  "errors": {
+    "invalid_email": "E-posta adresiniz geçersiz.",
+    "wrong_password": "E-posta adresi veya şifre yanlış.",
+    "user_disabled": "Kullanıcı hesabı aktif değil.",
+    "password_not_enough": "Parolanız 6 karakterden uzun olmalıdır.",
+    "invalid_verification_code": "Girdiğiniz kod yanlıştır.",
+    "invalid_phone_number": "Telefon numaranız geçersiz.",
+    "too_many_requests": "Çok fazla istek gönderildi. Lütfen daha sonra tekrar deneyin.",
+    "operation_not_allowed": "E-posta adresiyle girişe izin verilmiyor.",
+    "email_already_exists": "Bu E-posta adresiyle daha önce hesap oluşturulmuş. Lütfen başka bir e-posta adresi kullanın.",
+    "account_already_exists": "Bu E-posta adresiyle daha önce hesap oluşturulmuş. Lütfen başka bir e-posta adresi kullanın.",
+    "credential_already_in_use": "Bu giriş kimliği başka bir hesapla ilişkilendirilmiş. Lütfen başka bir hesapla giriş yapmayı deneyin.",
+    "invalid_credential": "Bu giriş yönteminde bir sorun var. Lütfen farklı bir giriş yöntemi seçiniz.",
+    "aborted_by_user": "Giriş kullanıcı tarafından iptal edildi.",
+    "expired_action_code": "Sifre sifirlama kodunuzun suresi doldu.",
+    "invalid_verification_id": "ID valid degil.",
+    "apple_unknown": "Apple tarafinda tanimlanamayan bir hata olustu.",
+    "apple_cancelled": "Kullanıcı, yetkilendirme girişimini iptal etti.",
+    "apple_invalid_response": "Gecersiz istek.",
+    "apple_not_handled": "Tanimlanmamis bir hata olustu.",
+    "apple_not_interactive": "Yetkilendirme talebi etkileşimli değildir.",
+    "apple_failed": "Yetkilendirme girişimi başarısız oldu.",
+    "apple_credential_error": "Apple yetkilendirme kimlik bilgileri alınamadı.",
+    "undefinied": "Tanımlanamayan bir hata oluştu.",
+    "email_send": "E-posta adresi geçerliyse, kısa süre içinde bir şifre sıfırlama e-postası alacaksınız.",
+    "apple_unsupported_device": "Bu cihaz, apple oturum açma için uygun değildir."
+  }
+}

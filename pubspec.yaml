@@ -41,8 +41,25 @@ dependencies:
   # Svg
   flutter_svg: ^1.1.6
 
-  # Navigation Bar
+  # UI
+  sign_button: ^2.0.2
   persistent_bottom_nav_bar_v2: ^4.2.6
+
+  # Dependency Injection
+  get_it: ^7.2.0
+
+  # Firebase
+  firebase_core: ^2.3.0
+  firebase_auth: ^4.1.5
+  cloud_firestore: ^4.1.0
+
+  # Social Auths
+  google_sign_in: ^5.4.2
+  sign_in_with_apple: ^4.2.0
+  crypto: ^3.0.2
+
+  # Localizations
+  easy_localization: ^3.0.1
 
 dev_dependencies:
   flutter_test:
