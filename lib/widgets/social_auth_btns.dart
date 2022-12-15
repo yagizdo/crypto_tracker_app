@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:crypto_tracker/utils/app_constants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -40,7 +42,7 @@ class _SocialAuthButtonsState extends State<SocialAuthButtons> {
             elevation: 0,
             onPressed: _signInWithGoogle),
         height5Per(context: context),
-        SignInButton(
+        Platform.isIOS ? SignInButton(
             buttonType: ButtonType.appleDark,
             buttonSize: ButtonSize.medium,
             width: 220.w,
@@ -49,7 +51,7 @@ class _SocialAuthButtonsState extends State<SocialAuthButtons> {
               borderRadius: BorderRadius.circular(10),
             ),
             elevation: 0,
-            onPressed: _signInWithApple),
+            onPressed: _signInWithApple) : const SizedBox(),
       ],
     );
   }
