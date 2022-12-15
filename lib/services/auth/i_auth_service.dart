@@ -9,4 +9,5 @@ abstract class IAuthService{
   Future<User?> registerWithEmailAndPassword({required String userEmail, required String userPassword});
   Future<User?> signInWithEmailAndPassword({required String userEmail, required String userPassword});
   Future<User?> signInWithGoogle();
+  Future<User?> signInWithApple();
 }

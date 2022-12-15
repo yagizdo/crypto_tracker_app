@@ -20,6 +20,10 @@ class _SocialAuthButtonsState extends State<SocialAuthButtons> {
     await _authService.signInWithGoogle();
   }
 
+  Future<void> _signInWithApple() async {
+    await _authService.signInWithApple();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -45,7 +49,7 @@ class _SocialAuthButtonsState extends State<SocialAuthButtons> {
               borderRadius: BorderRadius.circular(10),
             ),
             elevation: 0,
-            onPressed: () {}),
+            onPressed: _signInWithApple),
       ],
     );
   }

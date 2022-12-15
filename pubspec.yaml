@@ -55,6 +55,8 @@ dependencies:
 
   # Social Auths
   google_sign_in: ^5.4.2
+  sign_in_with_apple: ^4.2.0
+  crypto: ^3.0.2
 
 dev_dependencies:
   flutter_test:

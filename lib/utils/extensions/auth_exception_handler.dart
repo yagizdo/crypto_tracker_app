@@ -17,12 +17,19 @@ enum AuthResultStatus {
   invalidVerificationCode,
   invalidVerificationId,
   expiredActionCode,
+  appleUnknown,
+  appleInvalidResponse,
+  appleCancelled,
+  appleFailed,
+  appleNotHandled,
+  appleNotInteractive,
+  appleCredentialError,
 }
 
 class AuthExceptionHandler {
   static dynamic handleException(e) {
     AuthResultStatus status;
-    switch (e.code) {
+    switch (e.code.toString()) {
       case 'invalid-email':
         status = AuthResultStatus.invalidEmail;
         break;
@@ -92,7 +99,31 @@ class AuthExceptionHandler {
       case 'invalid-verification-id':
         status = AuthResultStatus.invalidVerificationId;
         break;
+      // Apple Sign In Start //
+      case 'AuthorizationErrorCode.canceled':
+        status = AuthResultStatus.appleCancelled;
+        break;
+      case 'AuthorizationErrorCode.unknown':
+        status = AuthResultStatus.appleUnknown;
+        break;
+      case 'AuthorizationErrorCode.failed':
+        status = AuthResultStatus.appleFailed;
+        break;
+      case 'AuthorizationErrorCode.invalidResponse':
+        status = AuthResultStatus.appleInvalidResponse;
+        break;
+      case 'AuthorizationErrorCode.notHandled':
+        status = AuthResultStatus.appleNotHandled;
+        break;
+      case 'AuthorizationErrorCode.notInteractive':
+        status = AuthResultStatus.appleNotInteractive;
+        break;
+      case 'credentials-error':
+        status = AuthResultStatus.appleCredentialError;
+        break;
+      // Apple Sign In End //
       default:
+        print('Case ${e} is not yet implemented');
         status = AuthResultStatus.undefined;
     }
     return status;
@@ -121,7 +152,7 @@ class AuthExceptionHandler {
         errorMessage = 'E-posta adresi veya şifre yanlış.';
         break;
       case AuthResultStatus.userNotFound:
-        errorMessage = 'Bu e-postaya ait bir kullanıcı bulunamadı.';
+        errorMessage = 'E-posta adresi veya şifre yanlış.';
         break;
       case AuthResultStatus.userDisabled:
         errorMessage = 'Kullanıcı hesabı aktif değil.';
@@ -158,8 +189,29 @@ class AuthExceptionHandler {
       case AuthResultStatus.invalidVerificationId:
         errorMessage = 'ID valid degil.';
         break;
-        case AuthResultStatus.undefined:
-        errorMessage = 'Tanımlanamayan bir hata oluştu.';
+
+      // Apple Sign In Start //
+      case AuthResultStatus.appleUnknown:
+        errorMessage = 'Apple tarafinda tanimlanamayan bir hata olustu.';
+        break;
+      case AuthResultStatus.appleCancelled:
+        errorMessage = 'Kullanıcı, yetkilendirme girişimini iptal etti.';
+        break;
+      case AuthResultStatus.appleInvalidResponse:
+        errorMessage = 'Hatali istek.';
+        break;
+      case AuthResultStatus.appleNotHandled:
+        errorMessage = 'Tanimlanmamis bir hata olustu.';
+        break;
+      case AuthResultStatus.appleNotInteractive:
+        errorMessage = 'Yetkilendirme talebi etkileşimli değildir.';
+        break;
+      case AuthResultStatus.appleFailed:
+        errorMessage = 'Yetkilendirme girişimi başarısız oldu.';
+        break;
+      // Apple Sign In End //
+      case AuthResultStatus.appleCredentialError:
+        errorMessage = 'Apple yetkilendirme kimlik bilgileri alınamadı.';
         break;
       default:
         errorMessage = 'Tanımsız bir hata oluştu.';
