@@ -2,7 +2,9 @@ import 'dart:convert';
 import 'dart:math';
 
 import 'package:crypto/crypto.dart';
+import 'package:crypto_tracker/i18n/locale_keys.g.dart';
 import 'package:crypto_tracker/services/auth/i_auth_service.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:google_sign_in/google_sign_in.dart';
@@ -63,14 +65,13 @@ class AuthService extends IAuthService {
   Future<void> sendResetPasswordMail({required String userEmail}) async {
     try {
       await _firebaseAuth.sendPasswordResetEmail(email: userEmail);
-      _navigationService.showSuccessSnackbar(errorMessage: 'If the email address is valid, you will receive a password reset email shortly.');
+      _navigationService.showSuccessSnackbar(errorMessage: LocaleKeys.errors_email_send.tr());
     } on FirebaseAuthException catch (e) {
       var exceptionMessage = AuthExceptionHandler.generateExceptionMessage(e);
-      _navigationService.showSuccessSnackbar(errorMessage: 'If the email address is valid, you will receive a password reset email shortly.');
-      debugPrint('Error: $exceptionMessage');
+      _navigationService.showSuccessSnackbar(errorMessage: LocaleKeys.errors_email_send.tr());
 
     } catch(e) {
-      _navigationService.showErrorSnackbar(errorMessage: 'Tanimlanmamis bir hata olustu..');
+      _navigationService.showErrorSnackbar(errorMessage: LocaleKeys.errors_undefinied.tr());
     }
 
   }
@@ -84,7 +85,7 @@ class AuthService extends IAuthService {
       _navigationService.showErrorSnackbar(errorMessage: exceptionMessage);
 
     } catch(e) {
-      _navigationService.showErrorSnackbar(errorMessage: 'Tanimlanmamis bir hata olustu..');
+      _navigationService.showErrorSnackbar(errorMessage: LocaleKeys.errors_undefinied.tr());
     }
   }
 
@@ -100,7 +101,7 @@ class AuthService extends IAuthService {
       _navigationService.showErrorSnackbar(errorMessage: exceptionMessage);
 
     } catch(e) {
-      _navigationService.showErrorSnackbar(errorMessage: 'Tanimlanmamis bir hata olustu..');
+      _navigationService.showErrorSnackbar(errorMessage: LocaleKeys.errors_undefinied.tr());
     }
    _user = userCredential?.user;
    return _user;
@@ -117,8 +118,7 @@ class AuthService extends IAuthService {
       _navigationService.showErrorSnackbar(errorMessage: exceptionMessage);
 
     } catch(e) {
-      _navigationService.showErrorSnackbar(errorMessage: 'Tanimlanmamis bir hata olustu..');
-      print('Tanimlanmamis hata kodu: ${e}');
+      _navigationService.showErrorSnackbar(errorMessage: LocaleKeys.errors_undefinied.tr());
     }
     _user = userCredential?.user;
     return _user;
@@ -151,7 +151,7 @@ class AuthService extends IAuthService {
       var exceptionMessage = AuthExceptionHandler.generateExceptionMessage(e);
       _navigationService.showErrorSnackbar(errorMessage: exceptionMessage);
     } catch(e) {
-      _navigationService.showErrorSnackbar(errorMessage: 'Tanimlanamayan bir hata olustu..');
+      _navigationService.showErrorSnackbar(errorMessage: LocaleKeys.errors_undefinied.tr());
     }
     // Return Firebase User
     _user = userCredential?.user;
@@ -162,7 +162,7 @@ class AuthService extends IAuthService {
   @override
   Future<User?> signInWithApple() async {
     if(!await SignInWithApple.isAvailable()) {
-      _navigationService.showErrorSnackbar(errorMessage: 'Apple ile giris yapilamadi..');
+      _navigationService.showErrorSnackbar(errorMessage: LocaleKeys.errors_apple_unsupported_device.tr());
       return null;
     }
     UserCredential? userCredential;
@@ -197,11 +197,10 @@ class AuthService extends IAuthService {
       var exceptionMessage = AuthExceptionHandler.generateExceptionMessage(e);
       _navigationService.showErrorSnackbar(errorMessage: exceptionMessage);
     } on SignInWithAppleAuthorizationException catch(e) {
-      print('Apple ile giris yapilamadi: ${e.code}');
       var exceptionMessage = AuthExceptionHandler.generateExceptionMessage(e);
       _navigationService.showErrorSnackbar(errorMessage: exceptionMessage);
     } catch(e) {
-      _navigationService.showErrorSnackbar(errorMessage: 'Tanimlanamayan bir hata olustu..');
+      _navigationService.showErrorSnackbar(errorMessage: LocaleKeys.errors_undefinied.tr());
     }
     _user = userCredential?.user;
     return _user;

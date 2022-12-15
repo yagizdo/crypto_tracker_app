@@ -1,11 +1,12 @@
 import 'package:crypto_tracker/services/locator.dart';
-import 'package:crypto_tracker/views/base_view.dart';
 import 'package:crypto_tracker/views/onboarding_view.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import 'firebase_options.dart';
+import 'i18n/codegen_loader.g.dart';
 import 'services/navigation_service.dart';
 
 Future<void> main() async {
@@ -13,8 +14,17 @@ Future<void> main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
+  await EasyLocalization.ensureInitialized();
   setUpInjections();
-  runApp(const MyApp());
+  runApp(EasyLocalization(
+      path: 'lib/i18n/langs',
+      supportedLocales: const [
+        Locale('en'),
+        Locale('tr'),
+      ],
+      fallbackLocale: const Locale('en'),
+      assetLoader: const CodegenLoader(),
+      child: const MyApp()));
 }
 
 class MyApp extends StatelessWidget {
@@ -28,6 +38,9 @@ class MyApp extends StatelessWidget {
         title: 'Crypto Tracker',
         home: OnboardingView(),
         navigatorKey: getIt<NavigationService>().navigatorKey,
+        supportedLocales: context.supportedLocales,
+        localizationsDelegates: context.localizationDelegates,
+        locale: context.locale,
       ),
     );
   }

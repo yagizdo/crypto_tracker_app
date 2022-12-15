@@ -1,3 +1,6 @@
+import 'package:crypto_tracker/i18n/locale_keys.g.dart';
+import 'package:easy_localization/easy_localization.dart';
+
 enum AuthResultStatus {
   successful,
   emailAlreadyExists,
@@ -122,84 +125,84 @@ class AuthExceptionHandler {
     String errorMessage;
     switch (exceptionStatus) {
       case AuthResultStatus.invalidEmail:
-        errorMessage = 'E-posta adresiniz geçersiz.';
+        errorMessage = LocaleKeys.errors_invalid_email.tr();
         break;
       case AuthResultStatus.passwordNotEnough:
-        errorMessage = 'Parolanız 6 karakterden uzun olmalıdır';
+        errorMessage = LocaleKeys.errors_password_not_enough.tr();
         break;
       case AuthResultStatus.invalidVerificationCode:
-        errorMessage = 'Girdiğiniz kod yanlıştır';
+        errorMessage = LocaleKeys.errors_invalid_verification_code.tr();
         break;
       case AuthResultStatus.invalidPhoneNumber:
-        errorMessage = 'Telefon numaranız geçersiz';
+        errorMessage = LocaleKeys.errors_invalid_phone_number.tr();
         break;
       case AuthResultStatus.wrongPassword:
-        errorMessage = 'E-posta adresi veya şifre yanlış.';
+        errorMessage = LocaleKeys.errors_wrong_password.tr();
         break;
       case AuthResultStatus.userNotFound:
-        errorMessage = 'E-posta adresi veya şifre yanlış.';
+        errorMessage = LocaleKeys.errors_invalid_email.tr();
         break;
       case AuthResultStatus.userDisabled:
-        errorMessage = 'Kullanıcı hesabı aktif değil.';
+        errorMessage = LocaleKeys.errors_user_disabled.tr();
         break;
       case AuthResultStatus.tooManyRequests:
         errorMessage =
-            'Çok fazla istek gönderildi. Lütfen daha sonra tekrar deneyin.';
+            LocaleKeys.errors_too_many_requests.tr();
         break;
       case AuthResultStatus.operationNotAllowed:
-        errorMessage = 'E-posta adresiyle girişe izin verilmiyor.';
+        errorMessage = LocaleKeys.errors_operation_not_allowed.tr();
         break;
       case AuthResultStatus.emailAlreadyExists:
         errorMessage =
-            'Bu E-posta adresiyle daha önce hesap oluşturulmuş. Lütfen başka bir e-posta adresi kullanın.';
+            LocaleKeys.errors_email_already_exists.tr();
         break;
       case AuthResultStatus.accountAlreadyExist:
         errorMessage =
-            'Kullandığınız e-posta adresiyle başka bir hesap mevcut. Lütfen diğer yöntemlerle giriş yapın.';
+            LocaleKeys.errors_account_already_exists.tr();
         break;
       case AuthResultStatus.credentialAlreadyInUse:
         errorMessage =
-            'Bu giriş kimliği başka bir hesapla ilişkilendirilmiş. Lütfen başka bir hesapla giriş yapmayı deneyin';
+            LocaleKeys.errors_credential_already_in_use.tr();
         break;
       case AuthResultStatus.invalidCredential:
         errorMessage =
-            'Bu giriş yönteminde bir sorun var. Lütfen farklı bir giriş yöntemi seçiniz.';
+            LocaleKeys.errors_invalid_credential.tr();
         break;
       case AuthResultStatus.abortedByUser:
-        errorMessage = 'Giriş kullanıcı tarafından iptal edildi.';
+        errorMessage = LocaleKeys.errors_aborted_by_user.tr();
         break;
       case AuthResultStatus.expiredActionCode:
-        errorMessage = 'Sifre sifirlama kodunuzun suresi doldu.';
+        errorMessage = LocaleKeys.errors_expired_action_code.tr();
         break;
       case AuthResultStatus.invalidVerificationId:
-        errorMessage = 'ID valid degil.';
+        errorMessage = LocaleKeys.errors_invalid_verification_id.tr();
         break;
 
       // Apple Sign In Start //
       case AuthResultStatus.appleUnknown:
-        errorMessage = 'Apple tarafinda tanimlanamayan bir hata olustu.';
+        errorMessage = LocaleKeys.errors_apple_unknown.tr();
         break;
       case AuthResultStatus.appleCancelled:
-        errorMessage = 'Kullanıcı, yetkilendirme girişimini iptal etti.';
+        errorMessage = LocaleKeys.errors_apple_cancelled.tr();
         break;
       case AuthResultStatus.appleInvalidResponse:
-        errorMessage = 'Hatali istek.';
+        errorMessage = LocaleKeys.errors_apple_invalid_response.tr();
         break;
       case AuthResultStatus.appleNotHandled:
-        errorMessage = 'Tanimlanmamis bir hata olustu.';
+        errorMessage = LocaleKeys.errors_apple_not_handled.tr();
         break;
       case AuthResultStatus.appleNotInteractive:
-        errorMessage = 'Yetkilendirme talebi etkileşimli değildir.';
+        errorMessage = LocaleKeys.errors_apple_not_interactive.tr();
         break;
       case AuthResultStatus.appleFailed:
-        errorMessage = 'Yetkilendirme girişimi başarısız oldu.';
+        errorMessage = LocaleKeys.errors_apple_failed.tr();
         break;
-      // Apple Sign In End //
       case AuthResultStatus.appleCredentialError:
-        errorMessage = 'Apple yetkilendirme kimlik bilgileri alınamadı.';
+        errorMessage = LocaleKeys.errors_apple_credential_error.tr();
         break;
+    // Apple Sign In End //
       default:
-        errorMessage = 'Tanımsız bir hata oluştu.';
+        errorMessage = LocaleKeys.errors_undefinied.tr();
     }
 
     return errorMessage;

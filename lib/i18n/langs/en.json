@@ -1,0 +1,29 @@
+{
+  "errors": {
+    "invalid_email": "Your e-mail address is invalid.",
+    "wrong_password": "Email address or password is incorrect.",
+    "user_disabled": "User account is not active.",
+    "password_not_enough": "Your password must be longer than 6 characters.",
+    "invalid_verification_code": "The code you entered is incorrect.",
+    "invalid_phone_number": "Your phone number is invalid.",
+    "too_many_requests": "Too many requests sent. Please try again later.",
+    "operation_not_allowed": "Login with e-mail address is not allowed.",
+    "email_already_exists": "An account has already been created with this E-mail address. Please use another email address.",
+    "account_already_exists": "An account has already been created with this E-mail address. Please use another email address.",
+    "credential_already_in_use": "This login ID is associated with another account. Please try logging in with another account.",
+    "invalid_credential": "There is a problem with this input method. Please choose a different input method.",
+    "aborted_by_user": "Login canceled by user.",
+    "expired_action_code": "Your password reset code has expired.",
+    "invalid_verification_id": "ID is not valid.",
+    "apple_unknown": "An error occurred that cannot be identified by Apple.",
+    "apple_cancelled": "The user canceled the authorization attempt.",
+    "apple_invalid_response": "Invalid request.",
+    "apple_not_handled": "An unidentified error has occurred.",
+    "apple_not_interactive": "The authorization request is not interactive.",
+    "apple_failed": "The authorization attempt failed.",
+    "apple_credential_error": "Failed to retrieve Apple authorization credentials.",
+    "undefinied": "An unidentified error has occurred.",
+    "email_send": "If the email address is valid, you will receive a password reset email shortly.",
+    "apple_unsupported_device": "This device is not suitable for apple sign in."
+  }
+}
