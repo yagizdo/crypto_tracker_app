@@ -140,7 +140,7 @@ class AuthExceptionHandler {
         errorMessage = LocaleKeys.errors_wrong_password.tr();
         break;
       case AuthResultStatus.userNotFound:
-        errorMessage = LocaleKeys.errors_invalid_email.tr();
+        errorMessage = LocaleKeys.errors_wrong_password.tr();
         break;
       case AuthResultStatus.userDisabled:
         errorMessage = LocaleKeys.errors_user_disabled.tr();
