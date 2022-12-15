@@ -43,7 +43,7 @@ class _SocialAuthButtonsState extends State<SocialAuthButtons> {
             onPressed: _signInWithGoogle),
         height5Per(context: context),
         Platform.isIOS ? SignInButton(
-            buttonType: ButtonType.appleDark,
+            buttonType: ButtonType.apple,
             buttonSize: ButtonSize.medium,
             width: 220.w,
             padding: 7.w,
