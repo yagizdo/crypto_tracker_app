@@ -27,7 +27,6 @@ class _RegisterComponentState extends State<RegisterComponent> {
   late TextEditingController _passwordConfirmController;
 
   final AuthService _authService = getIt<AuthService>();
-  final NavigationService _navigationService = getIt<NavigationService>();
   bool isLoading = false;
 
   @override
@@ -42,7 +41,6 @@ class _RegisterComponentState extends State<RegisterComponent> {
       isLoading =true;
     });
     await _authService.registerWithEmailAndPassword(userEmail: _emailController.text, userPassword: _passwordController.text);
-    await _authService.sendVerificationMail();
     setState(() {
       isLoading =false;
     });

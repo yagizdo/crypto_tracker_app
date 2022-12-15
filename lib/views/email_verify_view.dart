@@ -1,14 +1,19 @@
 import 'dart:async';
 
+import 'package:crypto_tracker/services/navigation_service.dart';
 import 'package:crypto_tracker/views/base_view.dart';
+import 'package:easy_localization/easy_localization.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+import '../i18n/locale_keys.g.dart';
 import '../services/auth/auth_service.dart';
 import '../services/locator.dart';
 import '../utils/app_colors.dart';
 import '../utils/app_constants.dart';
+import '../utils/extensions/auth_exception_handler.dart';
 import '../widgets/main_widgets/main_layout.dart';
 import '../widgets/main_widgets/tapWrapper.dart';
 
@@ -22,10 +27,23 @@ class EmailVerifyView extends StatefulWidget {
 class _EmailVerifyViewState extends State<EmailVerifyView> {
 
   final AuthService _authService = getIt<AuthService>();
+  final NavigationService _navigationService = getIt<NavigationService>();
   late Timer timer;
+
+  Future<void> _sendVerificationEmail() async {
+    try {
+      await _authService.sendVerificationMail();
+    }  on FirebaseAuthException catch(e) {
+      var exceptionMessage = AuthExceptionHandler.generateExceptionMessage(e);
+      _navigationService.showErrorSnackbar(errorMessage: exceptionMessage);
+    } catch(e) {
+      _navigationService.showErrorSnackbar(errorMessage: LocaleKeys.errors_undefinied.tr());
+    }
+  }
 
   @override
   void initState() {
+    _sendVerificationEmail();
     timer = Timer.periodic(
       const Duration(seconds: 3),
           (timer) async {
