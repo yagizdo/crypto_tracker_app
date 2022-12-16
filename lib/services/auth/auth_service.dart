@@ -60,6 +60,15 @@ class AuthService extends IAuthService {
     return _firebaseAuth.authStateChanges();
   }
 
+  Future<void> updateUserName({required String name}) async {
+    try {
+      await _firebaseAuth.currentUser?.updateDisplayName(name);
+    } catch (e) {
+      var errorMessage = AuthExceptionHandler.generateExceptionMessage(e);
+      _navigationService.showErrorSnackbar(errorMessage: errorMessage);
+    }
+  }
+
 
   @override
   Future<void> sendResetPasswordMail({required String userEmail}) async {
