@@ -1,3 +1,4 @@
+import 'package:crypto_tracker/services/database/database_service.dart';
 import 'package:crypto_tracker/services/navigation_service.dart';
 import 'package:crypto_tracker/widgets/auth/auth_textfield.dart';
 import 'package:flutter/material.dart';
@@ -28,6 +29,7 @@ class _RegisterComponentState extends State<RegisterComponent> {
   late TextEditingController _passwordConfirmController;
 
   final AuthService _authService = getIt<AuthService>();
+  final DatabaseService _databaseService = getIt<DatabaseService>();
   bool isLoading = false;
 
   @override
@@ -44,15 +46,22 @@ class _RegisterComponentState extends State<RegisterComponent> {
   Future<void> updateUserName() async {
     await _authService.updateUserName(name :_nameController.text);
   }
+
+  Future<void> saveUserInDatabase() async {
+    await _databaseService.saveUserInDatabase(_authService.currentUser);
+  }
+
   Future<void> registerWithEmailAndPassword() async {
     setState(() {
       isLoading =true;
     });
     await _authService.registerWithEmailAndPassword(userEmail: _emailController.text, userPassword: _passwordController.text)
-        .then((value) {
+        .then((value) async {
       if(value != null) {
-        sendVerificationMail();
-        updateUserName();
+       await updateUserName();
+       await saveUserInDatabase();
+       await sendVerificationMail();
+
       }
     });
     setState(() {
