@@ -33,7 +33,7 @@ class _LoginComponentState extends State<LoginComponent> {
       isLoading = true;
     });
 
-   await _authService.signInWithEmailAndPassword(
+    await _authService.signInWithEmailAndPassword(
         userEmail: _emailController.text,
         userPassword: _passwordController.text);
     setState(() {
@@ -90,7 +90,11 @@ class _LoginComponentState extends State<LoginComponent> {
             },
             child: const Text('You don\'t have an account? Register')),
         height5Per(context: context),
-        HorizontalOrLine(label: 'OR', height: 15.w, color: AppColors.white,),
+        HorizontalOrLine(
+          label: 'OR',
+          height: 15.w,
+          color: AppColors.white,
+        ),
         height5Per(context: context),
       ],
     );
@@ -104,6 +108,8 @@ class _LoginComponentState extends State<LoginComponent> {
           AuthTextField(
             controller: _emailController,
             label: 'Email',
+            prefixIcon:
+                const Icon(Icons.mail, color: AppColors.blackBackground),
             isPassword: false,
             validator: (value) => Validator.email(value),
           ),
@@ -111,6 +117,8 @@ class _LoginComponentState extends State<LoginComponent> {
           AuthTextField(
             controller: _passwordController,
             label: 'Password',
+            prefixIcon:
+                const Icon(Icons.lock, color: AppColors.blackBackground),
             isPassword: true,
             validator: (value) => Validator.password(
               value,
@@ -138,13 +146,13 @@ class _LoginComponentState extends State<LoginComponent> {
         child: Center(
           child: isLoading
               ? CircularProgressIndicator(
-            color: Colors.black,
-            strokeWidth: 2.w,
-          )
+                  color: Colors.black,
+                  strokeWidth: 2.w,
+                )
               : Text(
-            'Login',
-            style: AppTextStyle.loginBtnTitle(),
-          ),
+                  'Login',
+                  style: AppTextStyle.loginBtnTitle(),
+                ),
         ),
       ),
     );

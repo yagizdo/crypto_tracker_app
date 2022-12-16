@@ -6,6 +6,15 @@ class Validator {
     return 'Please enter a valid email';
   }
 
+  static String? name(String? value) {
+    if (value == null || value.isEmpty) {
+      return 'Please enter some text';
+    } else if (value.length < 3) {
+      return 'Name must be at least 3 characters';
+    }
+    return null;
+  }
+
   static String? password(String? value) {
     if (value == null || value.isEmpty) {
       return 'Please enter some text';

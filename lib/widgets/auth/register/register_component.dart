@@ -22,6 +22,7 @@ class RegisterComponent extends StatefulWidget {
 
 class _RegisterComponentState extends State<RegisterComponent> {
   late GlobalKey<FormState> _formKey;
+  late TextEditingController _nameController;
   late TextEditingController _emailController;
   late TextEditingController _passwordController;
   late TextEditingController _passwordConfirmController;
@@ -49,6 +50,7 @@ class _RegisterComponentState extends State<RegisterComponent> {
   @override
   void initState() {
     super.initState();
+    _nameController = TextEditingController();
     _emailController = TextEditingController();
     _passwordController = TextEditingController();
     _passwordConfirmController = TextEditingController();
@@ -57,6 +59,7 @@ class _RegisterComponentState extends State<RegisterComponent> {
 
   @override
   void dispose() {
+    _nameController.dispose();
     _emailController.dispose();
     _passwordController.dispose();
     _passwordConfirmController.dispose();
@@ -72,7 +75,6 @@ class _RegisterComponentState extends State<RegisterComponent> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
-        height10Per(context: context),
         _registerFormComp(),
       ],
     );
@@ -86,8 +88,17 @@ class _RegisterComponentState extends State<RegisterComponent> {
       child: Column(
         children: [
           AuthTextField(
+            controller: _nameController,
+            label: 'Name',
+            prefixIcon: const Icon(Icons.person, color: AppColors.blackBackground),
+            isPassword: false,
+            validator: (value) => Validator.name(value),
+          ),
+          height10Per(context: context),
+          AuthTextField(
             controller: _emailController,
             label: 'Email',
+            prefixIcon: const Icon(Icons.email, color: AppColors.blackBackground),
             isPassword: false,
             validator: (value) => Validator.email(value),
           ),
@@ -95,6 +106,7 @@ class _RegisterComponentState extends State<RegisterComponent> {
           AuthTextField(
             controller: _passwordController,
             label: 'Password',
+            prefixIcon: const Icon(Icons.lock, color: AppColors.blackBackground),
             isPassword: true,
             validator: (value) => Validator.password(
               value,
@@ -104,6 +116,7 @@ class _RegisterComponentState extends State<RegisterComponent> {
           AuthTextField(
             controller: _passwordConfirmController,
             label: 'Password Check',
+            prefixIcon: const Icon(Icons.lock, color: AppColors.blackBackground),
             isPassword: true,
             validator: (value) => Validator.passwordsMatch(
                 value, _passwordController.text, _passwordConfirmController.text),

@@ -98,6 +98,7 @@ class _ResetPasswordCompState extends State<ResetPasswordComp> {
           AuthTextField(
             controller: _emailController,
             label: 'Email',
+            prefixIcon: const Icon(Icons.email, color: AppColors.blackBackground),
             isPassword: false,
             validator: (value) => Validator.email(value),
           ),
