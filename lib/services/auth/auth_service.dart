@@ -44,8 +44,17 @@ class AuthService extends IAuthService {
 
   @override
   Future<void> reloadUser() async {
-    await _firebaseAuth.currentUser?.reload();
+    if (_firebaseAuth.currentUser != null) {
+      await _firebaseAuth.currentUser!.reload();
+    }
   }
+
+  @override
+  Future<bool> getUserEmailStatus() async {
+   return _firebaseAuth.currentUser?.emailVerified ?? false;
+
+  }
+
 
   @override
   Future<void> logout() async {

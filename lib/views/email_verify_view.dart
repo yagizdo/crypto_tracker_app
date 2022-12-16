@@ -29,6 +29,9 @@ class _EmailVerifyViewState extends State<EmailVerifyView> {
   final AuthService _authService = getIt<AuthService>();
   Timer? timer;
 
+  Future<bool> getEmailStatus() async {
+    return await _authService.getUserEmailStatus();
+  }
   @override
   void initState() {
     if (!mounted) return;
@@ -36,7 +39,7 @@ class _EmailVerifyViewState extends State<EmailVerifyView> {
         const Duration(seconds: 3),
             (timer) async {
           await _authService.reloadUser();
-          if(_authService.currentUser.emailVerified){
+          if(await getEmailStatus()){
             timer.cancel();
             if (!mounted) return;
             Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => const BaseView(),),);

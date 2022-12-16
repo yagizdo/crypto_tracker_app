@@ -2,6 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 
 abstract class IAuthService{
   Future<void> reloadUser();
+  Future<bool> getUserEmailStatus();
   Future<void> logout();
   Future<void> sendVerificationMail();
   Future<void> sendResetPasswordMail({required String userEmail});
