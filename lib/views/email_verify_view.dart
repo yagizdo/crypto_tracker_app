@@ -27,41 +27,29 @@ class EmailVerifyView extends StatefulWidget {
 class _EmailVerifyViewState extends State<EmailVerifyView> {
 
   final AuthService _authService = getIt<AuthService>();
-  final NavigationService _navigationService = getIt<NavigationService>();
-  late Timer timer;
-
-  Future<void> _sendVerificationEmail() async {
-    try {
-      await _authService.sendVerificationMail();
-    }  on FirebaseAuthException catch(e) {
-      var exceptionMessage = AuthExceptionHandler.generateExceptionMessage(e);
-      _navigationService.showErrorSnackbar(errorMessage: exceptionMessage);
-    } catch(e) {
-      _navigationService.showErrorSnackbar(errorMessage: LocaleKeys.errors_undefinied.tr());
-    }
-  }
+  Timer? timer;
 
   @override
   void initState() {
-    _sendVerificationEmail();
+    if (!mounted) return;
     timer = Timer.periodic(
-      const Duration(seconds: 3),
-          (timer) async {
-        await _authService.reloadUser();
-        if(_authService.currentUser.emailVerified){
-          timer.cancel();
-          if (!mounted) return;
-          Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => const BaseView(),),);
-        }
-      },
-    );
+        const Duration(seconds: 3),
+            (timer) async {
+          await _authService.reloadUser();
+          if(_authService.currentUser.emailVerified){
+            timer.cancel();
+            if (!mounted) return;
+            Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => const BaseView(),),);
+          }
+        },
+      );
     super.initState();
   }
 
   @override
   void dispose() {
     if(!mounted){
-      timer.cancel();
+      timer?.cancel();
     }
     super.dispose();
   }
@@ -96,7 +84,7 @@ class _EmailVerifyViewState extends State<EmailVerifyView> {
                 ),
                 TapWrapper(
                   onTap: () async {
-                    timer.cancel();
+                    timer?.cancel();
                     await _authService.logout();
                   },
                   child: Container(

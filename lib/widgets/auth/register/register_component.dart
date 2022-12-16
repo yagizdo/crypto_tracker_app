@@ -37,11 +37,20 @@ class _RegisterComponentState extends State<RegisterComponent> {
     }
   }
 
+  Future<void> sendVerificationMail() async {
+    await _authService.sendVerificationMail();
+  }
+
   Future<void> registerWithEmailAndPassword() async {
     setState(() {
       isLoading =true;
     });
-    await _authService.registerWithEmailAndPassword(userEmail: _emailController.text, userPassword: _passwordController.text);
+    await _authService.registerWithEmailAndPassword(userEmail: _emailController.text, userPassword: _passwordController.text)
+        .then((value) {
+      if(value != null) {
+        sendVerificationMail();
+      }
+    });
     setState(() {
       isLoading =false;
     });
