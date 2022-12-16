@@ -1,6 +1,7 @@
 import 'package:crypto_tracker/utils/app_colors.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class AuthTextField extends StatefulWidget {
@@ -10,6 +11,7 @@ class AuthTextField extends StatefulWidget {
       required this.controller,
       required this.isPassword,
       this.isEmail,
+      this.isName,
       required this.prefixIcon,
       this.validator})
       : super(key: key);
@@ -17,6 +19,7 @@ class AuthTextField extends StatefulWidget {
   final TextEditingController controller;
   final bool isPassword;
   final bool? isEmail;
+  final bool? isName;
   final Widget prefixIcon;
   final String? Function(String?)? validator;
 
@@ -35,6 +38,10 @@ class _AuthTextFieldState extends State<AuthTextField> {
         obscureText: widget.isPassword ? !isPasswordVisible : false,
         obscuringCharacter: '*',
         validator: widget.validator,
+        inputFormatters: [
+          if(widget.isName == true)
+          FilteringTextInputFormatter.allow(RegExp(r'^[a-zA-Z ]*[a-zA-Z ]*'))
+        ],
         keyboardType: widget.isEmail == true
             ? TextInputType.emailAddress
             : widget.isPassword

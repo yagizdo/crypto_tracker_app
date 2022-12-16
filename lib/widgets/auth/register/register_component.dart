@@ -92,6 +92,7 @@ class _RegisterComponentState extends State<RegisterComponent> {
             label: 'Name',
             prefixIcon: const Icon(Icons.person, color: AppColors.blackBackground),
             isPassword: false,
+            isName: true,
             validator: (value) => Validator.name(value),
           ),
           height10Per(context: context),
