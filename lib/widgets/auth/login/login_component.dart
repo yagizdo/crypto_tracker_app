@@ -108,6 +108,7 @@ class _LoginComponentState extends State<LoginComponent> {
           AuthTextField(
             controller: _emailController,
             label: 'Email',
+            isEmail: true,
             prefixIcon:
                 const Icon(Icons.mail, color: AppColors.blackBackground),
             isPassword: false,

@@ -9,12 +9,14 @@ class AuthTextField extends StatefulWidget {
       required this.label,
       required this.controller,
       required this.isPassword,
+      this.isEmail,
       required this.prefixIcon,
       this.validator})
       : super(key: key);
   final String label;
   final TextEditingController controller;
   final bool isPassword;
+  final bool? isEmail;
   final Widget prefixIcon;
   final String? Function(String?)? validator;
 
@@ -31,8 +33,13 @@ class _AuthTextFieldState extends State<AuthTextField> {
       child: TextFormField(
         controller: widget.controller,
         obscureText: widget.isPassword ? !isPasswordVisible : false,
+        obscuringCharacter: '*',
         validator: widget.validator,
-        keyboardType: widget.isPassword ? TextInputType.visiblePassword : TextInputType.emailAddress,
+        keyboardType: widget.isEmail == true
+            ? TextInputType.emailAddress
+            : widget.isPassword
+                ? TextInputType.visiblePassword
+                : TextInputType.visiblePassword,
         style: const TextStyle(color: AppColors.blackBackground),
         decoration: InputDecoration(
           prefixIcon: widget.prefixIcon,

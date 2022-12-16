@@ -99,6 +99,7 @@ class _ResetPasswordCompState extends State<ResetPasswordComp> {
             controller: _emailController,
             label: 'Email',
             prefixIcon: const Icon(Icons.email, color: AppColors.blackBackground),
+            isEmail: true,
             isPassword: false,
             validator: (value) => Validator.email(value),
           ),

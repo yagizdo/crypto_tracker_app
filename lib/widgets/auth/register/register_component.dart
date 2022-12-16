@@ -98,6 +98,7 @@ class _RegisterComponentState extends State<RegisterComponent> {
           AuthTextField(
             controller: _emailController,
             label: 'Email',
+            isEmail: true,
             prefixIcon: const Icon(Icons.email, color: AppColors.blackBackground),
             isPassword: false,
             validator: (value) => Validator.email(value),
