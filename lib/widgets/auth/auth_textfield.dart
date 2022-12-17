@@ -40,7 +40,7 @@ class _AuthTextFieldState extends State<AuthTextField> {
         validator: widget.validator,
         inputFormatters: [
           if(widget.isName == true)
-          FilteringTextInputFormatter.allow(RegExp(r'^[a-zA-Z ]*[a-zA-Z ]*'))
+          FilteringTextInputFormatter.allow(RegExp(r'^[a-zA-ZğıüşöçİĞÜŞÖÇ ]*[a-zA-ZğıüşöçİĞÜŞÖÇ ]*'))
         ],
         keyboardType: widget.isEmail == true
             ? TextInputType.emailAddress
