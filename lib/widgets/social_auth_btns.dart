@@ -6,6 +6,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:sign_button/sign_button.dart';
 
 import '../services/auth/auth_service.dart';
+import '../services/database/database_service.dart';
 import '../services/locator.dart';
 
 class SocialAuthButtons extends StatefulWidget {
@@ -17,13 +18,26 @@ class SocialAuthButtons extends StatefulWidget {
 
 class _SocialAuthButtonsState extends State<SocialAuthButtons> {
   final AuthService _authService = getIt<AuthService>();
+  final DatabaseService _databaseService = getIt<DatabaseService>();
+
 
   Future<void> _signInWithGoogle() async {
-    await _authService.signInWithGoogle();
+    await _authService.signInWithGoogle().then(
+        (user) async {
+          if (user != null) {
+            await _databaseService.saveUserInDatabase(user!);
+          }
+        });
   }
 
   Future<void> _signInWithApple() async {
-    await _authService.signInWithApple();
+    await _authService.signInWithApple().then(
+        (user) async {
+          if (user!=null) {
+            await _databaseService.saveUserInDatabase(user!);
+          }
+        }
+    );
   }
 
   @override

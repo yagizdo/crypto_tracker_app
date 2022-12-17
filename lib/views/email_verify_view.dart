@@ -54,6 +54,7 @@ class _EmailVerifyViewState extends State<EmailVerifyView> {
     if(!mounted){
       timer?.cancel();
     }
+    timer?.cancel();
     super.dispose();
   }
   @override
