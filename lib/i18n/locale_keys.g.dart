@@ -26,6 +26,11 @@ abstract class  LocaleKeys {
   static const errors_undefinied = 'errors.undefinied';
   static const errors_email_send = 'errors.email_send';
   static const errors_apple_unsupported_device = 'errors.apple_unsupported_device';
+  static const errors_auth_validation_valid_email = 'errors.auth_validation_valid_email';
+  static const errors_auth_validation_empty_error = 'errors.auth_validation_empty_error';
+  static const errors_auth_validation_name_length = 'errors.auth_validation_name_length';
+  static const errors_auth_validation_pw_length = 'errors.auth_validation_pw_length';
+  static const errors_auth_validation_pw_match = 'errors.auth_validation_pw_match';
   static const errors = 'errors';
 
 }

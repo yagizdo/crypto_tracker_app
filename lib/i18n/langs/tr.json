@@ -24,6 +24,11 @@
     "apple_credential_error": "Apple yetkilendirme kimlik bilgileri alınamadı.",
     "undefinied": "Tanımlanamayan bir hata oluştu.",
     "email_send": "E-posta adresi geçerliyse, kısa süre içinde bir şifre sıfırlama e-postası alacaksınız.",
-    "apple_unsupported_device": "Bu cihaz, apple oturum açma için uygun değildir."
+    "apple_unsupported_device": "Bu cihaz, apple oturum açma için uygun değildir.",
+    "auth_validation_valid_email": "Lütfen geçerli bir E-posta adresi giriniz.",
+    "auth_validation_empty_error": "Bu alan boş olamaz!",
+    "auth_validation_name_length": "İsim en az 3 karakter olmalıdır.",
+    "auth_validation_pw_length": "Şifre en az 6 karakter olmalıdır.",
+    "auth_validation_pw_match": "Parolalar uyuşmuyor."
   }
 }

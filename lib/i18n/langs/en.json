@@ -24,6 +24,11 @@
     "apple_credential_error": "Failed to retrieve Apple authorization credentials.",
     "undefinied": "An unidentified error has occurred.",
     "email_send": "If the email address is valid, you will receive a password reset email shortly.",
-    "apple_unsupported_device": "This device is not suitable for apple sign in."
+    "apple_unsupported_device": "This device is not suitable for apple sign in.",
+    "auth_validation_valid_email": "Please enter a valid email.",
+    "auth_validation_empty_error": "This field cannot be empty!",
+    "auth_validation_name_length": "Name must be at least 3 characters.",
+    "auth_validation_pw_length": "Password must be at least 6 characters.",
+    "auth_validation_pw_match": "Passwords do not match."
   }
 }
