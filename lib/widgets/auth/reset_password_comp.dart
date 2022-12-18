@@ -1,6 +1,8 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+import '../../i18n/locale_keys.g.dart';
 import '../../services/auth/auth_service.dart';
 import '../../services/locator.dart';
 import '../../services/validator.dart';
@@ -80,7 +82,7 @@ class _ResetPasswordCompState extends State<ResetPasswordComp> {
                 color: Colors.black,
                 strokeWidth: 2.w,
               ) : Text(
-                'Back to login',
+                LocaleKeys.auth_reset_password_back_btn.tr(),
                 style: AppTextStyle.loginBtnTitle(),
               ),
             ),
@@ -97,7 +99,7 @@ class _ResetPasswordCompState extends State<ResetPasswordComp> {
         children: [
           AuthTextField(
             controller: _emailController,
-            label: 'Email',
+            label: LocaleKeys.auth_email_txt.tr(),
             prefixIcon: const Icon(Icons.email, color: AppColors.blackBackground),
             isEmail: true,
             isPassword: false,
@@ -114,8 +116,6 @@ class _ResetPasswordCompState extends State<ResetPasswordComp> {
       onTap: () {
         if (_formKey.currentState!.validate()) {
           sendResetPasswordEmail();
-        } else {
-          print('Form not valid');
         }
       },
       child: Container(
@@ -130,7 +130,7 @@ class _ResetPasswordCompState extends State<ResetPasswordComp> {
             color: Colors.black,
             strokeWidth: 2.w,
           ) : Text(
-            'Reset Password',
+            LocaleKeys.auth_reset_password_reset_btn_txt.tr(),
             style: AppTextStyle.loginBtnTitle(),
           ),
         ),

@@ -1,6 +1,8 @@
 import 'dart:io';
 
+import 'package:crypto_tracker/i18n/locale_keys.g.dart';
 import 'package:crypto_tracker/utils/app_constants.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:sign_button/sign_button.dart';
@@ -51,6 +53,7 @@ class _SocialAuthButtonsState extends State<SocialAuthButtons> {
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(10),
             ),
+            btnText: LocaleKeys.auth_login_google_sign_txt.tr(),
             width: 220.w,
             padding: 7.w,
             elevation: 0,
@@ -64,6 +67,7 @@ class _SocialAuthButtonsState extends State<SocialAuthButtons> {
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(10),
             ),
+            btnText: LocaleKeys.auth_login_apple_sign_txt.tr(),
             elevation: 0,
             onPressed: _signInWithApple) : const SizedBox(),
       ],

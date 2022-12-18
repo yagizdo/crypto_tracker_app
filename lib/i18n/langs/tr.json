@@ -30,5 +30,30 @@
     "auth_validation_name_length": "İsim en az 3 karakter olmalıdır.",
     "auth_validation_pw_length": "Şifre en az 6 karakter olmalıdır.",
     "auth_validation_pw_match": "Parolalar uyuşmuyor."
+  },
+  "auth": {
+    "login": {
+      "title": "Giriş Yap",
+      "login_btn": "Giriş Yap",
+      "forgot_pass_txt": "Şifremi Unuttum?",
+      "dont_have_acc_txt": "Hesabınız yok mu? Kayıt ol",
+      "google_sign_txt": "Google ile giriş yap",
+      "apple_sign_txt": "Apple ile giriş yap",
+      "or_txt": "Veya"
+    },
+    "email_txt": "E-Posta",
+    "password_txt": "Şifre",
+    "password_scnd_txt": "Şifre kontrolü",
+    "register": {
+      "title": "Kayıt Ol",
+      "name_txtfield_txt": "İsim",
+      "have_account": "Hesabın var mı? Giriş Yap!",
+      "register_btn": "Kayıt Ol"
+    },
+    "reset_password": {
+      "reset_btn_txt": "Şifreyi sıfırla",
+      "back_btn": "Girişe geri dön",
+      "title": "Şifre sıfırlama"
+    }
   }
 }

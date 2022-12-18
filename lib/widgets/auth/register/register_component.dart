@@ -1,6 +1,8 @@
+import 'package:crypto_tracker/i18n/locale_keys.g.dart';
 import 'package:crypto_tracker/services/database/database_service.dart';
 import 'package:crypto_tracker/services/navigation_service.dart';
 import 'package:crypto_tracker/widgets/auth/auth_textfield.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -111,7 +113,7 @@ class _RegisterComponentState extends State<RegisterComponent> {
         children: [
           AuthTextField(
             controller: _nameController,
-            label: 'Name',
+            label: LocaleKeys.auth_register_name_txtfield_txt.tr(),
             prefixIcon: const Icon(Icons.person, color: AppColors.blackBackground),
             isPassword: false,
             isName: true,
@@ -120,7 +122,7 @@ class _RegisterComponentState extends State<RegisterComponent> {
           height10Per(context: context),
           AuthTextField(
             controller: _emailController,
-            label: 'Email',
+            label: LocaleKeys.auth_email_txt.tr(),
             isEmail: true,
             prefixIcon: const Icon(Icons.email, color: AppColors.blackBackground),
             isPassword: false,
@@ -129,7 +131,7 @@ class _RegisterComponentState extends State<RegisterComponent> {
           height10Per(context: context),
           AuthTextField(
             controller: _passwordController,
-            label: 'Password',
+            label: LocaleKeys.auth_password_txt.tr(),
             prefixIcon: const Icon(Icons.lock, color: AppColors.blackBackground),
             isPassword: true,
             validator: (value) => Validator.password(
@@ -139,7 +141,7 @@ class _RegisterComponentState extends State<RegisterComponent> {
           height10Per(context: context),
           AuthTextField(
             controller: _passwordConfirmController,
-            label: 'Password Check',
+            label: LocaleKeys.auth_password_scnd_txt.tr(),
             prefixIcon: const Icon(Icons.lock, color: AppColors.blackBackground),
             isPassword: true,
             validator: (value) => Validator.passwordsMatch(
@@ -152,7 +154,7 @@ class _RegisterComponentState extends State<RegisterComponent> {
               onPressed: () {
                 widget.onRegisterChanged(AuthFormState.login);
               },
-              child: const Text('You have an account? Sign In!')),
+              child: Text(LocaleKeys.auth_register_have_account.tr())),
         ],
       ),
     );
@@ -179,7 +181,7 @@ class _RegisterComponentState extends State<RegisterComponent> {
         ),
         child: Center(
           child:isLoading ? SizedBox(width: 25.w, height: 25.w, child: CircularProgressIndicator(color: AppColors.blackBackground, strokeWidth: 2.5.w,)) : Text(
-            'Register',
+            LocaleKeys.auth_register_register_btn.tr(),
             style: AppTextStyle.loginBtnTitle(),
           ),
         ),

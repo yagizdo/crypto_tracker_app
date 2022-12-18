@@ -1,8 +1,10 @@
 import 'package:crypto_tracker/views/auth_view.dart';
 import 'package:crypto_tracker/widgets/social_auth_btns.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+import '../../../i18n/locale_keys.g.dart';
 import '../../../services/auth/auth_service.dart';
 import '../../../services/locator.dart';
 import '../../../services/validator.dart';
@@ -79,7 +81,7 @@ class _LoginComponentState extends State<LoginComponent> {
               onPressed: () {
                 widget.onRegisterChanged(AuthFormState.resetPassword);
               },
-              child: const Text('Forgot Password?')),
+    child: Text(LocaleKeys.auth_login_forgot_pass_txt.tr())),
         ),
         height5Per(context: context),
         _loginButton(),
@@ -88,10 +90,10 @@ class _LoginComponentState extends State<LoginComponent> {
             onPressed: () {
               widget.onRegisterChanged(AuthFormState.register);
             },
-            child: const Text('You don\'t have an account? Register')),
+            child: Text(LocaleKeys.auth_login_dont_have_acc_txt.tr())),
         height5Per(context: context),
         HorizontalOrLine(
-          label: 'OR',
+          label: LocaleKeys.auth_login_or_txt.tr().toUpperCase(),
           height: 15.w,
           color: AppColors.white,
         ),
@@ -107,7 +109,7 @@ class _LoginComponentState extends State<LoginComponent> {
         children: [
           AuthTextField(
             controller: _emailController,
-            label: 'Email',
+            label: LocaleKeys.auth_email_txt.tr(),
             isEmail: true,
             prefixIcon:
                 const Icon(Icons.mail, color: AppColors.blackBackground),
@@ -117,7 +119,7 @@ class _LoginComponentState extends State<LoginComponent> {
           height10Per(context: context),
           AuthTextField(
             controller: _passwordController,
-            label: 'Password',
+            label: LocaleKeys.auth_password_txt.tr(),
             prefixIcon:
                 const Icon(Icons.lock, color: AppColors.blackBackground),
             isPassword: true,
@@ -151,7 +153,7 @@ class _LoginComponentState extends State<LoginComponent> {
                   strokeWidth: 2.w,
                 )
               : Text(
-                  'Login',
+                  LocaleKeys.auth_login_login_btn.tr(),
                   style: AppTextStyle.loginBtnTitle(),
                 ),
         ),

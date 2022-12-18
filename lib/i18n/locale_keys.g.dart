@@ -32,5 +32,26 @@ abstract class  LocaleKeys {
   static const errors_auth_validation_pw_length = 'errors.auth_validation_pw_length';
   static const errors_auth_validation_pw_match = 'errors.auth_validation_pw_match';
   static const errors = 'errors';
+  static const auth_login_title = 'auth.login.title';
+  static const auth_login_login_btn = 'auth.login.login_btn';
+  static const auth_login_forgot_pass_txt = 'auth.login.forgot_pass_txt';
+  static const auth_login_dont_have_acc_txt = 'auth.login.dont_have_acc_txt';
+  static const auth_login_google_sign_txt = 'auth.login.google_sign_txt';
+  static const auth_login_apple_sign_txt = 'auth.login.apple_sign_txt';
+  static const auth_login_or_txt = 'auth.login.or_txt';
+  static const auth_login = 'auth.login';
+  static const auth_email_txt = 'auth.email_txt';
+  static const auth_password_txt = 'auth.password_txt';
+  static const auth_password_scnd_txt = 'auth.password_scnd_txt';
+  static const auth_register_title = 'auth.register.title';
+  static const auth_register_name_txtfield_txt = 'auth.register.name_txtfield_txt';
+  static const auth_register_have_account = 'auth.register.have_account';
+  static const auth_register_register_btn = 'auth.register.register_btn';
+  static const auth_register = 'auth.register';
+  static const auth_reset_password_reset_btn_txt = 'auth.reset_password.reset_btn_txt';
+  static const auth_reset_password_back_btn = 'auth.reset_password.back_btn';
+  static const auth_reset_password_title = 'auth.reset_password.title';
+  static const auth_reset_password = 'auth.reset_password';
+  static const auth = 'auth';
 
 }
