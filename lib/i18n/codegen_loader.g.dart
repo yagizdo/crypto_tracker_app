@@ -70,6 +70,11 @@ class CodegenLoader extends AssetLoader{
       "reset_btn_txt": "Sıfırla",
       "back_btn": "Geri dön",
       "title": "Şifre sıfırlama"
+    },
+    "email_verify": {
+      "title": "Lütfen E-postanızı doğrulayın",
+      "resend_email_btn": "E-postayı tekrar gönder",
+      "cancel_btn": "Vazgeç"
     }
   }
 };
@@ -129,6 +134,11 @@ static const Map<String,dynamic> en = {
       "reset_btn_txt": "Reset Password",
       "back_btn": "Back to login",
       "title": "Reset Password"
+    },
+    "email_verify": {
+      "title": "Please verify your Email",
+      "resend_email_btn": "Resend Email",
+      "cancel_btn": "Cancel"
     }
   }
 };

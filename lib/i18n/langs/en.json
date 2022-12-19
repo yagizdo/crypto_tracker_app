@@ -54,6 +54,11 @@
       "reset_btn_txt": "Reset Password",
       "back_btn": "Back to login",
       "title": "Reset Password"
+    },
+    "email_verify": {
+      "title": "Please verify your Email",
+      "resend_email_btn": "Resend Email",
+      "cancel_btn": "Cancel"
     }
   }
 }

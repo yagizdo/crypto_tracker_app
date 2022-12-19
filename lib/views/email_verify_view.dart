@@ -62,14 +62,11 @@ class _EmailVerifyViewState extends State<EmailVerifyView> {
     return MainLayout(
       appBar: AppBar(
         backgroundColor: AppColors.blackBackground,
-        title: Text('Please Verify Your Email',style: TextStyle(color: CupertinoColors.white,fontSize: 20.sp,fontWeight: FontWeight.bold)),
+        title: Text(LocaleKeys.auth_email_verify_title.tr(),style: TextStyle(color: CupertinoColors.white,fontSize: 20.sp,fontWeight: FontWeight.bold)),
       ),
       content: Center(
         child: Column(
           children: [
-            height10Per(context: context),
-            Text(
-              '${_authService.currentUser?.emailVerified ?? 'No Data'}', style: TextStyle(color: CupertinoColors.white,fontSize: 18.sp),),
             height10Per(context: context),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -83,7 +80,7 @@ class _EmailVerifyViewState extends State<EmailVerifyView> {
                     width: 150.w,
                     height: 40.w,
                     decoration: BoxDecoration(color: Colors.white,borderRadius: BorderRadius.circular(10)),
-                    child: Text('Resend Email',style: TextStyle(color: CupertinoColors.black,fontSize: 15.sp)),
+                    child: Text(LocaleKeys.auth_email_verify_resend_email_btn.tr(), textAlign: TextAlign.center ,style: TextStyle(color: CupertinoColors.black,fontSize: 13.5.sp, fontWeight: FontWeight.w500),),
                   ),
                 ),
                 TapWrapper(
@@ -93,10 +90,10 @@ class _EmailVerifyViewState extends State<EmailVerifyView> {
                   },
                   child: Container(
                     alignment: Alignment.center,
-                    width: 150.w,
+                    width: 160.w,
                     height: 40.w,
                     decoration: BoxDecoration(color: Colors.redAccent,borderRadius: BorderRadius.circular(10)),
-                    child: Text('Cancel',style: TextStyle(color: CupertinoColors.white,fontSize: 15.sp)),
+                    child: Text(LocaleKeys.auth_email_verify_cancel_btn.tr(),style: TextStyle(color: CupertinoColors.white,fontSize: 13.5.sp,fontWeight: FontWeight.w500)),
                   ),
                 ),
               ],

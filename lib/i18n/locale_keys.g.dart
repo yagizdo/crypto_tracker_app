@@ -52,6 +52,10 @@ abstract class  LocaleKeys {
   static const auth_reset_password_back_btn = 'auth.reset_password.back_btn';
   static const auth_reset_password_title = 'auth.reset_password.title';
   static const auth_reset_password = 'auth.reset_password';
+  static const auth_email_verify_title = 'auth.email_verify.title';
+  static const auth_email_verify_resend_email_btn = 'auth.email_verify.resend_email_btn';
+  static const auth_email_verify_cancel_btn = 'auth.email_verify.cancel_btn';
+  static const auth_email_verify = 'auth.email_verify';
   static const auth = 'auth';
 
 }
