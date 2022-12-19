@@ -1,10 +1,11 @@
 class Currency {
+  String? name;
   String? alis;
   String? tur;
   String? satis;
   String? degisim;
 
-  Currency({this.alis, this.tur, this.satis, this.degisim});
+  Currency(this.name,{this.alis, this.tur, this.satis, this.degisim});
 
   Currency.fromJson(Map<String, dynamic> json) {
     alis = json['Alış'];
