@@ -64,6 +64,11 @@ dependencies:
   # Env
   flutter_dotenv: ^5.0.2
 
+  # Bloc
+  bloc: ^8.1.0
+  flutter_bloc: ^8.1.1
+  meta: ^1.8.0
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
