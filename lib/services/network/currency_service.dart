@@ -20,10 +20,19 @@ class CurrencyService extends BaseApiClient implements ICurrencyService {
 
     // Loop through the keys and values and create a currency object
     for (var i = 1; i < keys.length; i++) {
+      String updatedAt = values[0];
       Currency currency = Currency.fromJson(values[i]);
       currency.name = keys[i];
+      currency.updatedAt = updatedAt;
       currencies.add(currency);
     }
+
+    // Sort the currencies by name (alphabetically)
+    var sortedCurrencies = currencies
+        .where((element) => element.name != 'updated_at')
+        .toList()
+      ..sort((a, b) => a.name!.compareTo(b.name!));
+
     return currencies;
   }
 }

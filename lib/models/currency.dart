@@ -1,25 +1,26 @@
 class Currency {
   String? name;
-  String? alis;
-  String? tur;
-  String? satis;
-  String? degisim;
+  String? updatedAt;
+  String? buy;
+  String? type;
+  String? sell;
+  String? change;
 
-  Currency(this.name,{this.alis, this.tur, this.satis, this.degisim});
+  Currency(this.name,this.updatedAt,{this.buy, this.type, this.sell, this.change});
 
   Currency.fromJson(Map<String, dynamic> json) {
-    alis = json['Alış'];
-    tur = json['Tür'];
-    satis = json['Satış'];
-    degisim = json['Değişim'];
+    buy = json['Alış'];
+    type = json['Tür'];
+    sell = json['Satış'];
+    change = json['Değişim'];
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{};
-    data['Alış'] = alis;
-    data['Tür'] = tur;
-    data['Satış'] = satis;
-    data['Değişim'] = degisim;
+    data['Alış'] = buy;
+    data['Tür'] = type;
+    data['Satış'] = sell;
+    data['Değişim'] = change;
     return data;
   }
 }
