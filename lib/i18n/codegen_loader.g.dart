@@ -67,8 +67,8 @@ class CodegenLoader extends AssetLoader{
       "register_btn": "Kayıt Ol"
     },
     "reset_password": {
-      "reset_btn_txt": "Şifreyi sıfırla",
-      "back_btn": "Girişe geri dön",
+      "reset_btn_txt": "Sıfırla",
+      "back_btn": "Geri dön",
       "title": "Şifre sıfırlama"
     }
   }

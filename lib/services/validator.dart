@@ -1,9 +1,12 @@
 import 'package:crypto_tracker/i18n/locale_keys.g.dart';
 import 'package:easy_localization/easy_localization.dart';
 
+import '../utils/extensions/validation_query.dart';
+
 class Validator {
+
   static String? email(String? value) {
-    if (RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+").hasMatch(value!)) {
+    if (ValidationQuery.emailValidationQuery.hasMatch(value!)) {
       return null;
     }
     return LocaleKeys.errors_auth_validation_valid_email.tr();

@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+import '../../utils/extensions/validation_query.dart';
+
 class AuthTextField extends StatefulWidget {
   const AuthTextField(
       {Key? key,
@@ -40,7 +42,7 @@ class _AuthTextFieldState extends State<AuthTextField> {
         validator: widget.validator,
         inputFormatters: [
           if(widget.isName == true)
-          FilteringTextInputFormatter.allow(RegExp(r'^[a-zA-ZğıüşöçİĞÜŞÖÇ ]*[a-zA-ZğıüşöçİĞÜŞÖÇ ]*'))
+          FilteringTextInputFormatter.allow(ValidationQuery.nameValidationQuery),
         ],
         keyboardType: widget.isEmail == true
             ? TextInputType.emailAddress

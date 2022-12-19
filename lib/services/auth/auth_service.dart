@@ -213,8 +213,9 @@ class AuthService extends IAuthService {
       // not match the nonce in `appleCredential.identityToken`, sign in will fail.
       userCredential = await _firebaseAuth.signInWithCredential(oauthCredential);
 
-      // This line for email
-      // Because apple sign in return user name null. I don't know why.
+      // Because apple sign in return user's name on first time. But name is return null was creating firebase user.
+      // So we need to update user's name.
+      // If user's name is null and user's name (in Apple Credential) is not null, we update user's name.
       if (userCredential.user?.displayName == null && appleCredential.givenName != null) {
         await userCredential.user?.updateDisplayName(appleCredential.givenName);
       }
