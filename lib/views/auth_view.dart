@@ -1,3 +1,5 @@
+import 'package:crypto_tracker/i18n/locale_keys.g.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 
 import '../utils/app_colors.dart';
@@ -21,9 +23,9 @@ class _AuthViewState extends State<AuthView> {
   AuthFormState _authFormState = AuthFormState.login;
 
   Map<AuthFormState, String> appbarTitles = {
-    AuthFormState.login: 'Login',
-    AuthFormState.register: 'Register',
-    AuthFormState.resetPassword: 'Reset Password',
+    AuthFormState.login: LocaleKeys.auth_login_title.tr(),
+    AuthFormState.register: LocaleKeys.auth_register_title.tr(),
+    AuthFormState.resetPassword: LocaleKeys.auth_reset_password_title.tr(),
   };
 
   @override

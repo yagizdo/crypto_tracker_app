@@ -40,7 +40,37 @@ class CodegenLoader extends AssetLoader{
     "apple_credential_error": "Apple yetkilendirme kimlik bilgileri alınamadı.",
     "undefinied": "Tanımlanamayan bir hata oluştu.",
     "email_send": "E-posta adresi geçerliyse, kısa süre içinde bir şifre sıfırlama e-postası alacaksınız.",
-    "apple_unsupported_device": "Bu cihaz, apple oturum açma için uygun değildir."
+    "apple_unsupported_device": "Bu cihaz, apple oturum açma için uygun değildir.",
+    "auth_validation_valid_email": "Lütfen geçerli bir E-posta adresi giriniz.",
+    "auth_validation_empty_error": "Bu alan boş olamaz!",
+    "auth_validation_name_length": "İsim en az 3 karakter olmalıdır.",
+    "auth_validation_pw_length": "Şifre en az 6 karakter olmalıdır.",
+    "auth_validation_pw_match": "Parolalar uyuşmuyor."
+  },
+  "auth": {
+    "login": {
+      "title": "Giriş Yap",
+      "login_btn": "Giriş Yap",
+      "forgot_pass_txt": "Şifremi Unuttum?",
+      "dont_have_acc_txt": "Hesabınız yok mu? Kayıt ol",
+      "google_sign_txt": "Google ile giriş yap",
+      "apple_sign_txt": "Apple ile giriş yap",
+      "or_txt": "Veya"
+    },
+    "email_txt": "E-Posta",
+    "password_txt": "Şifre",
+    "password_scnd_txt": "Şifre kontrolü",
+    "register": {
+      "title": "Kayıt Ol",
+      "name_txtfield_txt": "İsim",
+      "have_account": "Hesabın var mı? Giriş Yap!",
+      "register_btn": "Kayıt Ol"
+    },
+    "reset_password": {
+      "reset_btn_txt": "Sıfırla",
+      "back_btn": "Geri dön",
+      "title": "Şifre sıfırlama"
+    }
   }
 };
 static const Map<String,dynamic> en = {
@@ -69,7 +99,37 @@ static const Map<String,dynamic> en = {
     "apple_credential_error": "Failed to retrieve Apple authorization credentials.",
     "undefinied": "An unidentified error has occurred.",
     "email_send": "If the email address is valid, you will receive a password reset email shortly.",
-    "apple_unsupported_device": "This device is not suitable for apple sign in."
+    "apple_unsupported_device": "This device is not suitable for apple sign in.",
+    "auth_validation_valid_email": "Please enter a valid email.",
+    "auth_validation_empty_error": "This field cannot be empty!",
+    "auth_validation_name_length": "Name must be at least 3 characters.",
+    "auth_validation_pw_length": "Password must be at least 6 characters.",
+    "auth_validation_pw_match": "Passwords do not match."
+  },
+  "auth": {
+    "login": {
+      "title": "Login",
+      "login_btn": "Login",
+      "forgot_pass_txt": "Forgot Password?",
+      "dont_have_acc_txt": "You don\\'t have an account? Register",
+      "google_sign_txt": "Sign in with Google",
+      "apple_sign_txt": "Sign in with Apple",
+      "or_txt": "Or"
+    },
+    "email_txt": "Email",
+    "password_txt": "Password",
+    "password_scnd_txt": "Password Check",
+    "register": {
+      "title": "Register",
+      "name_txtfield_txt": "Name",
+      "have_account": "Do you have an account? Sign In!",
+      "register_btn": "Register"
+    },
+    "reset_password": {
+      "reset_btn_txt": "Reset Password",
+      "back_btn": "Back to login",
+      "title": "Reset Password"
+    }
   }
 };
 static const Map<String, Map<String,dynamic>> mapLocales = {"tr": tr, "en": en};

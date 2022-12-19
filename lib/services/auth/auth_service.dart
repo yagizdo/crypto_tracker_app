@@ -44,8 +44,17 @@ class AuthService extends IAuthService {
 
   @override
   Future<void> reloadUser() async {
-    await _firebaseAuth.currentUser?.reload();
+    if (_firebaseAuth.currentUser != null) {
+      await _firebaseAuth.currentUser!.reload();
+    }
   }
+
+  @override
+  Future<bool> getUserEmailStatus() async {
+   return _firebaseAuth.currentUser?.emailVerified ?? false;
+
+  }
+
 
   @override
   Future<void> logout() async {
@@ -58,6 +67,15 @@ class AuthService extends IAuthService {
   @override
   Stream<User?>? authStateChanges() {
     return _firebaseAuth.authStateChanges();
+  }
+
+  Future<void> updateUserName({required String name}) async {
+    try {
+      await _firebaseAuth.currentUser?.updateDisplayName(name);
+    } catch (e) {
+      var errorMessage = AuthExceptionHandler.generateExceptionMessage(e);
+      _navigationService.showErrorSnackbar(errorMessage: errorMessage);
+    }
   }
 
 
@@ -194,6 +212,13 @@ class AuthService extends IAuthService {
       // Sign in the user with Firebase. If the nonce we generated earlier does
       // not match the nonce in `appleCredential.identityToken`, sign in will fail.
       userCredential = await _firebaseAuth.signInWithCredential(oauthCredential);
+
+      // Because apple sign in return user's name on first time. But name is return null was creating firebase user.
+      // So we need to update user's name.
+      // If user's name is null and user's name (in Apple Credential) is not null, we update user's name.
+      if (userCredential.user?.displayName == null && appleCredential.givenName != null) {
+        await userCredential.user?.updateDisplayName(appleCredential.givenName);
+      }
     } on FirebaseAuthException catch(e) {
       var exceptionMessage = AuthExceptionHandler.generateExceptionMessage(e);
       _navigationService.showErrorSnackbar(errorMessage: exceptionMessage);

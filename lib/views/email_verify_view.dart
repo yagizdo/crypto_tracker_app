@@ -1,14 +1,19 @@
 import 'dart:async';
 
+import 'package:crypto_tracker/services/navigation_service.dart';
 import 'package:crypto_tracker/views/base_view.dart';
+import 'package:easy_localization/easy_localization.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+import '../i18n/locale_keys.g.dart';
 import '../services/auth/auth_service.dart';
 import '../services/locator.dart';
 import '../utils/app_colors.dart';
 import '../utils/app_constants.dart';
+import '../utils/extensions/auth_exception_handler.dart';
 import '../widgets/main_widgets/main_layout.dart';
 import '../widgets/main_widgets/tapWrapper.dart';
 
@@ -22,29 +27,34 @@ class EmailVerifyView extends StatefulWidget {
 class _EmailVerifyViewState extends State<EmailVerifyView> {
 
   final AuthService _authService = getIt<AuthService>();
-  late Timer timer;
+  Timer? timer;
 
+  Future<bool> getEmailStatus() async {
+    return await _authService.getUserEmailStatus();
+  }
   @override
   void initState() {
+    if (!mounted) return;
     timer = Timer.periodic(
-      const Duration(seconds: 3),
-          (timer) async {
-        await _authService.reloadUser();
-        if(_authService.currentUser.emailVerified){
-          timer.cancel();
-          if (!mounted) return;
-          Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => const BaseView(),),);
-        }
-      },
-    );
+        const Duration(seconds: 3),
+            (timer) async {
+          await _authService.reloadUser();
+          if(await getEmailStatus()){
+            timer.cancel();
+            if (!mounted) return;
+            Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => const BaseView(),),);
+          }
+        },
+      );
     super.initState();
   }
 
   @override
   void dispose() {
     if(!mounted){
-      timer.cancel();
+      timer?.cancel();
     }
+    timer?.cancel();
     super.dispose();
   }
   @override
@@ -78,7 +88,7 @@ class _EmailVerifyViewState extends State<EmailVerifyView> {
                 ),
                 TapWrapper(
                   onTap: () async {
-                    timer.cancel();
+                    timer?.cancel();
                     await _authService.logout();
                   },
                   child: Container(

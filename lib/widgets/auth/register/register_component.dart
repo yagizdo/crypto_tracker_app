@@ -1,5 +1,8 @@
+import 'package:crypto_tracker/i18n/locale_keys.g.dart';
+import 'package:crypto_tracker/services/database/database_service.dart';
 import 'package:crypto_tracker/services/navigation_service.dart';
 import 'package:crypto_tracker/widgets/auth/auth_textfield.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -22,12 +25,13 @@ class RegisterComponent extends StatefulWidget {
 
 class _RegisterComponentState extends State<RegisterComponent> {
   late GlobalKey<FormState> _formKey;
+  late TextEditingController _nameController;
   late TextEditingController _emailController;
   late TextEditingController _passwordController;
   late TextEditingController _passwordConfirmController;
 
   final AuthService _authService = getIt<AuthService>();
-  final NavigationService _navigationService = getIt<NavigationService>();
+  final DatabaseService _databaseService = getIt<DatabaseService>();
   bool isLoading = false;
 
   @override
@@ -37,12 +41,31 @@ class _RegisterComponentState extends State<RegisterComponent> {
     }
   }
 
+  Future<void> sendVerificationMail() async {
+    await _authService.sendVerificationMail();
+  }
+
+  Future<void> updateUserName() async {
+    await _authService.updateUserName(name :_nameController.text);
+  }
+
+  Future<void> saveUserInDatabase() async {
+    await _databaseService.saveUserInDatabase(_authService.currentUser);
+  }
+
   Future<void> registerWithEmailAndPassword() async {
     setState(() {
       isLoading =true;
     });
-    await _authService.registerWithEmailAndPassword(userEmail: _emailController.text, userPassword: _passwordController.text);
-    await _authService.sendVerificationMail();
+    await _authService.registerWithEmailAndPassword(userEmail: _emailController.text, userPassword: _passwordController.text)
+        .then((value) async {
+      if(value != null) {
+       await updateUserName();
+       await saveUserInDatabase();
+       await sendVerificationMail();
+
+      }
+    });
     setState(() {
       isLoading =false;
     });
@@ -51,6 +74,7 @@ class _RegisterComponentState extends State<RegisterComponent> {
   @override
   void initState() {
     super.initState();
+    _nameController = TextEditingController();
     _emailController = TextEditingController();
     _passwordController = TextEditingController();
     _passwordConfirmController = TextEditingController();
@@ -59,6 +83,7 @@ class _RegisterComponentState extends State<RegisterComponent> {
 
   @override
   void dispose() {
+    _nameController.dispose();
     _emailController.dispose();
     _passwordController.dispose();
     _passwordConfirmController.dispose();
@@ -74,7 +99,6 @@ class _RegisterComponentState extends State<RegisterComponent> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
-        height10Per(context: context),
         _registerFormComp(),
       ],
     );
@@ -88,15 +112,27 @@ class _RegisterComponentState extends State<RegisterComponent> {
       child: Column(
         children: [
           AuthTextField(
+            controller: _nameController,
+            label: LocaleKeys.auth_register_name_txtfield_txt.tr(),
+            prefixIcon: const Icon(Icons.person, color: AppColors.blackBackground),
+            isPassword: false,
+            isName: true,
+            validator: (value) => Validator.name(value),
+          ),
+          height10Per(context: context),
+          AuthTextField(
             controller: _emailController,
-            label: 'Email',
+            label: LocaleKeys.auth_email_txt.tr(),
+            isEmail: true,
+            prefixIcon: const Icon(Icons.email, color: AppColors.blackBackground),
             isPassword: false,
             validator: (value) => Validator.email(value),
           ),
           height10Per(context: context),
           AuthTextField(
             controller: _passwordController,
-            label: 'Password',
+            label: LocaleKeys.auth_password_txt.tr(),
+            prefixIcon: const Icon(Icons.lock, color: AppColors.blackBackground),
             isPassword: true,
             validator: (value) => Validator.password(
               value,
@@ -105,7 +141,8 @@ class _RegisterComponentState extends State<RegisterComponent> {
           height10Per(context: context),
           AuthTextField(
             controller: _passwordConfirmController,
-            label: 'Password Check',
+            label: LocaleKeys.auth_password_scnd_txt.tr(),
+            prefixIcon: const Icon(Icons.lock, color: AppColors.blackBackground),
             isPassword: true,
             validator: (value) => Validator.passwordsMatch(
                 value, _passwordController.text, _passwordConfirmController.text),
@@ -117,7 +154,7 @@ class _RegisterComponentState extends State<RegisterComponent> {
               onPressed: () {
                 widget.onRegisterChanged(AuthFormState.login);
               },
-              child: const Text('You have an account? Sign In!')),
+              child: Text(LocaleKeys.auth_register_have_account.tr())),
         ],
       ),
     );
@@ -144,7 +181,7 @@ class _RegisterComponentState extends State<RegisterComponent> {
         ),
         child: Center(
           child:isLoading ? SizedBox(width: 25.w, height: 25.w, child: CircularProgressIndicator(color: AppColors.blackBackground, strokeWidth: 2.5.w,)) : Text(
-            'Register',
+            LocaleKeys.auth_register_register_btn.tr(),
             style: AppTextStyle.loginBtnTitle(),
           ),
         ),

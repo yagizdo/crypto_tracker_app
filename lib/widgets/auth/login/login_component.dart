@@ -1,15 +1,19 @@
 import 'package:crypto_tracker/views/auth_view.dart';
 import 'package:crypto_tracker/widgets/social_auth_btns.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+import '../../../i18n/locale_keys.g.dart';
 import '../../../services/auth/auth_service.dart';
 import '../../../services/locator.dart';
 import '../../../services/validator.dart';
+import '../../../utils/app_colors.dart';
 import '../../../utils/app_constants.dart';
 import '../../../utils/app_textstyles.dart';
 import '../../main_widgets/tapWrapper.dart';
 import '../auth_textfield.dart';
+import '../horizantal_or_line.dart';
 
 class LoginComponent extends StatefulWidget {
   const LoginComponent({Key? key, required this.onRegisterChanged})
@@ -31,7 +35,7 @@ class _LoginComponentState extends State<LoginComponent> {
       isLoading = true;
     });
 
-   await _authService.signInWithEmailAndPassword(
+    await _authService.signInWithEmailAndPassword(
         userEmail: _emailController.text,
         userPassword: _passwordController.text);
     setState(() {
@@ -69,21 +73,30 @@ class _LoginComponentState extends State<LoginComponent> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
-        height10Per(context: context),
         _loginFormComp(),
-        height10Per(context: context),
+        height2Per(context: context),
+        Padding(
+          padding: EdgeInsets.only(right: 220.w),
+          child: TextButton(
+              onPressed: () {
+                widget.onRegisterChanged(AuthFormState.resetPassword);
+              },
+    child: Text(LocaleKeys.auth_login_forgot_pass_txt.tr())),
+        ),
+        height5Per(context: context),
         _loginButton(),
         height5Per(context: context),
         TextButton(
             onPressed: () {
-              widget.onRegisterChanged(AuthFormState.resetPassword);
-            },
-            child: const Text('Forgot Password?')),
-        TextButton(
-            onPressed: () {
               widget.onRegisterChanged(AuthFormState.register);
             },
-            child: const Text('You don\'t have an account? Register')),
+            child: Text(LocaleKeys.auth_login_dont_have_acc_txt.tr())),
+        height5Per(context: context),
+        HorizontalOrLine(
+          label: LocaleKeys.auth_login_or_txt.tr().toUpperCase(),
+          height: 15.w,
+          color: AppColors.white,
+        ),
         height5Per(context: context),
       ],
     );
@@ -96,14 +109,19 @@ class _LoginComponentState extends State<LoginComponent> {
         children: [
           AuthTextField(
             controller: _emailController,
-            label: 'Email',
+            label: LocaleKeys.auth_email_txt.tr(),
+            isEmail: true,
+            prefixIcon:
+                const Icon(Icons.mail, color: AppColors.blackBackground),
             isPassword: false,
             validator: (value) => Validator.email(value),
           ),
           height10Per(context: context),
           AuthTextField(
             controller: _passwordController,
-            label: 'Password',
+            label: LocaleKeys.auth_password_txt.tr(),
+            prefixIcon:
+                const Icon(Icons.lock, color: AppColors.blackBackground),
             isPassword: true,
             validator: (value) => Validator.password(
               value,
@@ -131,13 +149,13 @@ class _LoginComponentState extends State<LoginComponent> {
         child: Center(
           child: isLoading
               ? CircularProgressIndicator(
-            color: Colors.black,
-            strokeWidth: 2.w,
-          )
+                  color: Colors.black,
+                  strokeWidth: 2.w,
+                )
               : Text(
-            'Login',
-            style: AppTextStyle.loginBtnTitle(),
-          ),
+                  LocaleKeys.auth_login_login_btn.tr(),
+                  style: AppTextStyle.loginBtnTitle(),
+                ),
         ),
       ),
     );

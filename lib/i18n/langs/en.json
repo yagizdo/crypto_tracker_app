@@ -24,6 +24,36 @@
     "apple_credential_error": "Failed to retrieve Apple authorization credentials.",
     "undefinied": "An unidentified error has occurred.",
     "email_send": "If the email address is valid, you will receive a password reset email shortly.",
-    "apple_unsupported_device": "This device is not suitable for apple sign in."
+    "apple_unsupported_device": "This device is not suitable for apple sign in.",
+    "auth_validation_valid_email": "Please enter a valid email.",
+    "auth_validation_empty_error": "This field cannot be empty!",
+    "auth_validation_name_length": "Name must be at least 3 characters.",
+    "auth_validation_pw_length": "Password must be at least 6 characters.",
+    "auth_validation_pw_match": "Passwords do not match."
+  },
+  "auth": {
+    "login": {
+      "title": "Login",
+      "login_btn": "Login",
+      "forgot_pass_txt": "Forgot Password?",
+      "dont_have_acc_txt": "You don\\'t have an account? Register",
+      "google_sign_txt": "Sign in with Google",
+      "apple_sign_txt": "Sign in with Apple",
+      "or_txt": "Or"
+    },
+    "email_txt": "Email",
+    "password_txt": "Password",
+    "password_scnd_txt": "Password Check",
+    "register": {
+      "title": "Register",
+      "name_txtfield_txt": "Name",
+      "have_account": "Do you have an account? Sign In!",
+      "register_btn": "Register"
+    },
+    "reset_password": {
+      "reset_btn_txt": "Reset Password",
+      "back_btn": "Back to login",
+      "title": "Reset Password"
+    }
   }
 }

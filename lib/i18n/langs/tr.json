@@ -24,6 +24,36 @@
     "apple_credential_error": "Apple yetkilendirme kimlik bilgileri alınamadı.",
     "undefinied": "Tanımlanamayan bir hata oluştu.",
     "email_send": "E-posta adresi geçerliyse, kısa süre içinde bir şifre sıfırlama e-postası alacaksınız.",
-    "apple_unsupported_device": "Bu cihaz, apple oturum açma için uygun değildir."
+    "apple_unsupported_device": "Bu cihaz, apple oturum açma için uygun değildir.",
+    "auth_validation_valid_email": "Lütfen geçerli bir E-posta adresi giriniz.",
+    "auth_validation_empty_error": "Bu alan boş olamaz!",
+    "auth_validation_name_length": "İsim en az 3 karakter olmalıdır.",
+    "auth_validation_pw_length": "Şifre en az 6 karakter olmalıdır.",
+    "auth_validation_pw_match": "Parolalar uyuşmuyor."
+  },
+  "auth": {
+    "login": {
+      "title": "Giriş Yap",
+      "login_btn": "Giriş Yap",
+      "forgot_pass_txt": "Şifremi Unuttum?",
+      "dont_have_acc_txt": "Hesabınız yok mu? Kayıt ol",
+      "google_sign_txt": "Google ile giriş yap",
+      "apple_sign_txt": "Apple ile giriş yap",
+      "or_txt": "Veya"
+    },
+    "email_txt": "E-Posta",
+    "password_txt": "Şifre",
+    "password_scnd_txt": "Şifre kontrolü",
+    "register": {
+      "title": "Kayıt Ol",
+      "name_txtfield_txt": "İsim",
+      "have_account": "Hesabın var mı? Giriş Yap!",
+      "register_btn": "Kayıt Ol"
+    },
+    "reset_password": {
+      "reset_btn_txt": "Sıfırla",
+      "back_btn": "Geri dön",
+      "title": "Şifre sıfırlama"
+    }
   }
 }
