@@ -1,6 +1,12 @@
 import 'package:crypto_tracker/utils/extensions/context_extension.dart';
 import 'package:flutter/material.dart';
 
+/// This is locale map for the app.
+final localesMap = {
+  'en': 'English',
+  'tr': 'Türkçe',
+};
+
 /// Screen-width %1
 SizedBox height1Per({required BuildContext context}) {
   return SizedBox(

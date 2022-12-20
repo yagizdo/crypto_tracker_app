@@ -92,4 +92,26 @@ class AppTextStyle {
       overflow: TextOverflow.ellipsis,
     );
   }
+
+
+  // Settings
+  static TextStyle settingsCardTitle({Color? titleColor}) {
+    return TextStyle(
+      color: titleColor ?? AppColors.blackBackground,
+      fontSize: 15.sp,
+      fontWeight: FontWeight.w500,
+      letterSpacing: -0.2.sp,
+      overflow: TextOverflow.ellipsis,
+    );
+  }
+
+  static TextStyle settingsCardLangCodeTxt() {
+    return TextStyle(
+      color: AppColors.blueBackground,
+      fontSize: 15.sp,
+      fontWeight: FontWeight.w400,
+      letterSpacing: -0.2.sp,
+      overflow: TextOverflow.ellipsis,
+    );
+  }
 }
