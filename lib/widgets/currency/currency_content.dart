@@ -26,6 +26,15 @@ class CurrencyContent extends StatelessWidget {
               currencies: state.currencies,
             );
           }
+
+          if (state is CurrencyError) {
+            return const Text(
+              'Something went wrong!',
+              style: TextStyle(
+                color: Colors.white,
+              ),
+            );
+          }
           return const Center(
             child: Text('No items'),
           );
