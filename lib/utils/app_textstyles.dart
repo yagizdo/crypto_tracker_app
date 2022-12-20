@@ -34,4 +34,15 @@ class AppTextStyle {
       overflow: TextOverflow.ellipsis,
     );
   }
+
+  // Currency Content
+  static TextStyle currencyRowItemTitle() {
+    return TextStyle(
+      color: Colors.white,
+      fontSize: 16.sp,
+      fontWeight: FontWeight.w500,
+      letterSpacing: -0.2.sp,
+      overflow: TextOverflow.ellipsis,
+    );
+  }
 }
