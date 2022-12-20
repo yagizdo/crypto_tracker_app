@@ -8,7 +8,7 @@ import '../../utils/app_colors.dart';
 class MainNavbar extends StatelessWidget {
   MainNavbar({Key? key, required this.onTabChanged, required this.currentIndex}) : super(key: key);
   final ValueSetter<int> onTabChanged;
-  int currentIndex = 0;
+  int currentIndex;
   @override
   Widget build(BuildContext context) {
     return DotNavigationBar(
