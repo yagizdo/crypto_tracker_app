@@ -83,7 +83,7 @@ class _ResetPasswordCompState extends State<ResetPasswordComp> {
                 strokeWidth: 2.w,
               ) : Text(
                 LocaleKeys.auth_reset_password_back_btn.tr(),
-                style: AppTextStyle.loginBtnTitle(),
+                style: AppTextStyle.resetPassBackBtn(),
               ),
             ),
           ),),

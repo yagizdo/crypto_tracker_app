@@ -35,6 +35,25 @@ class AppTextStyle {
     );
   }
 
+  static TextStyle resetPassBackBtn() {
+    return TextStyle(
+      color: AppColors.white,
+      fontSize: 18.sp,
+      fontWeight: FontWeight.w700,
+      letterSpacing: -0.2.sp,
+      overflow: TextOverflow.ellipsis,
+    );
+  }
+
+  static TextStyle authTextButton() {
+    return TextStyle(
+      color: Colors.white,
+      fontSize: 13.sp,
+      fontWeight: FontWeight.w500,
+      letterSpacing: -0.2.sp,
+      overflow: TextOverflow.ellipsis,
+    );
+  }
   // Currency Content
   static TextStyle currencyRowItemTitle() {
     return TextStyle(
