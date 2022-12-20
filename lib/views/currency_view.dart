@@ -1,3 +1,4 @@
+import 'package:crypto_tracker/widgets/currency/currency_content.dart';
 import 'package:flutter/material.dart';
 
 class CurrencyView extends StatefulWidget {
@@ -10,6 +11,6 @@ class CurrencyView extends StatefulWidget {
 class _CurrencyViewState extends State<CurrencyView> {
   @override
   Widget build(BuildContext context) {
-    return const Placeholder();
+    return const CurrencyContent();
   }
 }

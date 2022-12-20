@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:crypto_tracker/services/navigation_service.dart';
+import 'package:crypto_tracker/views/currency_view.dart';
 import 'package:crypto_tracker/views/home_view.dart';
 import 'package:crypto_tracker/widgets/main_widgets/main_layout.dart';
 import 'package:crypto_tracker/widgets/main_widgets/main_navbar.dart';
@@ -65,9 +66,7 @@ class _BaseViewState extends State<BaseView> {
       case 0:
         return const HomeView();
       case 1:
-        return const Center(
-          child: Text('Coming soon'),
-        );
+        return const CurrencyView();
       case 2:
         return const Center(
           child: Text('Coming soon'),
