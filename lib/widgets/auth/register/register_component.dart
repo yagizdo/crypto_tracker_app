@@ -180,7 +180,7 @@ class _RegisterComponentState extends State<RegisterComponent> {
         }
       },
       child: Container(
-        width: 250.w,
+        width: 332.9.w,
         height: 40.w,
         alignment: Alignment.center,
         decoration: BoxDecoration(

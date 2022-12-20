@@ -147,7 +147,7 @@ class _LoginComponentState extends State<LoginComponent> {
         }
       },
       child: Container(
-        width: 250.w,
+        width: 332.9.w,
         height: 40.w,
         decoration: BoxDecoration(
           color: Colors.white,
