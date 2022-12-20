@@ -37,6 +37,15 @@ class MainNavbar extends StatelessWidget {
             textStyle: TextStyle(fontSize: 11.sp),
             title: 'Home'),
 
+        // Currency
+        PersistentBottomNavBarItem(
+            activeColorPrimary: CupertinoColors.white,
+            inactiveColorPrimary: CupertinoColors.inactiveGray,
+            activeColorSecondary: CupertinoColors.white,
+            icon: const Icon(Icons.attach_money),
+            textStyle: TextStyle(fontSize: 11.sp),
+            title: 'Currency'),
+
         // Coins
         PersistentBottomNavBarItem(
             activeColorPrimary: CupertinoColors.white,

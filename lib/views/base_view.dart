@@ -63,6 +63,7 @@ class _BaseViewState extends State<BaseView> {
           const HomeView(),
           Container(),
           Container(),
+          Container(),
         ],
       ),
     );
