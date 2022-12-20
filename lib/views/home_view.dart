@@ -31,33 +31,31 @@ class _HomeViewState extends State<HomeView> {
     );
   }
 
-  PreferredSize _buildHomeAppBar() {
-    return PreferredSize(
-      preferredSize: Size(0, 80.w),
-      child: Padding(
-        padding: EdgeInsets.only(top: 50.w),
-        child: AppBar(
-          backgroundColor: AppColors.blackBackground,
-          elevation: 0,
-          title: Text(
-            'Home',
-            style: TextStyle(
-              color: AppColors.white,
-              fontSize: 30.sp,
-              fontWeight: FontWeight.w600,
-            ),
-          ),
-          actions: [
-            Padding(
-              padding: EdgeInsets.only(right: 10.w),
-              child: TapWrapper(onTap: (){
-                _authService.logout();
-                Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => OnboardingView()));
-              }, child: const Icon(Icons.logout)),
-            )
-          ],
+  PreferredSizeWidget _buildHomeAppBar() {
+    return AppBar(
+      backgroundColor: Colors.transparent,
+      elevation: 0,
+      title: Text(
+        'Home',
+        style: TextStyle(
+          color: AppColors.white,
+          fontSize: 30.sp,
+          fontWeight: FontWeight.w600,
         ),
       ),
+      actions: [
+        Padding(
+          padding: EdgeInsets.only(right: 10.w),
+          child: TapWrapper(onTap: () async {
+            if (_authService.currentUser != null) {
+              await _authService.logout();
+              if (!mounted) return;
+              Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => OnboardingView()));
+
+            }
+          }, child: const Icon(Icons.logout)),
+        )
+      ],
     );
   }
 }

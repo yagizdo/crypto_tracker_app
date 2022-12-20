@@ -43,7 +43,8 @@ dependencies:
 
   # UI
   sign_button: ^2.0.2
-  persistent_bottom_nav_bar_v2: ^4.2.6
+  dot_navigation_bar: ^1.0.1+4
+
 
   # Dependency Injection
   get_it: ^7.2.0

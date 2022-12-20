@@ -10,7 +10,7 @@ class MainLayout extends StatefulWidget {
     this.padding,
     this.alignment,
     this.backgroundColor,
-    this.paddingTop = true,
+    this.paddingTop = false,
     this.bottomNavigationBar,
     this.safeAreaBottomActivated = false,
     this.floatingActionButton,
@@ -39,7 +39,7 @@ class _MainLayoutState extends State<MainLayout> {
   Widget build(BuildContext context) {
     return Scaffold(
       bottomNavigationBar: widget.bottomNavigationBar,
-      backgroundColor: widget.backgroundColor ?? AppColors.blackBackground,
+      backgroundColor: widget.backgroundColor ?? AppColors.blueBackground,
       resizeToAvoidBottomInset: widget.resizeresizeToAvoidBottomInset,
       appBar: widget.appBar,
       floatingActionButton: widget.floatingActionButton,
