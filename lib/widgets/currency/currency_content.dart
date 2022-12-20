@@ -30,24 +30,39 @@ class CurrencyContent extends StatelessWidget {
           if (state is CurrencyLoaded) {
             return Column(
               children: [
-                Expanded(child: Padding(
-                  padding: EdgeInsets.only(left: 35.w, right: 20.w),
-                  child: Container(
-                    decoration: const BoxDecoration(
-                      color: AppColors.blueBackground,
-                    ),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Expanded(child: Text(LocaleKeys.currency_row_name.tr(), style: AppTextStyle.currencyRowItemTitle(),)),
-                        width7Per(context: context),
-                        Expanded(child: Text(LocaleKeys.currency_row_buy_price.tr(args: ['₺']), style: AppTextStyle.currencyRowItemTitle(),)),
-                        width7Per(context: context),
-                        Expanded(child: Text(LocaleKeys.currency_row_change.tr(), style: AppTextStyle.currencyRowItemTitle(),)),
-                      ],
+                Expanded(
+                  child: Padding(
+                    padding: EdgeInsets.only(left: 25.w, right: 25.w),
+                    child: Container(
+                      decoration: const BoxDecoration(
+                        color: AppColors.blueBackground,
+                      ),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Expanded(
+                              child: Text(
+                            LocaleKeys.currency_row_name.tr(),
+                            style: AppTextStyle.currencyRowItemTitle(),
+                            textAlign: TextAlign.center,
+                          )),
+                          Expanded(
+                              child: Text(
+                            LocaleKeys.currency_row_buy_price.tr(args: ['₺']),
+                            style: AppTextStyle.currencyRowItemTitle(),
+                            textAlign: TextAlign.center,
+                          )),
+                          Expanded(
+                              child: Text(
+                            LocaleKeys.currency_row_change.tr(),
+                            style: AppTextStyle.currencyRowItemTitle(),
+                            textAlign: TextAlign.center,
+                          )),
+                        ],
+                      ),
                     ),
                   ),
-                ),),
+                ),
                 Expanded(
                   flex: 10,
                   child: CurrencyList(
