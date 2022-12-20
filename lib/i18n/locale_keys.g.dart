@@ -57,5 +57,9 @@ abstract class  LocaleKeys {
   static const auth_email_verify_cancel_btn = 'auth.email_verify.cancel_btn';
   static const auth_email_verify = 'auth.email_verify';
   static const auth = 'auth';
+  static const currency_row_name = 'currency.row_name';
+  static const currency_row_buy_price = 'currency.row_buy_price';
+  static const currency_row_change = 'currency.row_change';
+  static const currency = 'currency';
 
 }

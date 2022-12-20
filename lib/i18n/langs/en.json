@@ -60,5 +60,10 @@
       "resend_email_btn": "Resend Email",
       "cancel_btn": "Cancel"
     }
+  },
+  "currency": {
+    "row_name": "Name",
+    "row_buy_price": "Buy Price {}",
+    "row_change": "Change"
   }
 }

@@ -76,6 +76,11 @@ class CodegenLoader extends AssetLoader{
       "resend_email_btn": "E-postayı tekrar gönder",
       "cancel_btn": "Vazgeç"
     }
+  },
+  "currency": {
+    "row_name": "İsim",
+    "row_buy_price": "Alım Fiyatı {}",
+    "row_change": "Değişim"
   }
 };
 static const Map<String,dynamic> en = {
@@ -140,6 +145,11 @@ static const Map<String,dynamic> en = {
       "resend_email_btn": "Resend Email",
       "cancel_btn": "Cancel"
     }
+  },
+  "currency": {
+    "row_name": "Name",
+    "row_buy_price": "Buy Price {}",
+    "row_change": "Change"
   }
 };
 static const Map<String, Map<String,dynamic>> mapLocales = {"tr": tr, "en": en};

@@ -60,5 +60,10 @@
       "resend_email_btn": "E-postayı tekrar gönder",
       "cancel_btn": "Vazgeç"
     }
+  },
+  "currency": {
+    "row_name": "İsim",
+    "row_buy_price": "Alım Fiyatı {}",
+    "row_change": "Değişim"
   }
 }

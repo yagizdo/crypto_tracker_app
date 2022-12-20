@@ -58,8 +58,36 @@ class AppTextStyle {
   static TextStyle currencyRowItemTitle() {
     return TextStyle(
       color: Colors.white,
-      fontSize: 16.sp,
+      fontSize: 15.sp,
       fontWeight: FontWeight.w500,
+      letterSpacing: -0.2.sp,
+      overflow: TextOverflow.ellipsis,
+    );
+  }
+  static TextStyle currencyTitle() {
+    return TextStyle(
+      color: AppColors.blackBackground,
+      fontSize: 15.sp,
+      fontWeight: FontWeight.w600,
+      letterSpacing: -0.2.sp,
+      overflow: TextOverflow.ellipsis,
+    );
+  }
+
+  static TextStyle currencyPrice() {
+    return TextStyle(
+      color: AppColors.blackBackground,
+      fontSize: 15.sp,
+      fontWeight: FontWeight.w400,
+      letterSpacing: -0.2.sp,
+      overflow: TextOverflow.ellipsis,
+    );
+  }
+  static TextStyle currencyChange() {
+    return TextStyle(
+      color: AppColors.white,
+      fontSize: 15.sp,
+      fontWeight: FontWeight.w600,
       letterSpacing: -0.2.sp,
       overflow: TextOverflow.ellipsis,
     );

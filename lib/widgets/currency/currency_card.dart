@@ -1,3 +1,5 @@
+import 'package:crypto_tracker/utils/app_textstyles.dart';
+import 'package:crypto_tracker/utils/extensions/string_extension.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -12,6 +14,13 @@ class CurrencyCard extends StatelessWidget {
 
     // String currency change percentage to double
     double? currencyChange = double.parse(currency.change!.replaceAll(',', '.').replaceAll('%', ''));
+
+    String? currencyName = currency.name?.replaceAll('-', ' ').toTitleCase();
+
+    if(currencyName!.length < 4) {
+      currencyName = currency.name?.replaceAll('-', ' ').toUpperCase();
+
+    }
 
 
     return Padding(
@@ -38,10 +47,10 @@ class CurrencyCard extends StatelessWidget {
                     onPressed: () {
 
                     },
-                    icon: const Icon(Icons.star_border),
+                    icon: Icon(Icons.star_border, color: AppColors.blackBackground, size: 25.w,),
                   )),
-              Expanded(flex: 3,child: Text(currency.name ?? 'No Data')),
-              Expanded(flex : 3, child: Text(currency.buy.toString(), textAlign: TextAlign.start,)),
+              Expanded(flex: 3,child: Text(currencyName ?? 'No Data', maxLines: 2, style: AppTextStyle.currencyTitle(),)),
+              Expanded(flex : 3, child: Text(currency.buy.toString(), textAlign: TextAlign.start, style: AppTextStyle.currencyPrice(),)),
               // Currency change container
               Expanded(
                 flex: 4,
@@ -58,9 +67,7 @@ class CurrencyCard extends StatelessWidget {
                     child: Text(
                       currency.change.toString(),
                       textAlign: TextAlign.center,
-                      style: const TextStyle(
-                        color: AppColors.blackBackground,
-                      ),
+                      style: AppTextStyle.currencyChange(),
                     ),
                   ),
                 ),
