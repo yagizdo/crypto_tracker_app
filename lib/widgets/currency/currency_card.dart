@@ -9,20 +9,10 @@ class CurrencyCard extends StatelessWidget {
   final Currency currency;
   @override
   Widget build(BuildContext context) {
-    // Deleted '%' from the start of the string
-    String? inputWithoutPercentage = currency.change?.replaceFirst('%', '');
 
-    // Deleted comma from the string
-    String? inputWithoutComma = inputWithoutPercentage?.replaceFirst(',', '');
+    // String currency change percentage to double
+    double? currencyChange = double.parse(currency.change!.replaceAll(',', '.').replaceAll('%', ''));
 
-    // Converted string to double
-    double? value = double.tryParse(inputWithoutComma ?? '0');
-
-    // Now data like 4.0 , i wanna convert to like 0.04
-    double? value2 = value! / 100;
-
-    // Dot to comma and added '%' to the end of the string
-    String updatedChange = value2.toString().replaceAll('.', ',').padLeft(value2.toString().length + 1, '%');
 
     return Padding(
       padding: EdgeInsets.symmetric(
@@ -58,7 +48,7 @@ class CurrencyCard extends StatelessWidget {
                 child: Container(
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(8),
-                    color: value2 > 0 ? Colors.green : Colors.red,
+                    color: currencyChange > 0 ? Colors.green : Colors.red,
                   ),
                   child: Padding(
                     padding: EdgeInsets.symmetric(
