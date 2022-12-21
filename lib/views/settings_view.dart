@@ -1,5 +1,7 @@
+import 'package:crypto_tracker/i18n/locale_keys.g.dart';
 import 'package:crypto_tracker/widgets/main_widgets/main_layout.dart';
 import 'package:crypto_tracker/widgets/settings/settings_content.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 
 class SettingsView extends StatelessWidget {
@@ -17,7 +19,7 @@ class SettingsView extends StatelessWidget {
     return AppBar(
       backgroundColor: Colors.transparent,
       elevation: 0,
-      title: const Text('Settings'),
+      title: Text(LocaleKeys.settings_title.tr()),
     );
   }
 }

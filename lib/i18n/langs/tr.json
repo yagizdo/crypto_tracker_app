@@ -65,5 +65,12 @@
     "row_name": "İsim",
     "row_buy_price": "Alım Fiyatı {}",
     "row_change": "Değişim"
+  },
+  "settings": {
+    "title": "Ayarlar",
+    "edit_btn": "Profili Düzenle",
+    "change_language": "Dili değiştir",
+    "logout": "Çıkış Yap",
+    "delete_acc": "Hesabı sil"
   }
 }

@@ -51,25 +51,26 @@ class SettingsCard extends StatelessWidget {
                   ? CircularProgressIndicator(
                       color: titleColor,
                     )
-                  : Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        isCenterText
-                            ? const SizedBox()
-                            : width4Per(context: context),
-                        icon ?? const SizedBox(),
-                        isCenterText
-                            ? const SizedBox()
-                            : width4Per(context: context),
-                        Text(title,
-                            style: AppTextStyle.settingsCardTitle(
-                                titleColor: titleColor)),
-                        isCenterText
-                            ? const SizedBox()
-                            : width15Per(context: context),
-                        content ?? const SizedBox()
-                      ],
-                    ),
+                  : isCenterText
+                      ? Text(title,
+                          style: AppTextStyle.settingsCardTitle(
+                              titleColor: titleColor))
+                      : Expanded(
+                          child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            width3Per(context: context),
+                            Expanded(flex: 1, child: icon ?? const SizedBox()),
+                            Expanded(
+                              flex: 4,
+                              child: Text(title,
+                                  style: AppTextStyle.settingsCardTitle(
+                                      titleColor: titleColor)),
+                            ),
+                            Expanded(
+                                flex: 2, child: content ?? const SizedBox())
+                          ],
+                        )),
               actionBtn ?? const SizedBox(),
             ],
           ),

@@ -61,5 +61,11 @@ abstract class  LocaleKeys {
   static const currency_row_buy_price = 'currency.row_buy_price';
   static const currency_row_change = 'currency.row_change';
   static const currency = 'currency';
+  static const settings_title = 'settings.title';
+  static const settings_edit_btn = 'settings.edit_btn';
+  static const settings_change_language = 'settings.change_language';
+  static const settings_logout = 'settings.logout';
+  static const settings_delete_acc = 'settings.delete_acc';
+  static const settings = 'settings';
 
 }

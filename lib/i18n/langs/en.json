@@ -65,5 +65,12 @@
     "row_name": "Name",
     "row_buy_price": "Buy Price {}",
     "row_change": "Change"
+  },
+  "settings": {
+    "title": "Settings",
+    "edit_btn": "Edit Profile",
+    "change_language": "Change Language",
+    "logout": "Logout",
+    "delete_acc": "Delete Account"
   }
 }

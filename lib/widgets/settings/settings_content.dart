@@ -1,7 +1,9 @@
+import 'package:crypto_tracker/i18n/locale_keys.g.dart';
 import 'package:crypto_tracker/utils/app_colors.dart';
 import 'package:crypto_tracker/utils/app_constants.dart';
 import 'package:crypto_tracker/utils/app_textstyles.dart';
 import 'package:crypto_tracker/widgets/main_widgets/tapWrapper.dart';
+import 'package:crypto_tracker/widgets/settings/edit_profile_comp.dart';
 import 'package:crypto_tracker/widgets/settings/settings_card.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
@@ -47,13 +49,14 @@ class _SettingsContentState extends State<SettingsContent> {
       mainAxisAlignment: MainAxisAlignment.start,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
+        height7Per(context: context),
         // Edit Profile
-        _buildEditProfileComp(),
-        height10Per(context: context),
+        EditProfileComp(currentUser: _authService.currentUser),
+        height7Per(context: context),
 
         // Language
         SettingsCard(
-            title: 'Change Language',
+            title: LocaleKeys.settings_change_language.tr(),
             icon: const Icon(
               Icons.language,
               color: AppColors.blueBackground,
@@ -72,90 +75,23 @@ class _SettingsContentState extends State<SettingsContent> {
               ],
             ),
             onTap: () {}),
-        height10Per(context: context),
+        height7Per(context: context),
 
         // Logout
-        SettingsCard(title: 'Logout', isCenterText: true, onTap: _signOut),
-        height10Per(context: context),
+        SettingsCard(
+            title: LocaleKeys.settings_logout.tr(),
+            isCenterText: true,
+            onTap: _signOut),
+        height7Per(context: context),
 
         // Delete Account
         SettingsCard(
-            title: 'Delete Account',
+            title: LocaleKeys.settings_delete_acc.tr(),
             backgroundColor: Colors.redAccent,
             isCenterText: true,
             titleColor: AppColors.white,
             onTap: () {}),
       ],
-    );
-  }
-
-  Widget _buildEditProfileComp() {
-    return Padding(
-      padding: EdgeInsets.symmetric(horizontal: 25.w),
-      child: Container(
-        height: 250.w,
-        alignment: Alignment.center,
-        width: double.infinity,
-        decoration: BoxDecoration(
-          color: AppColors.white,
-          borderRadius: BorderRadius.circular(10),
-        ),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            const CircleAvatar(
-              radius: 50,
-              backgroundColor: Colors.white,
-              child: CircleAvatar(
-                radius: 45,
-              ),
-            ),
-            height4Per(context: context),
-            Text(
-              _authService.currentUser.displayName ?? 'User Name',
-              style: const TextStyle(
-                fontSize: 20,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-            height4Per(context: context),
-            Text(
-              _authService.currentUser?.email ?? 'No Data',
-              style: const TextStyle(
-                fontSize: 15,
-                fontWeight: FontWeight.w300,
-              ),
-            ),
-            height7Per(context: context),
-            TapWrapper(
-                onTap: () {},
-                child: Container(
-                  height: 38.w,
-                  width: 140.w,
-                  decoration: BoxDecoration(
-                    color: AppColors.blueBackground,
-                    borderRadius: BorderRadius.circular(20),
-                  ),
-                  child: Center(
-                      child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      const Text(
-                        'Edit Profile',
-                        style: TextStyle(color: Colors.white),
-                      ),
-                      width2Per(context: context),
-                      Icon(
-                        Icons.edit,
-                        color: Colors.white,
-                        size: 16.w,
-                      ),
-                    ],
-                  )),
-                )),
-          ],
-        ),
-      ),
     );
   }
 }

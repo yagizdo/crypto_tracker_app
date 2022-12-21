@@ -81,6 +81,13 @@ class CodegenLoader extends AssetLoader{
     "row_name": "İsim",
     "row_buy_price": "Alım Fiyatı {}",
     "row_change": "Değişim"
+  },
+  "settings": {
+    "title": "Ayarlar",
+    "edit_btn": "Profili Düzenle",
+    "change_language": "Dili değiştir",
+    "logout": "Çıkış Yap",
+    "delete_acc": "Hesabı sil"
   }
 };
 static const Map<String,dynamic> en = {
@@ -150,6 +157,13 @@ static const Map<String,dynamic> en = {
     "row_name": "Name",
     "row_buy_price": "Buy Price {}",
     "row_change": "Change"
+  },
+  "settings": {
+    "title": "Settings",
+    "edit_btn": "Edit Profile",
+    "change_language": "Change Language",
+    "logout": "Logout",
+    "delete_acc": "Delete Account"
   }
 };
 static const Map<String, Map<String,dynamic>> mapLocales = {"tr": tr, "en": en};
