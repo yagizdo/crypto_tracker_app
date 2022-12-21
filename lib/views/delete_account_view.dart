@@ -1,3 +1,4 @@
+import 'package:crypto_tracker/services/alert_helper.dart';
 import 'package:crypto_tracker/widgets/main_widgets/main_layout.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -30,12 +31,17 @@ class _DeleteAccountViewState extends State<DeleteAccountView> {
 
   Future<void> _deleteAccount() async {
     User? currentUser = _authService.currentUser;
-
+    setState(() {
+      isLoading = true;
+    });
     if (currentUser != null) {
       await _authService.deleteAccount(
           userEmail: currentUser.email!,
           userPassword: _passwordController.text);
     }
+    setState(() {
+      isLoading = false;
+    });
   }
 
   @override
@@ -60,7 +66,7 @@ class _DeleteAccountViewState extends State<DeleteAccountView> {
         backgroundColor: Colors.transparent,
         elevation: 0,
         title: Text(
-          'Confirm Delete Account',
+          LocaleKeys.settings_delete_account_alert_title.tr(),
           maxLines: 2,
           textAlign: TextAlign.center,
           style: AppTextStyle.settingsDeleteAccountBottomSheetTitle(),
@@ -68,10 +74,51 @@ class _DeleteAccountViewState extends State<DeleteAccountView> {
       ),
       content: Column(
         children: [
-          height10Per(context: context),
+          height7Per(context: context),
           _deleteAccountFormComp(),
-          height10Per(context: context),
+          height7Per(context: context),
+          _deleteAccountWarning(),
+          height7Per(context: context),
           _deleteAccountButton(),
+        ],
+      ),
+    );
+  }
+
+  Widget _deleteAccountWarning() {
+    return Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisAlignment: MainAxisAlignment.start,
+        children: [
+          _warningTextRow(title: LocaleKeys.settings_delete_account_warning_one.tr()),
+          height5Per(context: context),
+          _warningTextRow(
+              title: LocaleKeys.settings_delete_account_warning_two.tr()),
+          height5Per(context: context),
+          _warningTextRow(title: LocaleKeys.settings_delete_account_warning_three.tr()),
+        ]);
+  }
+
+  Widget _warningTextRow({required String title}) {
+    return Padding(
+      padding: EdgeInsets.symmetric(horizontal: 20.w),
+      child: Row(
+        children: [
+          const Expanded(
+            child: Icon(
+              Icons.check_box,
+              color: Colors.white,
+            ),
+          ),
+          width3Per(context: context),
+          Expanded(
+            flex: 10,
+            child: Text(
+              title,
+              maxLines: 2,
+              style: AppTextStyle.settingsDeleteAccountWarning(),
+            ),
+          ),
         ],
       ),
     );
@@ -91,7 +138,6 @@ class _DeleteAccountViewState extends State<DeleteAccountView> {
             isPassword: true,
             validator: (value) => Validator.password(value),
           ),
-          height10Per(context: context),
         ],
       ),
     );
@@ -101,7 +147,20 @@ class _DeleteAccountViewState extends State<DeleteAccountView> {
     return TapWrapper(
       onTap: () {
         if (_formKey.currentState!.validate()) {
-          _deleteAccount();
+          AlertHelper.shared.showCupertinoChooseDialog(
+            context: context,
+            title: LocaleKeys.settings_delete_account_alert_title.tr(),
+            actions: [
+              CupertinoActionSheetAction(
+                child: Text(LocaleKeys.settings_delete_account_alert_confirm.tr()),
+                onPressed: () async {
+                  await _deleteAccount();
+                  if(!mounted) return;
+                  Navigator.pop(context);
+                },
+              ),
+            ],
+          );
         }
       },
       child: Container(
@@ -114,11 +173,11 @@ class _DeleteAccountViewState extends State<DeleteAccountView> {
         child: Center(
           child: isLoading
               ? CircularProgressIndicator(
-                  color: Colors.black,
+                  color: Colors.white,
                   strokeWidth: 2.w,
                 )
               : Text(
-                  LocaleKeys.auth_reset_password_reset_btn_txt.tr(),
+                  LocaleKeys.settings_delete_account_delete_account_btn.tr(),
                   style: AppTextStyle.deleteAccountBtnTitle(),
                 ),
         ),

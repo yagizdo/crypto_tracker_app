@@ -132,4 +132,14 @@ class AppTextStyle {
       overflow: TextOverflow.ellipsis,
     );
   }
+
+
+  static TextStyle settingsDeleteAccountWarning() {
+    return TextStyle(
+      color: AppColors.white,
+      fontSize: 15.sp,
+      fontWeight: FontWeight.w400,
+      letterSpacing: -0.2.sp,
+    );
+  }
 }

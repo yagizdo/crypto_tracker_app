@@ -87,7 +87,16 @@ class CodegenLoader extends AssetLoader{
     "edit_btn": "Profili Düzenle",
     "change_language": "Dili değiştir",
     "logout": "Çıkış Yap",
-    "delete_acc": "Hesabı sil"
+    "delete_account": {
+      "alert_confirm": "Hesabımı silmek istiyorum.",
+      "alert_cancel": "Vazgeç",
+      "alert_title": "Hesabı Silmeyi Onayla",
+      "delete_acc_settings_btn": "Hesabı sil",
+      "delete_account_btn": "Hesabımı sil",
+      "warning_one": "Verileriniz tamamen silinecek",
+      "warning_two": "Favorileriniz dahil tüm listeleriniz silinecek",
+      "warning_three": "Verilerinizi kurtaramayacaksınız"
+    }
   }
 };
 static const Map<String,dynamic> en = {
@@ -163,7 +172,16 @@ static const Map<String,dynamic> en = {
     "edit_btn": "Edit Profile",
     "change_language": "Change Language",
     "logout": "Logout",
-    "delete_acc": "Delete Account"
+    "delete_account": {
+      "alert_confirm": "I want to delete my account.",
+      "alert_cancel": "Cancel",
+      "alert_title": "Confirm Delete Account",
+      "delete_acc_settings_btn": "Delete Account",
+      "delete_account_btn": "Delete my account",
+      "warning_one": "Your data will be completely deleted",
+      "warning_two": "All your lists, including your favorites, will be deleted",
+      "warning_three": "You will not be able to recover your data"
+    }
   }
 };
 static const Map<String, Map<String,dynamic>> mapLocales = {"tr": tr, "en": en};

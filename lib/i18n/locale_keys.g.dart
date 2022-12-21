@@ -65,7 +65,15 @@ abstract class  LocaleKeys {
   static const settings_edit_btn = 'settings.edit_btn';
   static const settings_change_language = 'settings.change_language';
   static const settings_logout = 'settings.logout';
-  static const settings_delete_acc = 'settings.delete_acc';
+  static const settings_delete_account_alert_confirm = 'settings.delete_account.alert_confirm';
+  static const settings_delete_account_alert_cancel = 'settings.delete_account.alert_cancel';
+  static const settings_delete_account_alert_title = 'settings.delete_account.alert_title';
+  static const settings_delete_account_delete_acc_settings_btn = 'settings.delete_account.delete_acc_settings_btn';
+  static const settings_delete_account_delete_account_btn = 'settings.delete_account.delete_account_btn';
+  static const settings_delete_account_warning_one = 'settings.delete_account.warning_one';
+  static const settings_delete_account_warning_two = 'settings.delete_account.warning_two';
+  static const settings_delete_account_warning_three = 'settings.delete_account.warning_three';
+  static const settings_delete_account = 'settings.delete_account';
   static const settings = 'settings';
 
 }
