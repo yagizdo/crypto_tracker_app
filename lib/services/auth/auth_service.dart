@@ -76,9 +76,7 @@ class AuthService extends IAuthService {
             email: userEmail, password: userPassword);
         await currentUser.reauthenticateWithCredential(credential);
         await _databaseService.deleteUserInDatabase(userUID: userUid);
-        await currentUser.delete().then((value) async {
-          await _navigationService.navigateBackToAuth();
-        });
+        await currentUser.delete();
       } on FirebaseAuthException catch (e) {
         var exceptionMessage = AuthExceptionHandler.generateExceptionMessage(e);
         _navigationService.showErrorSnackbar(errorMessage: exceptionMessage);

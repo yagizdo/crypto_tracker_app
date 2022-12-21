@@ -133,6 +133,16 @@ class AppTextStyle {
     );
   }
 
+  static TextStyle deleteAccountCancelBtnTitle() {
+    return TextStyle(
+      color: AppColors.blackBackground,
+      fontSize: 18.sp,
+      fontWeight: FontWeight.w700,
+      letterSpacing: -0.2.sp,
+      overflow: TextOverflow.ellipsis,
+    );
+  }
+
 
   static TextStyle settingsDeleteAccountWarning() {
     return TextStyle(

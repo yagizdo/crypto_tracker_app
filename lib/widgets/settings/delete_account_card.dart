@@ -1,4 +1,3 @@
-import 'package:crypto_tracker/views/delete_account_view.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 
@@ -7,8 +6,8 @@ import '../../utils/app_colors.dart';
 import 'settings_card.dart';
 
 class DeleteAccountCard extends StatelessWidget {
-  const DeleteAccountCard({Key? key}) : super(key: key);
-
+  const DeleteAccountCard({Key? key, required this.onClick}) : super(key: key);
+  final ValueSetter<bool> onClick;
 
 
   @override
@@ -19,7 +18,7 @@ class DeleteAccountCard extends StatelessWidget {
         isCenterText: true,
         titleColor: AppColors.white,
         onTap: (){
-          Navigator.push(context, MaterialPageRoute(builder: (context) => const DeleteAccountView()));
+          onClick(true);
         });
   }
 }
