@@ -14,7 +14,7 @@ class DeleteAccountCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SettingsCard(
-        title: LocaleKeys.settings_delete_account_delete_acc_settings_btn.tr(),
+        title: LocaleKeys.settings_delete_account_btn_txt.tr(),
         backgroundColor: Colors.redAccent,
         isCenterText: true,
         titleColor: AppColors.white,

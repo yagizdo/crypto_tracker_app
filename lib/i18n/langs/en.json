@@ -75,11 +75,10 @@
       "alert_confirm": "I want to delete my account.",
       "alert_cancel": "Cancel",
       "alert_title": "Confirm Delete Account",
-      "delete_acc_settings_btn": "Delete Account",
-      "delete_account_btn": "Delete my account",
       "warning_one": "Your data will be completely deleted",
       "warning_two": "All your lists, including your favorites, will be deleted",
-      "warning_three": "You will not be able to recover your data"
+      "warning_three": "You will not be able to recover your data",
+      "btn_txt": "Delete my account"
     }
   }
 }

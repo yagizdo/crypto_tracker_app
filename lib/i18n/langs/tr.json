@@ -75,11 +75,10 @@
       "alert_confirm": "Hesabımı silmek istiyorum.",
       "alert_cancel": "Vazgeç",
       "alert_title": "Hesabı Silmeyi Onayla",
-      "delete_acc_settings_btn": "Hesabı sil",
-      "delete_account_btn": "Hesabımı sil",
       "warning_one": "Verileriniz tamamen silinecek",
       "warning_two": "Favorileriniz dahil tüm listeleriniz silinecek",
-      "warning_three": "Verilerinizi kurtaramayacaksınız"
+      "warning_three": "Verilerinizi kurtaramayacaksınız",
+      "btn_txt": "Hesabımı sil"
     }
   }
 }

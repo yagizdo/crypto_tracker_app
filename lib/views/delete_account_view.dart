@@ -177,7 +177,7 @@ class _DeleteAccountViewState extends State<DeleteAccountView> {
                   strokeWidth: 2.w,
                 )
               : Text(
-                  LocaleKeys.settings_delete_account_delete_account_btn.tr(),
+                  LocaleKeys.settings_delete_account_btn_txt.tr(),
                   style: AppTextStyle.deleteAccountBtnTitle(),
                 ),
         ),
