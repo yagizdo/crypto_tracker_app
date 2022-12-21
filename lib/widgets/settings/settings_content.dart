@@ -1,4 +1,5 @@
 import 'package:crypto_tracker/i18n/locale_keys.g.dart';
+import 'package:crypto_tracker/services/alert_helper.dart';
 import 'package:crypto_tracker/utils/app_colors.dart';
 import 'package:crypto_tracker/utils/app_constants.dart';
 import 'package:crypto_tracker/utils/app_textstyles.dart';
@@ -37,6 +38,10 @@ class _SettingsContentState extends State<SettingsContent> {
     setState(() {
       isLoading = false;
     });
+  }
+
+  Future<void> _deleteAccount() async {
+    AlertHelper.shared.showDeletingAccountDialog(context);
   }
 
   @override
@@ -90,7 +95,7 @@ class _SettingsContentState extends State<SettingsContent> {
             backgroundColor: Colors.redAccent,
             isCenterText: true,
             titleColor: AppColors.white,
-            onTap: () {}),
+            onTap: _deleteAccount),
       ],
     );
   }
