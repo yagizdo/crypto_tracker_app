@@ -65,6 +65,17 @@ class AuthService extends IAuthService {
   }
 
   @override
+  Future<void> deleteAccount({required String userEmail, required String userPassword}) async {
+    final currentUser = _firebaseAuth.currentUser;
+    if (currentUser != null) {
+      final credential = EmailAuthProvider.credential(
+          email: userEmail, password: userPassword);
+      await currentUser.reauthenticateWithCredential(credential);
+      await currentUser.delete();
+    }
+  }
+
+  @override
   Stream<User?>? authStateChanges() {
     return _firebaseAuth.authStateChanges();
   }
