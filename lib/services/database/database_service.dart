@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:crypto_tracker/services/database/i_database_service.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/foundation.dart';
 
 import '../../utils/extensions/auth_exception_handler.dart';
 import '../locator.dart';
@@ -24,13 +25,19 @@ class DatabaseService extends IDatabaseService {
     } catch (e) {
       var errorMessage = AuthExceptionHandler.generateExceptionMessage(e);
       _navigationService.showErrorSnackbar(errorMessage: errorMessage);
+      kDebugMode ? debugPrint(e.toString()) : null;
     }
   }
 
   @override
-  Future<void> deleteUserInDatabase(User user) {
-    // TODO: implement deleteUserInDatabase
-    throw UnimplementedError();
+  Future<void> deleteUserInDatabase({required String userUID}) async {
+    try {
+      await _users.doc(userUID).delete();
+    } catch (e) {
+      var errorMessage = AuthExceptionHandler.generateExceptionMessage(e);
+      _navigationService.showErrorSnackbar(errorMessage: errorMessage);
+      kDebugMode ? debugPrint(e.toString()) : null;
+    }
   }
 
   @override

@@ -6,7 +6,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../i18n/locale_keys.g.dart';
-import '../services/alert_helper.dart';
 import '../services/auth/auth_service.dart';
 import '../services/locator.dart';
 import '../services/validator.dart';
@@ -29,6 +28,16 @@ class _DeleteAccountViewState extends State<DeleteAccountView> {
   final AuthService _authService = getIt<AuthService>();
   bool isLoading = false;
 
+  Future<void> _deleteAccount() async {
+    User? currentUser = _authService.currentUser;
+
+    if (currentUser != null) {
+      await _authService.deleteAccount(
+          userEmail: currentUser.email!,
+          userPassword: _passwordController.text);
+    }
+  }
+
   @override
   void initState() {
     super.initState();
@@ -42,6 +51,7 @@ class _DeleteAccountViewState extends State<DeleteAccountView> {
     _formKey.currentState?.dispose();
     super.dispose();
   }
+
   @override
   Widget build(BuildContext context) {
     return MainLayout(
@@ -53,8 +63,7 @@ class _DeleteAccountViewState extends State<DeleteAccountView> {
           'Confirm Delete Account',
           maxLines: 2,
           textAlign: TextAlign.center,
-          style:
-          AppTextStyle.settingsDeleteAccountBottomSheetTitle(),
+          style: AppTextStyle.settingsDeleteAccountBottomSheetTitle(),
         ),
       ),
       content: Column(
@@ -68,7 +77,6 @@ class _DeleteAccountViewState extends State<DeleteAccountView> {
     );
   }
 
-
   Widget _deleteAccountFormComp() {
     return Form(
       key: _formKey,
@@ -78,7 +86,7 @@ class _DeleteAccountViewState extends State<DeleteAccountView> {
             controller: _passwordController,
             label: LocaleKeys.auth_password_txt.tr(),
             prefixIcon:
-            const Icon(Icons.email, color: AppColors.blackBackground),
+                const Icon(Icons.email, color: AppColors.blackBackground),
             isEmail: true,
             isPassword: false,
             validator: (value) => Validator.password(value),
@@ -93,11 +101,7 @@ class _DeleteAccountViewState extends State<DeleteAccountView> {
     return TapWrapper(
       onTap: () {
         if (_formKey.currentState!.validate()) {
-          User? currentUser = _authService.currentUser;
-
-          if (currentUser != null) {
-            _authService.deleteAccount(userEmail: currentUser.email!, userPassword: _passwordController.text);
-          }
+          _deleteAccount();
         }
       },
       child: Container(
@@ -110,13 +114,13 @@ class _DeleteAccountViewState extends State<DeleteAccountView> {
         child: Center(
           child: isLoading
               ? CircularProgressIndicator(
-            color: Colors.black,
-            strokeWidth: 2.w,
-          )
+                  color: Colors.black,
+                  strokeWidth: 2.w,
+                )
               : Text(
-            LocaleKeys.auth_reset_password_reset_btn_txt.tr(),
-            style: AppTextStyle.loginBtnTitle(),
-          ),
+                  LocaleKeys.auth_reset_password_reset_btn_txt.tr(),
+                  style: AppTextStyle.loginBtnTitle(),
+                ),
         ),
       ),
     );
