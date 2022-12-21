@@ -6,7 +6,6 @@ import 'package:crypto_tracker/i18n/locale_keys.g.dart';
 import 'package:crypto_tracker/services/auth/i_auth_service.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:sign_in_with_apple/sign_in_with_apple.dart';
 
@@ -68,10 +67,18 @@ class AuthService extends IAuthService {
   Future<void> deleteAccount({required String userEmail, required String userPassword}) async {
     final currentUser = _firebaseAuth.currentUser;
     if (currentUser != null) {
-      final credential = EmailAuthProvider.credential(
-          email: userEmail, password: userPassword);
-      await currentUser.reauthenticateWithCredential(credential);
-      await currentUser.delete();
+      try {
+        final credential = EmailAuthProvider.credential(
+            email: userEmail, password: userPassword);
+        await currentUser.reauthenticateWithCredential(credential);
+        await currentUser.delete().then((value) => _navigationService.navigateBackToAuth());
+      } on FirebaseAuthException catch (e) {
+        var exceptionMessage = AuthExceptionHandler.generateExceptionMessage(e);
+        _navigationService.showErrorSnackbar(errorMessage: exceptionMessage);
+
+      } catch(e) {
+        _navigationService.showErrorSnackbar(errorMessage: LocaleKeys.errors_undefinied.tr());
+      }
     }
   }
 

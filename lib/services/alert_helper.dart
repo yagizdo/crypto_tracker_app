@@ -214,7 +214,7 @@ class AlertHelper {
   }
 
 
-  showDeletingAccountDialog(BuildContext context) {
+  showDeletingAccountDialog(BuildContext context, VoidCallback onConfirm) {
     // set up the buttons
     Widget noButton = TextButton(
       child: const Text(
@@ -225,7 +225,7 @@ class AlertHelper {
       },
     );
     Widget sureButton = TapWrapper(
-        onTap: () {},
+        onTap: onConfirm,
         child: Container(
           alignment: Alignment.center,
           width: context.screenWidth * 0.45,

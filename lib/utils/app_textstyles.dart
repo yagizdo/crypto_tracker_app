@@ -114,4 +114,12 @@ class AppTextStyle {
       overflow: TextOverflow.ellipsis,
     );
   }
+  static TextStyle settingsDeleteAccountBottomSheetTitle() {
+    return TextStyle(
+      color: AppColors.white,
+      fontSize: 20.sp,
+      fontWeight: FontWeight.w600,
+      letterSpacing: -0.2.sp,
+    );
+  }
 }

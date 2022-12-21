@@ -1,9 +1,8 @@
 import 'package:crypto_tracker/i18n/locale_keys.g.dart';
-import 'package:crypto_tracker/services/alert_helper.dart';
 import 'package:crypto_tracker/utils/app_colors.dart';
 import 'package:crypto_tracker/utils/app_constants.dart';
 import 'package:crypto_tracker/utils/app_textstyles.dart';
-import 'package:crypto_tracker/widgets/main_widgets/tapWrapper.dart';
+import 'package:crypto_tracker/widgets/settings/delete_account_card.dart';
 import 'package:crypto_tracker/widgets/settings/edit_profile_comp.dart';
 import 'package:crypto_tracker/widgets/settings/settings_card.dart';
 import 'package:easy_localization/easy_localization.dart';
@@ -38,10 +37,6 @@ class _SettingsContentState extends State<SettingsContent> {
     setState(() {
       isLoading = false;
     });
-  }
-
-  Future<void> _deleteAccount() async {
-    AlertHelper.shared.showDeletingAccountDialog(context);
   }
 
   @override
@@ -90,12 +85,7 @@ class _SettingsContentState extends State<SettingsContent> {
         height7Per(context: context),
 
         // Delete Account
-        SettingsCard(
-            title: LocaleKeys.settings_delete_acc.tr(),
-            backgroundColor: Colors.redAccent,
-            isCenterText: true,
-            titleColor: AppColors.white,
-            onTap: _deleteAccount),
+        const DeleteAccountCard(),
       ],
     );
   }
