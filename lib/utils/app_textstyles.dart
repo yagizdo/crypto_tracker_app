@@ -122,4 +122,14 @@ class AppTextStyle {
       letterSpacing: -0.2.sp,
     );
   }
+
+  static TextStyle deleteAccountBtnTitle() {
+    return TextStyle(
+      color: AppColors.white,
+      fontSize: 18.sp,
+      fontWeight: FontWeight.w700,
+      letterSpacing: -0.2.sp,
+      overflow: TextOverflow.ellipsis,
+    );
+  }
 }

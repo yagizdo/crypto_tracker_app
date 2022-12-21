@@ -86,9 +86,9 @@ class _DeleteAccountViewState extends State<DeleteAccountView> {
             controller: _passwordController,
             label: LocaleKeys.auth_password_txt.tr(),
             prefixIcon:
-                const Icon(Icons.email, color: AppColors.blackBackground),
+                const Icon(Icons.lock, color: AppColors.blackBackground),
             isEmail: true,
-            isPassword: false,
+            isPassword: true,
             validator: (value) => Validator.password(value),
           ),
           height10Per(context: context),
@@ -119,7 +119,7 @@ class _DeleteAccountViewState extends State<DeleteAccountView> {
                 )
               : Text(
                   LocaleKeys.auth_reset_password_reset_btn_txt.tr(),
-                  style: AppTextStyle.loginBtnTitle(),
+                  style: AppTextStyle.deleteAccountBtnTitle(),
                 ),
         ),
       ),

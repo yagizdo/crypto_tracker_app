@@ -1,6 +1,7 @@
 import 'package:crypto_tracker/i18n/locale_keys.g.dart';
 import 'package:crypto_tracker/services/database/database_service.dart';
 import 'package:crypto_tracker/services/navigation_service.dart';
+import 'package:crypto_tracker/utils/extensions/string_extension.dart';
 import 'package:crypto_tracker/widgets/auth/auth_textfield.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
@@ -47,7 +48,8 @@ class _RegisterComponentState extends State<RegisterComponent> {
   }
 
   Future<void> updateUserName() async {
-    await _authService.updateUserName(name: _nameController.text);
+    String userName = _nameController.text.toTitleCase();
+    await _authService.updateUserName(name: userName);
   }
 
   Future<void> saveUserInDatabase() async {

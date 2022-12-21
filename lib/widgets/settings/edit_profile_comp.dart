@@ -34,7 +34,7 @@ class EditProfileComp extends StatelessWidget {
               backgroundColor: AppColors.blackForeground,
             child: currentUser?.photoURL == null
                 ? Text(
-                    currentUser!.displayName?.substring(0, 1) ?? 'N',
+                    currentUser?.displayName?.substring(0, 1) ?? 'N',
                     style: TextStyle(
                       fontSize: 45.sp,
                       color: AppColors.white,

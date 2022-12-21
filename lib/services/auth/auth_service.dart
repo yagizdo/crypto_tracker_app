@@ -20,6 +20,7 @@ class AuthService extends IAuthService {
   final DatabaseService _databaseService = getIt<DatabaseService>();
   late User? _user;
   get currentUser => _firebaseAuth.currentUser;
+  get isSocialLogin => _firebaseAuth.currentUser?.providerData.first.providerId != 'password';
   get isUserEmailVerified => _firebaseAuth.currentUser?.emailVerified;
 
 

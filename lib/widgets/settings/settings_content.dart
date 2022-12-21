@@ -14,7 +14,7 @@ import '../../services/locator.dart';
 import '../../views/onboarding_view.dart';
 
 class SettingsContent extends StatefulWidget {
-  SettingsContent({Key? key}) : super(key: key);
+  const SettingsContent({Key? key}) : super(key: key);
 
   @override
   State<SettingsContent> createState() => _SettingsContentState();
@@ -85,7 +85,7 @@ class _SettingsContentState extends State<SettingsContent> {
         height7Per(context: context),
 
         // Delete Account
-        const DeleteAccountCard(),
+        _authService.isSocialLogin ?  const SizedBox() : const DeleteAccountCard(),
       ],
     );
   }
