@@ -25,8 +25,7 @@ class FavoritesBloc extends Bloc<FavoritesEvent, FavoritesState> {
     List<Crypto> cryptoFavorites = [];
     List<Currency> currencyFavorites = [];
     on<FavoritesEvent>((event, emit) {});
-    on<GetFavoritesEvent>((event, emit) async {
-      emit(FavoritesLoadingState());
+    Future<void> getFavorites() async {
       favoritesNames = await databaseService.getFavorites(
           userUID: authService.currentUser.uid);
       List<Currency> currencies = await currencyService.getCurrencies();
@@ -55,6 +54,10 @@ class FavoritesBloc extends Bloc<FavoritesEvent, FavoritesState> {
       }
 
       favorites = [...cryptoFavorites, ...currencyFavorites];
+    }
+    on<GetFavoritesEvent>((event, emit) async {
+      emit(FavoritesLoadingState());
+      await getFavorites();
       emit(FavoritesLoadedState(favorites));
     });
     on<AddFavoriteEvent>((event, emit) async {
@@ -62,14 +65,19 @@ class FavoritesBloc extends Bloc<FavoritesEvent, FavoritesState> {
         favoritesNames.add(event.itemName);
         await databaseService.saveFavorites(
             favorites: favoritesNames, userUID: authService.currentUser.uid);
+        await getFavorites();
+        emit(FavoritesLoadedState(favorites));
       }
 
     });
     on<DeleteFavoriteEvent>((event, emit) async {
      if (favoritesNames.contains(event.itemName)) {
+       emit(FavoritesLoadingState());
        favoritesNames.remove(event.itemName);
        await databaseService.saveFavorites(
            favorites: favoritesNames, userUID: authService.currentUser.uid);
+       await getFavorites();
+       emit(FavoritesLoadedState(favorites));
      }
     });
   }
