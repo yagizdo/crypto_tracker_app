@@ -45,7 +45,8 @@ class CodegenLoader extends AssetLoader{
     "auth_validation_empty_error": "Bu alan boş olamaz!",
     "auth_validation_name_length": "İsim en az 3 karakter olmalıdır.",
     "auth_validation_pw_length": "Şifre en az 6 karakter olmalıdır.",
-    "auth_validation_pw_match": "Parolalar uyuşmuyor."
+    "auth_validation_pw_match": "Parolalar uyuşmuyor.",
+    "custom_error": "Bir şeyler yanlış gitti!"
   },
   "auth": {
     "login": {
@@ -80,7 +81,8 @@ class CodegenLoader extends AssetLoader{
   "currency": {
     "row_name": "İsim",
     "row_buy_price": "Alım Fiyatı {}",
-    "row_change": "Değişim"
+    "row_change": "Değişim",
+    "no_item": "Veri yok"
   },
   "settings": {
     "title": "Ayarlar",
@@ -129,7 +131,8 @@ static const Map<String,dynamic> en = {
     "auth_validation_empty_error": "This field cannot be empty!",
     "auth_validation_name_length": "Name must be at least 3 characters.",
     "auth_validation_pw_length": "Password must be at least 6 characters.",
-    "auth_validation_pw_match": "Passwords do not match."
+    "auth_validation_pw_match": "Passwords do not match.",
+    "custom_error": "Something went wrong!"
   },
   "auth": {
     "login": {
@@ -164,7 +167,8 @@ static const Map<String,dynamic> en = {
   "currency": {
     "row_name": "Name",
     "row_buy_price": "Buy Price {}",
-    "row_change": "Change"
+    "row_change": "Change",
+    "no_item": "No Data"
   },
   "settings": {
     "title": "Settings",

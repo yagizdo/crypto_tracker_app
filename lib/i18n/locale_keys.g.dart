@@ -31,6 +31,7 @@ abstract class  LocaleKeys {
   static const errors_auth_validation_name_length = 'errors.auth_validation_name_length';
   static const errors_auth_validation_pw_length = 'errors.auth_validation_pw_length';
   static const errors_auth_validation_pw_match = 'errors.auth_validation_pw_match';
+  static const errors_custom_error = 'errors.custom_error';
   static const errors = 'errors';
   static const auth_login_title = 'auth.login.title';
   static const auth_login_login_btn = 'auth.login.login_btn';
@@ -60,6 +61,7 @@ abstract class  LocaleKeys {
   static const currency_row_name = 'currency.row_name';
   static const currency_row_buy_price = 'currency.row_buy_price';
   static const currency_row_change = 'currency.row_change';
+  static const currency_no_item = 'currency.no_item';
   static const currency = 'currency';
   static const settings_title = 'settings.title';
   static const settings_edit_btn = 'settings.edit_btn';

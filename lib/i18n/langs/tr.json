@@ -29,7 +29,8 @@
     "auth_validation_empty_error": "Bu alan boş olamaz!",
     "auth_validation_name_length": "İsim en az 3 karakter olmalıdır.",
     "auth_validation_pw_length": "Şifre en az 6 karakter olmalıdır.",
-    "auth_validation_pw_match": "Parolalar uyuşmuyor."
+    "auth_validation_pw_match": "Parolalar uyuşmuyor.",
+    "custom_error": "Bir şeyler yanlış gitti!"
   },
   "auth": {
     "login": {
@@ -64,7 +65,8 @@
   "currency": {
     "row_name": "İsim",
     "row_buy_price": "Alım Fiyatı {}",
-    "row_change": "Değişim"
+    "row_change": "Değişim",
+    "no_item": "Veri yok"
   },
   "settings": {
     "title": "Ayarlar",

@@ -23,7 +23,7 @@ class CryptoContent extends StatelessWidget {
         }
 
         if(state is CryptoError) {
-          return Center(child: Text(state.errorMessage,style: const TextStyle(color: AppColors.white),),);
+          return Center(child: Text(LocaleKeys.errors_custom_error.tr(),style: const TextStyle(color: AppColors.white),),);
         }
 
         if (state is CryptoLoaded) {
@@ -34,7 +34,7 @@ class CryptoContent extends StatelessWidget {
             ],
           );
         }
-        return const Center(child: Text('No items',style: TextStyle(color: Colors.white),),);
+        return Center(child: Text(LocaleKeys.currency_no_item.tr(),style: const TextStyle(color: Colors.white),),);
       },
     );
   }
