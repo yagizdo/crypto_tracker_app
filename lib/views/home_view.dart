@@ -1,5 +1,7 @@
 import 'package:crypto_tracker/bloc/favorites_bloc/favorites_bloc.dart';
 import 'package:crypto_tracker/utils/app_textstyles.dart';
+import 'package:crypto_tracker/widgets/favorites/favorites_content.dart';
+import 'package:crypto_tracker/widgets/favorites/favorites_list.dart';
 import 'package:crypto_tracker/widgets/main_widgets/main_layout.dart';
 import 'package:crypto_tracker/widgets/main_widgets/tapWrapper.dart';
 import 'package:flutter/material.dart';
@@ -19,7 +21,6 @@ class HomeView extends StatefulWidget {
 }
 
 class _HomeViewState extends State<HomeView> {
-  final AuthService _authService = getIt<AuthService>();
 
   @override
   void initState() {
@@ -28,12 +29,9 @@ class _HomeViewState extends State<HomeView> {
   }
   @override
   Widget build(BuildContext context) {
-    return MainLayout(
+    return const MainLayout(
       content: Center(
-        child: Text(
-          'Home',
-          style: AppTextStyle.homeText(),
-        ),
+        child: FavoritesContent(),
       ),
     );
   }

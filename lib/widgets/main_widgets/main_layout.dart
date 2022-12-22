@@ -42,6 +42,7 @@ class _MainLayoutState extends State<MainLayout> {
       backgroundColor: widget.backgroundColor ?? AppColors.blueBackground,
       resizeToAvoidBottomInset: widget.resizeresizeToAvoidBottomInset,
       appBar: widget.appBar,
+      extendBody: true,
       floatingActionButton: widget.floatingActionButton,
       body: SafeArea(
         minimum:

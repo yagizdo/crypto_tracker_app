@@ -18,6 +18,7 @@ class CurrencyList extends StatelessWidget {
         Currency currency = currencies[index];
         return CurrencyCard(
           currency: currency,
+          isFavorite: false,
         );
       },
     );

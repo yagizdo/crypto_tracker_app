@@ -14,7 +14,7 @@ class CryptoList extends StatelessWidget {
     return ListView.builder(
       itemCount: cryptos.length,
       itemBuilder: (context, index) {
-        return CryptoCard(crypto: cryptos[index]);
+        return CryptoCard(crypto: cryptos[index], isFavorite: false,);
       },
     );
   }

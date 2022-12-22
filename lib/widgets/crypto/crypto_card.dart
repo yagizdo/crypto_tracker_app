@@ -9,14 +9,21 @@ import '../../utils/app_colors.dart';
 import '../../utils/app_textstyles.dart';
 
 class CryptoCard extends StatelessWidget {
-  const CryptoCard({Key? key, required this.crypto}) : super(key: key);
+  const CryptoCard({Key? key, required this.crypto, required this.isFavorite})
+      : super(key: key);
   final Crypto crypto;
+  final bool isFavorite;
   @override
   Widget build(BuildContext context) {
     return TapWrapper(
       onTap: () {
-        BlocProvider.of<FavoritesBloc>(context,listen: false).add(AddFavoriteEvent('${crypto.market?.baseCurrencyCode} - ${crypto.market?.counterCurrencyCode}'));
-        BlocProvider.of<FavoritesBloc>(context,listen: false).add(GetFavoritesEvent());
+        isFavorite
+            ? BlocProvider.of<FavoritesBloc>(context, listen: false).add(
+                DeleteFavoriteEvent(
+                    '${crypto.market?.baseCurrencyCode} - ${crypto.market?.counterCurrencyCode}'))
+            : BlocProvider.of<FavoritesBloc>(context, listen: false).add(
+                AddFavoriteEvent(
+                    '${crypto.market?.baseCurrencyCode} - ${crypto.market?.counterCurrencyCode}'));
       },
       child: Padding(
         padding: EdgeInsets.symmetric(
@@ -40,11 +47,17 @@ class CryptoCard extends StatelessWidget {
                     flex: 2,
                     child: IconButton(
                       onPressed: () {},
-                      icon: Icon(
-                        Icons.star_border,
-                        color: AppColors.blackBackground,
-                        size: 25.w,
-                      ),
+                      icon: isFavorite
+                          ? Icon(
+                              Icons.star,
+                              color: Colors.yellow,
+                              size: 25.w,
+                            )
+                          : Icon(
+                              Icons.star_border,
+                              color: AppColors.blackBackground,
+                              size: 25.w,
+                            ),
                     )),
                 Expanded(
                     flex: 4,
@@ -55,14 +68,16 @@ class CryptoCard extends StatelessWidget {
                     )),
                 Expanded(
                     flex: 4,
-                    child: Text(double.parse(crypto.lastPrice!).toString(),
+                    child: Text(
+                      double.parse(crypto.lastPrice!).toString(),
                       textAlign: TextAlign.start,
                       style: AppTextStyle.cryptoPrice(),
                     )),
                 // Crypto change container
                 Expanded(
                   flex: 5,
-                  child: _buildChangeContainer(cryptoChange: double.parse(crypto.change24h ?? '0')),
+                  child: _buildChangeContainer(
+                      cryptoChange: double.parse(crypto.change24h ?? '0')),
                 ),
               ],
             ),
@@ -71,7 +86,6 @@ class CryptoCard extends StatelessWidget {
       ),
     );
   }
-
 
   Widget _buildChangeContainer({required double cryptoChange}) {
     return Container(

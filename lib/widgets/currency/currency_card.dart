@@ -12,8 +12,9 @@ import '../../models/currency.dart';
 import '../../utils/app_colors.dart';
 
 class CurrencyCard extends StatelessWidget {
-  const CurrencyCard({Key? key, required this.currency}) : super(key: key);
+  const CurrencyCard({Key? key, required this.currency, required this.isFavorite}) : super(key: key);
   final Currency currency;
+  final bool isFavorite;
   @override
   Widget build(BuildContext context) {
     // String currency change percentage to double
@@ -28,12 +29,11 @@ class CurrencyCard extends StatelessWidget {
 
     return TapWrapper(
       onTap: () {
-        BlocProvider.of<FavoritesBloc>(context,listen: false).add(AddFavoriteEvent(currency.name!));
-        BlocProvider.of<FavoritesBloc>(context,listen: false).add(GetFavoritesEvent());
+       isFavorite ? BlocProvider.of<FavoritesBloc>(context,listen: false).add(DeleteFavoriteEvent(currency.name!)) : BlocProvider.of<FavoritesBloc>(context,listen: false).add(AddFavoriteEvent(currency.name!));
       },
       child: Padding(
         padding: EdgeInsets.symmetric(
-          horizontal: 15.w,
+          horizontal: 10.w,
           vertical: 5.w,
         ),
         child: Container(
@@ -53,21 +53,25 @@ class CurrencyCard extends StatelessWidget {
                     flex: 2,
                     child: IconButton(
                       onPressed: () {},
-                      icon: Icon(
+                      icon: isFavorite ? Icon(
+                        Icons.star,
+                        color: Colors.yellow,
+                        size: 25.w,
+                      ) : Icon(
                         Icons.star_border,
                         color: AppColors.blackBackground,
                         size: 25.w,
                       ),
                     )),
                 Expanded(
-                    flex: 3,
+                    flex: 4,
                     child: Text(
                       currencyName ?? 'No Data',
                       maxLines: 2,
                       style: AppTextStyle.currencyTitle(),
                     )),
                 Expanded(
-                    flex: 3,
+                    flex: 4,
                     child: Text(
                       currency.buy.toString(),
                       textAlign: TextAlign.start,
@@ -75,7 +79,7 @@ class CurrencyCard extends StatelessWidget {
                     )),
                 // Currency change container
                 Expanded(
-                  flex: 4,
+                  flex: 5,
                   child: _buildChangeContainer(currencyChange: currencyChange),
                 ),
               ],
