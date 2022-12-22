@@ -26,6 +26,7 @@ class FavoritesBloc extends Bloc<FavoritesEvent, FavoritesState> {
     List<Currency> currencyFavorites = [];
     on<FavoritesEvent>((event, emit) {});
     on<GetFavoritesEvent>((event, emit) async {
+      emit(FavoritesLoadingState());
       favoritesNames = await databaseService.getFavorites(
           userUID: authService.currentUser.uid);
       List<Currency> currencies = await currencyService.getCurrencies();
