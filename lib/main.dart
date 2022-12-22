@@ -1,5 +1,6 @@
 import 'package:crypto_tracker/bloc/crypto_bloc/crypto_bloc.dart';
 import 'package:crypto_tracker/bloc/currency_bloc/currency_bloc.dart';
+import 'package:crypto_tracker/bloc/favorites_bloc/favorites_bloc.dart';
 import 'package:crypto_tracker/services/locator.dart';
 import 'package:crypto_tracker/views/onboarding_view.dart';
 import 'package:easy_localization/easy_localization.dart';
@@ -37,6 +38,7 @@ Future<void> main() async {
         providers: [
           BlocProvider(create: (_) => CurrencyBloc()),
           BlocProvider(create: (_) => CryptoBloc()),
+          BlocProvider(create: (_) => FavoritesBloc()),
         ],
         child: const MyApp(),
       )));
