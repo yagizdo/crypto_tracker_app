@@ -1,6 +1,11 @@
+import 'package:crypto_tracker/bloc/favorites_bloc/favorites_bloc.dart';
+import 'package:crypto_tracker/services/database/database_service.dart';
+import 'package:crypto_tracker/services/locator.dart';
 import 'package:crypto_tracker/utils/app_textstyles.dart';
 import 'package:crypto_tracker/utils/extensions/string_extension.dart';
+import 'package:crypto_tracker/widgets/main_widgets/tapWrapper.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../models/currency.dart';
@@ -21,54 +26,60 @@ class CurrencyCard extends StatelessWidget {
       currencyName = currency.name?.replaceAll('-', ' ').toUpperCase();
     }
 
-    return Padding(
-      padding: EdgeInsets.symmetric(
-        horizontal: 15.w,
-        vertical: 5.w,
-      ),
-      child: Container(
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(8),
-          color: AppColors.white.withOpacity(0.9),
+    return TapWrapper(
+      onTap: () {
+        BlocProvider.of<FavoritesBloc>(context,listen: false).add(AddFavoriteEvent(currency.name!));
+        BlocProvider.of<FavoritesBloc>(context,listen: false).add(GetFavoritesEvent());
+      },
+      child: Padding(
+        padding: EdgeInsets.symmetric(
+          horizontal: 15.w,
+          vertical: 5.w,
         ),
-        child: Padding(
-          padding: EdgeInsets.symmetric(
-            horizontal: 10.w,
-            vertical: 3.w,
+        child: Container(
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(8),
+            color: AppColors.white.withOpacity(0.9),
           ),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Expanded(
-                  flex: 2,
-                  child: IconButton(
-                    onPressed: () {},
-                    icon: Icon(
-                      Icons.star_border,
-                      color: AppColors.blackBackground,
-                      size: 25.w,
-                    ),
-                  )),
-              Expanded(
-                  flex: 3,
-                  child: Text(
-                    currencyName ?? 'No Data',
-                    maxLines: 2,
-                    style: AppTextStyle.currencyTitle(),
-                  )),
-              Expanded(
-                  flex: 3,
-                  child: Text(
-                    currency.buy.toString(),
-                    textAlign: TextAlign.start,
-                    style: AppTextStyle.currencyPrice(),
-                  )),
-              // Currency change container
-              Expanded(
-                flex: 4,
-                child: _buildChangeContainer(currencyChange: currencyChange),
-              ),
-            ],
+          child: Padding(
+            padding: EdgeInsets.symmetric(
+              horizontal: 10.w,
+              vertical: 3.w,
+            ),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Expanded(
+                    flex: 2,
+                    child: IconButton(
+                      onPressed: () {},
+                      icon: Icon(
+                        Icons.star_border,
+                        color: AppColors.blackBackground,
+                        size: 25.w,
+                      ),
+                    )),
+                Expanded(
+                    flex: 3,
+                    child: Text(
+                      currencyName ?? 'No Data',
+                      maxLines: 2,
+                      style: AppTextStyle.currencyTitle(),
+                    )),
+                Expanded(
+                    flex: 3,
+                    child: Text(
+                      currency.buy.toString(),
+                      textAlign: TextAlign.start,
+                      style: AppTextStyle.currencyPrice(),
+                    )),
+                // Currency change container
+                Expanded(
+                  flex: 4,
+                  child: _buildChangeContainer(currencyChange: currencyChange),
+                ),
+              ],
+            ),
           ),
         ),
       ),

@@ -1,5 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:crypto_tracker/i18n/locale_keys.g.dart';
 import 'package:crypto_tracker/services/database/i_database_service.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
 
@@ -8,7 +10,8 @@ import '../locator.dart';
 import '../navigation_service.dart';
 
 class DatabaseService extends IDatabaseService {
-  CollectionReference _users = FirebaseFirestore.instance.collection('users');
+  final CollectionReference _users = FirebaseFirestore.instance.collection('users');
+  final CollectionReference _favorites = FirebaseFirestore.instance.collection('favorites');
   final NavigationService _navigationService = getIt<NavigationService>();
 
   @override
@@ -41,26 +44,32 @@ class DatabaseService extends IDatabaseService {
   }
 
   @override
-  Future<List<User>> getAllUsersInDatabase() async {
-    List<User> users = [];
-
-    _users.get().then((QuerySnapshot querySnapshot) {
-      querySnapshot.docs.forEach((doc) {
-        print(doc['id']);
-      });
-    });
-    return users;
-  }
-
-  @override
-  Future<User> getUserByIDInDatabase(String id) {
-    // TODO: implement getUserInDatabase
-    throw UnimplementedError();
-  }
-
-  @override
   Future<void> updateUserInDatabase(User user) {
     // TODO: implement updateUserInDatabase
     throw UnimplementedError();
   }
+
+  @override
+  Future<List<dynamic>> getFavorites({required String userUID}) async {
+    List favorites;
+    try {
+      favorites = await _favorites.doc(userUID).get().then((DocumentSnapshot documentSnapshot) {
+        return documentSnapshot.exists ? documentSnapshot.get('favorites') : [];
+      });
+    } catch (e) {
+      _navigationService.showErrorSnackbar(errorMessage: LocaleKeys.errors_custom_error.tr());
+      kDebugMode ? debugPrint(e.toString()) : null;
+      return [];
+    }
+    return favorites;
+  }
+
+  @override
+  Future<void> saveFavorites({required List favorites, required String userUID}) async {
+    await _favorites.doc(userUID).set({
+      'favorites' : favorites
+    });
+  }
+
+
 }

@@ -7,7 +7,6 @@ class GetFavoritesEvent extends FavoritesEvent {}
 
 class AddFavoriteEvent extends FavoritesEvent {
   final String itemName;
-
   AddFavoriteEvent(this.itemName);
 
 }

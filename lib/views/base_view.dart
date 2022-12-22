@@ -63,25 +63,18 @@ class _BaseViewState extends State<BaseView> {
     super.dispose();
   }
 
-  Widget _buildView() {
-    switch (currentIndex) {
-      case 0:
-        return const HomeView();
-      case 1:
-        return const CurrencyView();
-      case 2:
-        return const CryptoView();
-      case 3:
-        return const SettingsView();
-      default:
-        return const HomeView();
-    }
-  }
-
   @override
   Widget build(BuildContext context) {
     return MainLayout(
-      content: _buildView(),
+      content: IndexedStack(
+        index: currentIndex,
+        children: const [
+          HomeView(),
+          CurrencyView(),
+          CryptoView(),
+          SettingsView(),
+        ],
+      ),
       bottomNavigationBar: MainNavbar(
         currentIndex: currentIndex,
         onTabChanged: (index) {
