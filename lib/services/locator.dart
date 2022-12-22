@@ -1,4 +1,5 @@
 import 'package:crypto_tracker/services/database/database_service.dart';
+import 'package:crypto_tracker/services/network/crypto_service.dart';
 import 'package:crypto_tracker/services/network/currency_service.dart';
 import 'package:get_it/get_it.dart';
 
@@ -12,4 +13,5 @@ Future<void> setUpInjections() async {
   getIt.registerLazySingleton<NavigationService>(() => NavigationService());
   getIt.registerLazySingleton<DatabaseService>(() => DatabaseService());
   getIt.registerLazySingleton<CurrencyService>(() => CurrencyService());
+  getIt.registerLazySingleton<CryptoService>(() => CryptoService());
 }

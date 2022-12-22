@@ -1,3 +1,4 @@
+import 'package:crypto_tracker/bloc/crypto_bloc/crypto_bloc.dart';
 import 'package:crypto_tracker/bloc/currency_bloc/currency_bloc.dart';
 import 'package:crypto_tracker/services/locator.dart';
 import 'package:crypto_tracker/views/onboarding_view.dart';
@@ -35,6 +36,7 @@ Future<void> main() async {
       child: MultiBlocProvider(
         providers: [
           BlocProvider(create: (_) => CurrencyBloc()),
+          BlocProvider(create: (_) => CryptoBloc()),
         ],
         child: const MyApp(),
       )));
