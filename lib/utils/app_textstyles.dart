@@ -152,4 +152,43 @@ class AppTextStyle {
       letterSpacing: -0.2.sp,
     );
   }
+
+  // Crypto
+  static TextStyle cryptoRowItemTitle() {
+    return TextStyle(
+      color: Colors.white,
+      fontSize: 15.sp,
+      fontWeight: FontWeight.w500,
+      letterSpacing: -0.2.sp,
+      overflow: TextOverflow.ellipsis,
+    );
+  }
+  static TextStyle cryptoTitle() {
+    return TextStyle(
+      color: AppColors.blackBackground,
+      fontSize: 13.sp,
+      fontWeight: FontWeight.w600,
+      letterSpacing: -0.2.sp,
+      overflow: TextOverflow.ellipsis,
+    );
+  }
+
+  static TextStyle cryptoPrice() {
+    return TextStyle(
+      color: AppColors.blackBackground,
+      fontSize: 15.sp,
+      fontWeight: FontWeight.w400,
+      letterSpacing: -0.2.sp,
+      overflow: TextOverflow.ellipsis,
+    );
+  }
+  static TextStyle cryptoChange() {
+    return TextStyle(
+      color: AppColors.white,
+      fontSize: 15.sp,
+      fontWeight: FontWeight.w600,
+      letterSpacing: -0.2.sp,
+      overflow: TextOverflow.ellipsis,
+    );
+  }
 }
