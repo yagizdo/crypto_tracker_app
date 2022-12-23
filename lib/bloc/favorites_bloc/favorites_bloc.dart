@@ -59,9 +59,12 @@ class FavoritesBloc extends Bloc<FavoritesEvent, FavoritesState> {
       emit(FavoritesLoadingState());
       try {
         await getFavorites();
-        emit(FavoritesLoadedState(favorites));
+        if (favorites.isNotEmpty) {
+          emit(FavoritesLoadedState(favorites));
+        } else {
+          emit(FavoritesEmptyState());
+        }
       } catch (e) {
-        print('31');
         emit(FavoritesErrorState(e.toString()));
       }
     });
@@ -90,7 +93,11 @@ class FavoritesBloc extends Bloc<FavoritesEvent, FavoritesState> {
             return favorite.name == event.itemName;
           }
         });
-        emit(FavoritesLoadedState(favorites));
+        if (favorites.isNotEmpty) {
+          emit(FavoritesLoadedState(favorites));
+        } else {
+          emit(FavoritesEmptyState());
+        }
       }
     });
   }

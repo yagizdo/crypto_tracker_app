@@ -19,6 +19,24 @@ class FavoritesContent extends StatelessWidget {
         if (state is FavoritesLoadingState) {
           return Center(child: CircularProgressIndicator(color: AppColors.white,strokeWidth: 3.w,),);
         }
+
+        if (state is FavoritesErrorState) {
+          return Center(
+            child: Text(
+              LocaleKeys.errors_custom_error.tr(),
+              style: AppTextStyle.homeText(),
+            ),
+          );
+        }
+
+        if (state is FavoritesEmptyState) {
+          return Center(
+            child: Text(
+              LocaleKeys.currency_no_item.tr(),
+              style: AppTextStyle.homeText(),
+            ),
+          );
+        }
         if (state is FavoritesLoadedState) {
           return Column(
             children: [
