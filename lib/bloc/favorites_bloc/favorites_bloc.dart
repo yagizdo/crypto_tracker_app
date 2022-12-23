@@ -8,8 +8,10 @@ import 'package:crypto_tracker/services/locator.dart';
 import 'package:crypto_tracker/services/navigation_service.dart';
 import 'package:crypto_tracker/services/network/crypto_service.dart';
 import 'package:crypto_tracker/services/network/currency_service.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:meta/meta.dart';
 
+import '../../i18n/locale_keys.g.dart';
 import '../../models/crypto.dart';
 
 part 'favorites_event.dart';
@@ -117,7 +119,7 @@ class FavoritesBloc extends Bloc<FavoritesEvent, FavoritesState> {
         List<String> customLists = await getAllCustomLists();
         if (customLists.contains(event.listName)) {
           navigationService.showErrorSnackbar(
-              errorMessage: 'List name already exists');
+              errorMessage: LocaleKeys.custom_lists_add_custom_list_dialog_list_name_already_exists_txt.tr());
           emit(CustomListNamesLoadedState(customLists));
         } else {
           // Add the list name to the database
@@ -183,7 +185,7 @@ class FavoritesBloc extends Bloc<FavoritesEvent, FavoritesState> {
           } else {
             List<String> customListNames = await getAllCustomLists();
             navigationService.showErrorSnackbar(
-                errorMessage: 'Item already exists in the list');
+                errorMessage: LocaleKeys.custom_lists_add_to_custom_list_dialog_added_error_txt.tr());
             emit(CustomListNamesLoadedState(customListNames));
           }
         } catch (e) {
@@ -202,7 +204,7 @@ class FavoritesBloc extends Bloc<FavoritesEvent, FavoritesState> {
         if (!customListItems.contains(event.itemName)) {
           List<String> customListNames = await getAllCustomLists();
           navigationService.showErrorSnackbar(
-              errorMessage: 'Item does not exist in the list');
+              errorMessage: LocaleKeys.custom_lists_delete_item_error_txt.tr());
           emit(CustomListNamesLoadedState(customListNames));
         } else {
           // Remove the item from the list

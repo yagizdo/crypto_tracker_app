@@ -101,7 +101,20 @@ class CodegenLoader extends AssetLoader{
   },
   "custom_lists": {
     "title": "Listeleriniz",
-    "item_count": "Öğe"
+    "item_count": "Öğe",
+    "add_custom_list_dialog": {
+      "title": "Yeni liste ekle",
+      "hint": "Liste için bir ad girin",
+      "add_btn": "Listeyi ekle",
+      "list_name_already_exists_txt": "Liste adı zaten var"
+    },
+    "dialog_cancel_btn": "Vazgeç",
+    "add_to_custom_list_dialog": {
+      "title": "Listeye ekle",
+      "added_succes_txt": "{} listesine eklendi",
+      "added_error_txt": "Öğe zaten listede var"
+    },
+    "delete_item_error_txt": "Öğe listede yok"
   }
 };
 static const Map<String,dynamic> en = {
@@ -191,7 +204,20 @@ static const Map<String,dynamic> en = {
   },
   "custom_lists": {
     "title": "Your Lists",
-    "item_count": "Items"
+    "item_count": "Items",
+    "add_custom_list_dialog": {
+      "title": "Add a new list",
+      "hint": "Enter a name for the list",
+      "add_btn": "Add List",
+      "list_name_already_exists_txt": "List name already exists"
+    },
+    "dialog_cancel_btn": "Cancel",
+    "add_to_custom_list_dialog": {
+      "title": "Add to a list",
+      "added_succes_txt": "Added to {} list",
+      "added_error_txt": "Item already exists in the list"
+    },
+    "delete_item_error_txt": "Item does not exist in the list"
   }
 };
 static const Map<String, Map<String,dynamic>> mapLocales = {"tr": tr, "en": en};

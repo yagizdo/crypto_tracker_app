@@ -85,6 +85,19 @@
   },
   "custom_lists": {
     "title": "Listeleriniz",
-    "item_count": "Öğe"
+    "item_count": "Öğe",
+    "add_custom_list_dialog": {
+      "title": "Yeni liste ekle",
+      "hint": "Liste için bir ad girin",
+      "add_btn": "Listeyi ekle",
+      "list_name_already_exists_txt": "Liste adı zaten var"
+    },
+    "dialog_cancel_btn": "Vazgeç",
+    "add_to_custom_list_dialog": {
+      "title": "Listeye ekle",
+      "added_succes_txt": "{} listesine eklendi",
+      "added_error_txt": "Öğe zaten listede var"
+    },
+    "delete_item_error_txt": "Öğe listede yok"
   }
 }

@@ -78,6 +78,17 @@ abstract class  LocaleKeys {
   static const settings = 'settings';
   static const custom_lists_title = 'custom_lists.title';
   static const custom_lists_item_count = 'custom_lists.item_count';
+  static const custom_lists_add_custom_list_dialog_title = 'custom_lists.add_custom_list_dialog.title';
+  static const custom_lists_add_custom_list_dialog_hint = 'custom_lists.add_custom_list_dialog.hint';
+  static const custom_lists_add_custom_list_dialog_add_btn = 'custom_lists.add_custom_list_dialog.add_btn';
+  static const custom_lists_add_custom_list_dialog_list_name_already_exists_txt = 'custom_lists.add_custom_list_dialog.list_name_already_exists_txt';
+  static const custom_lists_add_custom_list_dialog = 'custom_lists.add_custom_list_dialog';
+  static const custom_lists_dialog_cancel_btn = 'custom_lists.dialog_cancel_btn';
+  static const custom_lists_add_to_custom_list_dialog_title = 'custom_lists.add_to_custom_list_dialog.title';
+  static const custom_lists_add_to_custom_list_dialog_added_succes_txt = 'custom_lists.add_to_custom_list_dialog.added_succes_txt';
+  static const custom_lists_add_to_custom_list_dialog_added_error_txt = 'custom_lists.add_to_custom_list_dialog.added_error_txt';
+  static const custom_lists_add_to_custom_list_dialog = 'custom_lists.add_to_custom_list_dialog';
+  static const custom_lists_delete_item_error_txt = 'custom_lists.delete_item_error_txt';
   static const custom_lists = 'custom_lists';
 
 }

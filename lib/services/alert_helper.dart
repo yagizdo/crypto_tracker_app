@@ -152,14 +152,14 @@ class AlertHelper {
         builder: (context) {
           return AlertDialog(
             backgroundColor: AppColors.blueBackground,
-            title: const Text('Add a new list'),
+            title: Text(LocaleKeys.custom_lists_add_custom_list_dialog_title.tr()),
             titleTextStyle: AppTextStyle.customListNameTitle(),
             content: TextField(
               controller: _listNameController,
-              decoration: const InputDecoration(
-                  hintText: "Enter a name for the list",
-                  labelStyle: TextStyle(color: AppColors.white),
-                  hintStyle: TextStyle(color: AppColors.white)),
+              decoration: InputDecoration(
+                  hintText: LocaleKeys.custom_lists_add_custom_list_dialog_hint.tr(),
+                  labelStyle: const TextStyle(color: AppColors.white),
+                  hintStyle: const TextStyle(color: AppColors.white)),
             ),
             actions: [
               TextButton(
@@ -173,7 +173,7 @@ class AlertHelper {
                 onPressed: () {
                   Navigator.pop(context);
                 },
-                child: const Text('CANCEL'),
+                child: Text(LocaleKeys.custom_lists_dialog_cancel_btn.tr()),
               ),
               TextButton(
                 style: ButtonStyle(
@@ -187,7 +187,7 @@ class AlertHelper {
                     Navigator.pop(context);
                   }
                 },
-                child: const Text('Add List'),
+                child: Text(LocaleKeys.custom_lists_add_custom_list_dialog_add_btn.tr()),
               ),
             ],
           );
@@ -201,7 +201,7 @@ class AlertHelper {
         builder: (context) {
           return AlertDialog(
             backgroundColor: AppColors.blueBackground,
-            title: const Text('Add to a list'),
+            title: Text(LocaleKeys.custom_lists_add_to_custom_list_dialog_title.tr()),
             titleTextStyle: AppTextStyle.customListNameTitle(),
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(12),
@@ -222,7 +222,7 @@ class AlertHelper {
                                   AddItemToCustomListEvent(
                                       listName: state.customListNames[index],
                                       itemName: itemName));
-                              _navigationService.showSuccessSnackbar(errorMessage: "Added to ${state.customListNames[index]} list");
+                              _navigationService.showSuccessSnackbar(errorMessage: LocaleKeys.custom_lists_add_to_custom_list_dialog_added_succes_txt.tr(args: [state.customListNames[index]]));
                               Navigator.pop(context);
                             },
                             child: CustomListsNameCard(
@@ -254,7 +254,7 @@ class AlertHelper {
                 onPressed: () {
                   Navigator.pop(context);
                 },
-                child: Text('CANCEL',style: AppTextStyle.addCustomListDialogCancelBtnTxt(),),
+                child: Text(LocaleKeys.custom_lists_dialog_cancel_btn.tr(),style: AppTextStyle.addCustomListDialogCancelBtnTxt(),),
               ),
             ],
           );
