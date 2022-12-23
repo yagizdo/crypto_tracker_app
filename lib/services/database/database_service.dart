@@ -10,8 +10,10 @@ import '../locator.dart';
 import '../navigation_service.dart';
 
 class DatabaseService extends IDatabaseService {
-  final CollectionReference _users = FirebaseFirestore.instance.collection('users');
-  final CollectionReference _favorites = FirebaseFirestore.instance.collection('favorites');
+  final CollectionReference _users =
+      FirebaseFirestore.instance.collection('users');
+  final CollectionReference _customLists =
+      FirebaseFirestore.instance.collection('customLists');
   final NavigationService _navigationService = getIt<NavigationService>();
 
   @override
@@ -44,15 +46,12 @@ class DatabaseService extends IDatabaseService {
   }
 
   @override
-  Future<void> updateUserInDatabase(User user) {
-    // TODO: implement updateUserInDatabase
-    throw UnimplementedError();
-  }
-
-  @override
   Future<List<dynamic>> getFavorites({required String userUID}) async {
     try {
-      return await _favorites.doc(userUID).get().then((DocumentSnapshot documentSnapshot) {
+      return await _customLists
+          .doc(userUID)
+          .get()
+          .then((DocumentSnapshot documentSnapshot) {
         return documentSnapshot.exists ? documentSnapshot.get('favorites') : [];
       });
     } catch (e) {
@@ -62,11 +61,70 @@ class DatabaseService extends IDatabaseService {
   }
 
   @override
-  Future<void> saveFavorites({required List favorites, required String userUID}) async {
-    await _favorites.doc(userUID).set({
-      'favorites' : favorites
-    });
+  Future<void> saveFavorites(
+      {required List favorites, required String userUID}) async {
+    await _customLists.doc(userUID).set({
+      'favorites': favorites,
+    }, SetOptions(merge: true));
   }
 
+  @override
+  Future<List> getAllFavLists({required String userUID}) {
+    try {
+      return _customLists
+          .doc(userUID)
+          .get()
+          .then((DocumentSnapshot documentSnapshot) {
+        // documentSnapshot.data() is Object? so we need to convert to map first
+        Map<String, dynamic> customListsMap =
+            documentSnapshot.data() as Map<String, dynamic>;
 
+        var keys = customListsMap.keys.toList();
+
+        List<dynamic> customListsNames = [];
+
+        for (var i = 0; i < keys.length; i++) {
+          customListsNames.add(keys[i]);
+        }
+
+        return customListsNames;
+      });
+    } catch (e) {
+      kDebugMode ? debugPrint(e.toString()) : null;
+      rethrow;
+    }
+  }
+
+  @override
+  Future<void> saveCustomLists(
+      {required List listItems,
+      required String userUID,
+      required String customListName}) {
+    try {
+      return _customLists.doc(userUID).set({
+        customListName: listItems,
+      }, SetOptions(merge: true));
+    } catch (e) {
+      kDebugMode ? debugPrint(e.toString()) : null;
+      rethrow;
+    }
+  }
+
+  @override
+  Future<List> getCustomList(
+      {required String userUID, required String customListName}) {
+    try {
+      return _customLists
+          .doc(userUID)
+          .get()
+          .then((DocumentSnapshot documentSnapshot) {
+        return documentSnapshot.exists
+            ? documentSnapshot.get(customListName)
+            : [];
+      });
+    } catch (e) {
+      kDebugMode ? debugPrint(e.toString()) : null;
+      rethrow;
+    }
+  }
 }
