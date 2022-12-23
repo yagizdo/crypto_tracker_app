@@ -36,105 +36,55 @@ class FavoritesBloc extends Bloc<FavoritesEvent, FavoritesState> {
 
     on<FavoritesEvent>((event, emit) {});
 
-    // Get Favorites
-    Future<void> getFavorites() async {
-      // Get Fav Names
-      favoritesNames = await databaseService.getFavorites(
-          userUID: authService.currentUser.uid);
-
-      // Get Currencies
-      List<Currency> currencies = await currencyService.getCurrencies();
-
-      // Get Cryptos
-      List<Crypto> cryptos = await cryptoService.getCryptos();
-
-      // Get the favorites from the currencies and cryptos lists and add them to the favorites list
-      // but don't add duplicates
-
-      // Get Currencies Favorites
-      for (var i = 0; i < favoritesNames.length; i++) {
-        for (var j = 0; j < currencies.length; j++) {
-          if (favoritesNames[i] == currencies[j].name!.toUpperCase()) {
-            if (!currencyFavorites
-                .any((element) => element.name == currencies[j].name)) {
-              currencyFavorites.add(currencies[j]);
-            }
-          }
-        }
-      }
-
-      // Get Cryptos Favorites
-      for (var i = 0; i < favoritesNames.length; i++) {
-        for (var j = 0; j < cryptos.length; j++) {
-          if (favoritesNames[i] ==
-              '${cryptos[j].market?.baseCurrencyCode} - ${cryptos[j].market?.counterCurrencyCode}') {
-            if (!cryptoFavorites.any((crypto) =>
-                '${crypto.market?.baseCurrencyCode} - ${crypto.market?.counterCurrencyCode}' ==
-                '${cryptos[j].market?.baseCurrencyCode} - ${cryptos[j].market?.counterCurrencyCode}')) {
-              cryptoFavorites.add(cryptos[j]);
-            }
-          }
-        }
-      }
-
-      // Add Currencies Favorites and Cryptos Favorites to the favorites list
-      favorites = [...cryptoFavorites, ...currencyFavorites];
-    }
-
-    // Get Custom Favorites List (Used for the search)
-    Future<List> getCustomFavoritesList({required String listName}) async {
-      // Get Custom List
-      List customList = await databaseService.getCustomList(
-          userUID: authService.currentUser.uid, customListName: listName);
-
-      // Get Currencies
-      List<Currency> currencies = await currencyService.getCurrencies();
-
-      // Get Cryptos
-      List<Crypto> cryptos = await cryptoService.getCryptos();
-
-      // Get the favorites from the currencies and cryptos lists and add them to the favorites list
-      // but don't add duplicates
-
-      // Get Currencies Favorites
-      for (var i = 0; i < customList.length; i++) {
-        for (var j = 0; j < currencies.length; j++) {
-          if (customList[i] == currencies[j].name!.toUpperCase()) {
-            if (!currencyFavorites
-                .any((element) => element.name == currencies[j].name)) {
-              currencyFavorites.add(currencies[j]);
-            }
-          }
-        }
-      }
-
-      // Get Cryptos Favorites
-      for (var i = 0; i < customList.length; i++) {
-        for (var j = 0; j < cryptos.length; j++) {
-          if (customList[i] ==
-              '${cryptos[j].market?.baseCurrencyCode} - ${cryptos[j].market?.counterCurrencyCode}') {
-            if (!cryptoFavorites.any((crypto) =>
-                '${crypto.market?.baseCurrencyCode} - ${crypto.market?.counterCurrencyCode}' ==
-                '${cryptos[j].market?.baseCurrencyCode} - ${cryptos[j].market?.counterCurrencyCode}')) {
-              cryptoFavorites.add(cryptos[j]);
-            }
-          }
-        }
-      }
-
-      // Add Currencies Favorites and Cryptos Favorites to the favorites list
-      favorites = [...cryptoFavorites, ...currencyFavorites];
-
-      return favorites;
-    }
-
     Future<List> getCustomList({required String listName}) async {
+      cryptoFavorites.clear();
+      currencyFavorites.clear();
+      favorites.clear();
       try {
         // Get Custom List
         List customList = await databaseService.getCustomList(
             userUID: authService.currentUser.uid, customListName: listName);
 
-        return customList;
+
+        // Get Currencies
+        List<Currency> currencies = await currencyService.getCurrencies();
+
+        // Get Cryptos
+        List<Crypto> cryptos = await cryptoService.getCryptos();
+
+        // Get the favorites from the currencies and cryptos lists and add them to the favorites list
+        // but don't add duplicates
+
+        // Get Currencies Favorites
+        for (var i = 0; i < customList.length; i++) {
+          for (var j = 0; j < currencies.length; j++) {
+            if (customList[i] == currencies[j].name!.toUpperCase()) {
+              if (!currencyFavorites
+                  .any((element) => element.name == currencies[j].name)) {
+                currencyFavorites.add(currencies[j]);
+              }
+            }
+          }
+        }
+
+        // Get Cryptos Favorites
+        for (var i = 0; i < customList.length; i++) {
+          for (var j = 0; j < cryptos.length; j++) {
+            if (customList[i] ==
+                '${cryptos[j].market?.baseCurrencyCode} - ${cryptos[j].market?.counterCurrencyCode}') {
+              if (!cryptoFavorites.any((crypto) =>
+              '${crypto.market?.baseCurrencyCode} - ${crypto.market?.counterCurrencyCode}' ==
+                  '${cryptos[j].market?.baseCurrencyCode} - ${cryptos[j].market?.counterCurrencyCode}')) {
+                cryptoFavorites.add(cryptos[j]);
+              }
+            }
+          }
+        }
+
+        // Add Currencies Favorites and Cryptos Favorites to the favorites list
+        favorites = [...cryptoFavorites, ...currencyFavorites];
+
+        return favorites;
       } catch (e) {
         print(e);
         rethrow;

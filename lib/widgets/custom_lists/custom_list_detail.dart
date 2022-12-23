@@ -1,5 +1,7 @@
 import 'package:crypto_tracker/bloc/favorites_bloc/favorites_bloc.dart';
 import 'package:crypto_tracker/services/database/database_service.dart';
+import 'package:crypto_tracker/widgets/crypto/crypto_card.dart';
+import 'package:crypto_tracker/widgets/currency/currency_card.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -75,13 +77,12 @@ class _CustomListDetailState extends State<CustomListDetail> {
                     itemCount: state.customListItems.length,
                     itemBuilder: (context, index) {
                       var item = state.customListItems[index];
-                      print(item.runtimeType);
                       if (item is Currency) {
-                        return Text(item.name!);
+                        return CurrencyCard(currency: item, isFavorite: true);
                       }
 
                       if (item is Crypto) {
-                        return Text(item.market!.baseCurrencyCode!);
+                        return CryptoCard(crypto: item, isFavorite: true);
                       }
 
                       return const SizedBox();
