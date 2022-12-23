@@ -98,6 +98,10 @@ class CodegenLoader extends AssetLoader{
       "warning_three": "Verilerinizi kurtaramayacaksınız",
       "btn_txt": "Hesabımı sil"
     }
+  },
+  "custom_lists": {
+    "title": "Listeleriniz",
+    "item_count": "{} Öğeler"
   }
 };
 static const Map<String,dynamic> en = {
@@ -184,6 +188,10 @@ static const Map<String,dynamic> en = {
       "warning_three": "You will not be able to recover your data",
       "btn_txt": "Delete my account"
     }
+  },
+  "custom_lists": {
+    "title": "Your Lists",
+    "item_count": "{} Items"
   }
 };
 static const Map<String, Map<String,dynamic>> mapLocales = {"tr": tr, "en": en};

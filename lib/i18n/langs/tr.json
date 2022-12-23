@@ -82,5 +82,9 @@
       "warning_three": "Verilerinizi kurtaramayacaksınız",
       "btn_txt": "Hesabımı sil"
     }
+  },
+  "custom_lists": {
+    "title": "Listeleriniz",
+    "item_count": "{} Öğeler"
   }
 }

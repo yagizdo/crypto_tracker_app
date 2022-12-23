@@ -82,5 +82,9 @@
       "warning_three": "You will not be able to recover your data",
       "btn_txt": "Delete my account"
     }
+  },
+  "custom_lists": {
+    "title": "Your Lists",
+    "item_count": "{} Items"
   }
 }

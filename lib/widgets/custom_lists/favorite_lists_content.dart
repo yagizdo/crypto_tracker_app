@@ -50,7 +50,7 @@ class CustomListsContent extends StatelessWidget {
                       color: AppColors.blueBackground,
                     ),
                     child:  Text(
-                      'Your Lists',
+                      LocaleKeys.custom_lists_title.tr(),
                       style: AppTextStyle.customListNameTitle(),
                       textAlign: TextAlign.center,
                     ),

@@ -76,5 +76,8 @@ abstract class  LocaleKeys {
   static const settings_delete_account_btn_txt = 'settings.delete_account.btn_txt';
   static const settings_delete_account = 'settings.delete_account';
   static const settings = 'settings';
+  static const custom_lists_title = 'custom_lists.title';
+  static const custom_lists_item_count = 'custom_lists.item_count';
+  static const custom_lists = 'custom_lists';
 
 }
