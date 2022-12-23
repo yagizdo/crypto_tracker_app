@@ -1,8 +1,10 @@
 import 'package:crypto_tracker/bloc/favorites_bloc/favorites_bloc.dart';
-import 'package:crypto_tracker/widgets/custom_lists/custom_lists_content.dart';
+import 'package:crypto_tracker/widgets/custom_lists/custom_fav_lists.dart';
 import 'package:crypto_tracker/widgets/main_widgets/main_layout.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+
+import '../widgets/custom_lists/custom_list_content.dart';
 
 
 class HomeView extends StatefulWidget {
@@ -23,7 +25,7 @@ class _HomeViewState extends State<HomeView> {
   Widget build(BuildContext context) {
     return const MainLayout(
       content: Center(
-        child: CustomListsContent(),
+        child: CustomListContent(),
       ),
     );
   }

@@ -10,14 +10,14 @@ import '../../utils/app_colors.dart';
 import '../../utils/app_textstyles.dart';
 import 'CustomListsNameList.dart';
 
-class CustomListsContent extends StatefulWidget {
-  const CustomListsContent({Key? key}) : super(key: key);
-
+class CustomFavLists extends StatefulWidget {
+  const CustomFavLists({Key? key, required this.onTap}) : super(key: key);
+  final ValueSetter<String> onTap;
   @override
-  State<CustomListsContent> createState() => _CustomListsContentState();
+  State<CustomFavLists> createState() => _CustomFavListsState();
 }
 
-class _CustomListsContentState extends State<CustomListsContent> {
+class _CustomFavListsState extends State<CustomFavLists> {
   late GlobalKey<FormState> _formKey;
   late TextEditingController _listNameController;
 
@@ -90,6 +90,9 @@ class _CustomListsContentState extends State<CustomListsContent> {
                       flex: 20,
                       child: CustomListsNamesList(
                         favoriteListNames: state.customListNames,
+                        onTap: (listName) {
+                          widget.onTap(listName);
+                        },
                       )),
                 ],
               ),

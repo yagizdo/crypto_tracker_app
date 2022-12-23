@@ -44,61 +44,58 @@ class _CustomListsNameCardState extends State<CustomListsNameCard> {
   }
   @override
   Widget build(BuildContext context) {
-    return TapWrapper(
-      onTap: () {},
-      child: Padding(
-        padding: EdgeInsets.symmetric(
-          horizontal: 10.w,
-          vertical: 10.w,
+    return Padding(
+      padding: EdgeInsets.symmetric(
+        horizontal: 10.w,
+        vertical: 10.w,
+      ),
+      child: Container(
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(8),
+          color: AppColors.white.withOpacity(0.9),
         ),
-        child: Container(
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(8),
-            color: AppColors.white.withOpacity(0.9),
+        height: 50.w,
+        child: Padding(
+          padding: EdgeInsets.symmetric(
+            horizontal: 10.w,
+            vertical: 3.w,
           ),
-          height: 50.w,
-          child: Padding(
-            padding: EdgeInsets.symmetric(
-              horizontal: 10.w,
-              vertical: 3.w,
-            ),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-                Expanded(
-                  flex: 1,
-                  child: Icon(
-                    Icons.list_alt_rounded,
-                    color: AppColors.blackBackground,
-                    size: 25.w,
-                  ),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              Expanded(
+                flex: 1,
+                child: Icon(
+                  Icons.list_alt_rounded,
+                  color: AppColors.blackBackground,
+                  size: 25.w,
                 ),
-                Expanded(
-                    flex: 7,
-                    child: Text(
-                      widget.listName,
-                      maxLines: 2,
-                      style: AppTextStyle.cryptoTitle(),
-                    )),
+              ),
+              Expanded(
+                  flex: 7,
+                  child: Text(
+                    widget.listName,
+                    maxLines: 2,
+                    style: AppTextStyle.cryptoTitle(),
+                  )),
 
-                Expanded(
-                    flex: 2,
-                    child: Row(
-                      children: [
-                        Expanded(child: Text(listItemCount.toString())),
-                        width1Per(context: context),
-                        Expanded(
-                          flex: 5,
-                          child: Text(
-                            LocaleKeys.custom_lists_item_count.tr(),
-                            maxLines: 2,
-                            style: AppTextStyle.cryptoTitle(),
-                          ),
+              Expanded(
+                  flex: 2,
+                  child: Row(
+                    children: [
+                      Expanded(child: Text(listItemCount.toString())),
+                      width1Per(context: context),
+                      Expanded(
+                        flex: 5,
+                        child: Text(
+                          LocaleKeys.custom_lists_item_count.tr(),
+                          maxLines: 2,
+                          style: AppTextStyle.cryptoTitle(),
                         ),
-                      ],
-                    )),
-              ],
-            ),
+                      ),
+                    ],
+                  )),
+            ],
           ),
         ),
       ),

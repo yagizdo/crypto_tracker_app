@@ -19,4 +19,18 @@ class CustomListNamesErrorState extends FavoritesState {
   CustomListNamesErrorState(this.message);
 }
 
+class CustomListLoadingState extends FavoritesState {}
+
+class CustomListLoadedState extends FavoritesState {
+  final List<dynamic> customListItems;
+
+  CustomListLoadedState(this.customListItems);
+}
+
+class CustomListErrorState extends FavoritesState {
+  final String message;
+
+  CustomListErrorState(this.message);
+}
+
 class CustomListEmptyState extends FavoritesState {}

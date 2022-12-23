@@ -128,6 +128,19 @@ class FavoritesBloc extends Bloc<FavoritesEvent, FavoritesState> {
       return favorites;
     }
 
+    Future<List> getCustomList({required String listName}) async {
+      try {
+        // Get Custom List
+        List customList = await databaseService.getCustomList(
+            userUID: authService.currentUser.uid, customListName: listName);
+
+        return customList;
+      } catch (e) {
+        print(e);
+        rethrow;
+      }
+    }
+
     // Get All Custom Lists
     Future<List<String>> getAllCustomLists() async {
       return await databaseService.getAllCustomLists(
@@ -244,6 +257,21 @@ class FavoritesBloc extends Bloc<FavoritesEvent, FavoritesState> {
         }
       } catch (e) {
         emit(CustomListNamesErrorState(e.toString()));
+      }
+    });
+
+    on<GetCustomListEvent>((event, emit) async {
+      emit(CustomListLoadingState());
+      try {
+        List customList = await getCustomList(listName: event.listName);
+        if (customList.isEmpty) {
+          emit(CustomListEmptyState());
+        } else {
+          emit(CustomListLoadedState(customList));
+        }
+      } catch (e) {
+        print(e);
+        emit(CustomListErrorState(e.toString()));
       }
     });
   }

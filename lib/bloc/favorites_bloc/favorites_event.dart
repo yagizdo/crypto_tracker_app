@@ -28,3 +28,8 @@ class DeleteItemFromCustomListEvent extends FavoritesEvent {
   final String listName;
   DeleteItemFromCustomListEvent(this.itemName, this.listName);
 }
+
+class GetCustomListEvent extends FavoritesEvent {
+  final String listName;
+  GetCustomListEvent(this.listName);
+}
