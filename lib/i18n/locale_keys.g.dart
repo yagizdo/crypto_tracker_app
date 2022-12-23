@@ -89,6 +89,7 @@ abstract class  LocaleKeys {
   static const custom_lists_add_to_custom_list_dialog_added_error_txt = 'custom_lists.add_to_custom_list_dialog.added_error_txt';
   static const custom_lists_add_to_custom_list_dialog = 'custom_lists.add_to_custom_list_dialog';
   static const custom_lists_delete_item_error_txt = 'custom_lists.delete_item_error_txt';
+  static const custom_lists_slidable_remove_txt = 'custom_lists.slidable_remove_txt';
   static const custom_lists = 'custom_lists';
 
 }

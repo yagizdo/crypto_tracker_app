@@ -98,6 +98,7 @@
       "added_succes_txt": "{} listesine eklendi",
       "added_error_txt": "Öğe zaten listede var"
     },
-    "delete_item_error_txt": "Öğe listede yok"
+    "delete_item_error_txt": "Öğe listede yok",
+    "slidable_remove_txt": "Listeyi sil"
   }
 }

@@ -114,7 +114,8 @@ class CodegenLoader extends AssetLoader{
       "added_succes_txt": "{} listesine eklendi",
       "added_error_txt": "Öğe zaten listede var"
     },
-    "delete_item_error_txt": "Öğe listede yok"
+    "delete_item_error_txt": "Öğe listede yok",
+    "slidable_remove_txt": "Listeyi sil"
   }
 };
 static const Map<String,dynamic> en = {
@@ -217,7 +218,8 @@ static const Map<String,dynamic> en = {
       "added_succes_txt": "Added to {} list",
       "added_error_txt": "Item already exists in the list"
     },
-    "delete_item_error_txt": "Item does not exist in the list"
+    "delete_item_error_txt": "Item does not exist in the list",
+    "slidable_remove_txt": "Delete list"
   }
 };
 static const Map<String, Map<String,dynamic>> mapLocales = {"tr": tr, "en": en};

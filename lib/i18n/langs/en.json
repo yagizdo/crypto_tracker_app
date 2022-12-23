@@ -98,6 +98,7 @@
       "added_succes_txt": "Added to {} list",
       "added_error_txt": "Item already exists in the list"
     },
-    "delete_item_error_txt": "Item does not exist in the list"
+    "delete_item_error_txt": "Item does not exist in the list",
+    "slidable_remove_txt": "Delete list"
   }
 }

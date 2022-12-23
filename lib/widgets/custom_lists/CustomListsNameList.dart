@@ -1,5 +1,7 @@
+import 'package:crypto_tracker/i18n/locale_keys.g.dart';
 import 'package:crypto_tracker/widgets/custom_lists/custom_lists_name_card.dart';
 import 'package:crypto_tracker/widgets/main_widgets/tapWrapper.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
@@ -44,7 +46,7 @@ class CustomListsNamesList extends StatelessWidget {
                         );
                       },
                       backgroundColor: Colors.redAccent,
-                      label: 'Cancel!',
+                      label: LocaleKeys.custom_lists_slidable_remove_txt.tr(),
                     )
                   ],
                 ),
