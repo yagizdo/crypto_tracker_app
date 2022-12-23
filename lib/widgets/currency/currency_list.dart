@@ -1,9 +1,6 @@
-import 'package:crypto_tracker/utils/app_colors.dart';
+import 'package:crypto_tracker/services/alert_helper.dart';
+import 'package:crypto_tracker/widgets/main_widgets/tapWrapper.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-
-import '../../bloc/currency_bloc/currency_bloc.dart';
 import '../../models/currency.dart';
 import 'currency_card.dart';
 
@@ -16,9 +13,14 @@ class CurrencyList extends StatelessWidget {
       itemCount: currencies.length,
       itemBuilder: (context, index) {
         Currency currency = currencies[index];
-        return CurrencyCard(
-          currency: currency,
-          isFavorite: false,
+        return TapWrapper(
+          onTap: () {
+            AlertHelper.shared.addItemToCustomListDialog(context);
+          },
+          child: CurrencyCard(
+            currency: currency,
+            isFavorite: false,
+          ),
         );
       },
     );

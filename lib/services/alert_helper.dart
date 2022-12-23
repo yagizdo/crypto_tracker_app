@@ -268,4 +268,70 @@ class AlertHelper {
           );
         });
   }
+
+  Future<void> addItemToCustomListDialog(BuildContext context) async {
+    return showDialog(
+        context: context,
+        builder: (context) {
+          return AlertDialog(
+            backgroundColor: AppColors.blueBackground,
+            title: const Text('Add to a list'),
+            titleTextStyle: AppTextStyle.customListNameTitle(),
+            content: BlocBuilder<FavoritesBloc, FavoritesState>(
+              builder: (context, state) {
+                if (state is CustomListNamesLoadedState) {
+                  return SizedBox(
+                    height: context.screenWidth * 0.3,
+                    width: context.screenWidth * 0.8,
+                    child: ListView.builder(
+                      shrinkWrap: true,
+                      itemCount: state.customListNames.length,
+                      itemBuilder: (context, index) {
+                        return ListTile(
+                          title: Text(
+                            state.customListNames[index],
+                            style: AppTextStyle.customListNameTitle(),
+                          ),
+                          onTap: () {
+                            Navigator.pop(context);
+                          },
+                        );
+                      },
+                    ),
+                  );;
+                } else {
+                  return const Center(
+                    child: CircularProgressIndicator(),
+                  );
+                }
+              },
+            ),
+            actions: [
+              TextButton(
+                style: ButtonStyle(
+                  textStyle: MaterialStateProperty.all(
+                    AppTextStyle.addCustomListDialogBtnTxt(),
+                  ),
+                  foregroundColor: MaterialStateProperty.all(AppColors.white),
+                  backgroundColor: MaterialStateProperty.all(Colors.redAccent),
+                ),
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+                child: const Text('CANCEL'),
+              ),
+              TextButton(
+                style: ButtonStyle(
+                  backgroundColor: MaterialStateProperty.all(AppColors.white),
+                ),
+                onPressed: () async {
+                  Navigator.pop(context);
+                  addCustomListDialog(context);
+                },
+                child: const Text('Create new list'),
+              ),
+            ],
+          );
+        });
+  }
 }
