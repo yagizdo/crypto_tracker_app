@@ -1,3 +1,4 @@
+import 'package:crypto_tracker/services/alert_helper.dart';
 import 'package:crypto_tracker/utils/app_constants.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
@@ -18,23 +19,6 @@ class CustomFavLists extends StatefulWidget {
 }
 
 class _CustomFavListsState extends State<CustomFavLists> {
-  late GlobalKey<FormState> _formKey;
-  late TextEditingController _listNameController;
-
-  @override
-  void initState() {
-    super.initState();
-    _formKey = GlobalKey<FormState>();
-    _listNameController = TextEditingController();
-  }
-
-  @override
-  void dispose() {
-    _listNameController.dispose();
-    _formKey.currentState?.dispose();
-    super.dispose();
-  }
-
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<FavoritesBloc, FavoritesState>(
@@ -66,12 +50,7 @@ class _CustomFavListsState extends State<CustomFavLists> {
                 Positioned(
                     bottom: 120.w,
                     right: 10.w,
-                    child: FloatingActionButton(
-                      child: const Icon(Icons.add),
-                      onPressed: () {
-                        _displayTextInputDialog(context);
-                      },
-                    )),
+                    child: _buildAddCustomListBtn()),
               ],
             ),
           );
@@ -108,14 +87,7 @@ class _CustomFavListsState extends State<CustomFavLists> {
                 ],
               ),
               Positioned(
-                  bottom: 120.w,
-                  right: 10.w,
-                  child: FloatingActionButton(
-                    child: const Icon(Icons.add),
-                    onPressed: () {
-                      _displayTextInputDialog(context);
-                    },
-                  )),
+                  bottom: 120.w, right: 10.w, child: _buildAddCustomListBtn()),
             ],
           );
         }
@@ -124,14 +96,7 @@ class _CustomFavListsState extends State<CustomFavLists> {
             children: [
               Center(child: Text(LocaleKeys.currency_no_item.tr())),
               Positioned(
-                  bottom: 120.w,
-                  right: 10.w,
-                  child: FloatingActionButton(
-                    child: const Icon(Icons.add),
-                    onPressed: () {
-                      _displayTextInputDialog(context);
-                    },
-                  )),
+                  bottom: 120.w, right: 10.w, child: _buildAddCustomListBtn()),
             ],
           ),
         );
@@ -139,64 +104,12 @@ class _CustomFavListsState extends State<CustomFavLists> {
     );
   }
 
-  Future<void> addCustomListName() async {
-    if (_formKey.currentState!.validate()) {
-      BlocProvider.of<FavoritesBloc>(context)
-          .add(AddCustomListEvent(_listNameController.text));
-      _listNameController.clear();
-      Navigator.pop(context);
-    }
-  }
-
-  Future<void> _displayTextInputDialog(BuildContext context) async {
-    return showDialog(
-        context: context,
-        builder: (context) {
-          return AlertDialog(
-            backgroundColor: AppColors.blueBackground,
-            title: const Text('Add a new list'),
-            titleTextStyle: AppTextStyle.customListNameTitle(),
-            content: Form(
-              key: _formKey,
-              child: TextFormField(
-                controller: _listNameController,
-                validator: (value) {
-                  if (value == null || value.isEmpty) {
-                    return LocaleKeys.errors_auth_validation_empty_error.tr();
-                  }
-                  return null;
-                },
-                decoration: const InputDecoration(
-                    hintText: "Enter a name for the list",
-                    labelStyle: TextStyle(color: AppColors.white),
-                    hintStyle: TextStyle(color: AppColors.white)),
-              ),
-            ),
-            actions: [
-              TextButton(
-                style: ButtonStyle(
-                  textStyle: MaterialStateProperty.all(
-                    AppTextStyle.addCustomListDialogBtnTxt(),
-                  ),
-                  foregroundColor: MaterialStateProperty.all(AppColors.white),
-                  backgroundColor: MaterialStateProperty.all(Colors.redAccent),
-                ),
-                onPressed: () {
-                  Navigator.pop(context);
-                },
-                child: const Text('CANCEL'),
-              ),
-              TextButton(
-                style: ButtonStyle(
-                  backgroundColor: MaterialStateProperty.all(AppColors.white),
-                ),
-                onPressed: () async {
-                  await addCustomListName();
-                },
-                child: const Text('Add List'),
-              ),
-            ],
-          );
-        });
+  FloatingActionButton _buildAddCustomListBtn() {
+    return FloatingActionButton(
+      child: const Icon(Icons.add),
+      onPressed: () {
+        AlertHelper.shared.addCustomListDialog(context);
+      },
+    );
   }
 }

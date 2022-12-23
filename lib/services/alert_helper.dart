@@ -3,14 +3,20 @@ import 'package:crypto_tracker/utils/extensions/context_extension.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../bloc/favorites_bloc/favorites_bloc.dart';
+import '../utils/app_colors.dart';
 import '../utils/app_constants.dart';
+import '../utils/app_textstyles.dart';
 import '../widgets/main_widgets/tapWrapper.dart';
 
 class AlertHelper {
   AlertHelper._();
 
   static final shared = AlertHelper._();
+
+  final TextEditingController _listNameController = TextEditingController();
 
   void showCupertinoChooseDialog(
       {required BuildContext context,
@@ -211,5 +217,55 @@ class AlertHelper {
         return alert;
       },
     );
+  }
+
+
+  // Future<void> parameter
+  Future<void> addCustomListDialog(BuildContext context) async {
+    return showDialog(
+        context: context,
+        builder: (context) {
+          return AlertDialog(
+            backgroundColor: AppColors.blueBackground,
+            title: const Text('Add a new list'),
+            titleTextStyle: AppTextStyle.customListNameTitle(),
+            content: TextField(
+              controller: _listNameController,
+              decoration: const InputDecoration(
+                  hintText: "Enter a name for the list",
+                  labelStyle: TextStyle(color: AppColors.white),
+                  hintStyle: TextStyle(color: AppColors.white)),
+            ),
+            actions: [
+              TextButton(
+                style: ButtonStyle(
+                  textStyle: MaterialStateProperty.all(
+                    AppTextStyle.addCustomListDialogBtnTxt(),
+                  ),
+                  foregroundColor: MaterialStateProperty.all(AppColors.white),
+                  backgroundColor: MaterialStateProperty.all(Colors.redAccent),
+                ),
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+                child: const Text('CANCEL'),
+              ),
+              TextButton(
+                style: ButtonStyle(
+                  backgroundColor: MaterialStateProperty.all(AppColors.white),
+                ),
+                onPressed: () async {
+                  if (_listNameController.text.isNotEmpty) {
+                    BlocProvider.of<FavoritesBloc>(context)
+                        .add(AddCustomListEvent(_listNameController.text));
+                    _listNameController.clear();
+                    Navigator.pop(context);
+                  }
+                },
+                child: const Text('Add List'),
+              ),
+            ],
+          );
+        });
   }
 }
