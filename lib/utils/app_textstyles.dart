@@ -202,6 +202,16 @@ class AppTextStyle {
     );
   }
 
+  static TextStyle customListDialogNameTitle() {
+    return TextStyle(
+      color: AppColors.blackBackground,
+      fontSize: 20.sp,
+      fontWeight: FontWeight.w700,
+      letterSpacing: -0.2.sp,
+      overflow: TextOverflow.ellipsis,
+    );
+  }
+
   static TextStyle addCustomListDialogBtnTxt() {
     return TextStyle(
       color: AppColors.white,
@@ -211,4 +221,26 @@ class AppTextStyle {
       overflow: TextOverflow.ellipsis,
     );
   }
+
+  static TextStyle addCustomListDialogCancelBtnTxt() {
+    return TextStyle(
+      color: AppColors.white,
+      fontSize: 14.sp,
+      fontWeight: FontWeight.w500,
+      letterSpacing: -0.2.sp,
+      overflow: TextOverflow.ellipsis,
+    );
+  }
+
+  static TextStyle customListDialogNameTxt() {
+    return TextStyle(
+      color: AppColors.blackBackground,
+      fontSize: 16.sp,
+      fontWeight: FontWeight.w500,
+      letterSpacing: -0.2.sp,
+      overflow: TextOverflow.ellipsis,
+    );
+  }
+
+
 }

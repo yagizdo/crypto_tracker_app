@@ -72,21 +72,21 @@ class _CustomListsNameCardState extends State<CustomListsNameCard> {
                 ),
               ),
               Expanded(
-                  flex: 7,
+                  flex: 3,
                   child: Text(
                     widget.listName,
                     maxLines: 2,
-                    style: AppTextStyle.cryptoTitle(),
+                    style: AppTextStyle.customListDialogNameTxt(),
                   )),
 
               Expanded(
-                  flex: 2,
+                  flex: 1,
                   child: Row(
                     children: [
                       Expanded(child: Text(listItemCount.toString())),
                       width1Per(context: context),
                       Expanded(
-                        flex: 5,
+                        flex: 3,
                         child: Text(
                           LocaleKeys.custom_lists_item_count.tr(),
                           maxLines: 2,

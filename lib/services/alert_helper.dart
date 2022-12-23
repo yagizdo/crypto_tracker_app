@@ -1,13 +1,16 @@
 import 'package:crypto_tracker/i18n/locale_keys.g.dart';
+import 'package:crypto_tracker/services/locator.dart';
+import 'package:crypto_tracker/services/navigation_service.dart';
 import 'package:crypto_tracker/utils/extensions/context_extension.dart';
+import 'package:crypto_tracker/widgets/custom_lists/custom_lists_name_card.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../bloc/favorites_bloc/favorites_bloc.dart';
 import '../utils/app_colors.dart';
-import '../utils/app_constants.dart';
 import '../utils/app_textstyles.dart';
 import '../widgets/main_widgets/tapWrapper.dart';
 
@@ -17,6 +20,7 @@ class AlertHelper {
   static final shared = AlertHelper._();
 
   final TextEditingController _listNameController = TextEditingController();
+  final NavigationService _navigationService = getIt<NavigationService>();
 
   void showCupertinoChooseDialog(
       {required BuildContext context,
@@ -141,85 +145,6 @@ class AlertHelper {
     ));
   }
 
-  showRatingDialog(BuildContext context) {
-    // set up the buttons
-    Widget noButton = TextButton(
-      child: const Text(
-        "NO",
-      ),
-      onPressed: () {
-        Navigator.pop(context);
-      },
-    );
-    Widget sureButton = TapWrapper(
-        onTap: () {},
-        child: Container(
-          alignment: Alignment.center,
-          width: context.screenWidth * 0.3,
-          height: context.screenWidth * 0.08,
-          decoration: BoxDecoration(
-            color: Colors.pink,
-            borderRadius: BorderRadius.circular(30.5),
-          ),
-          child: const Text(
-            'SURE',
-          ),
-        ));
-
-    // set up the AlertDialog
-    Widget alert = AlertDialog(
-      title: const Text(
-        "We hope you’re enjoying!",
-        textAlign: TextAlign.center,
-      ),
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(12),
-        side:
-            BorderSide(color: Colors.white, width: context.screenWidth * 0.005),
-      ),
-      content: Container(
-        alignment: Alignment.center,
-        height: context.screenWidth * 0.45,
-        child: Padding(
-          padding: EdgeInsets.symmetric(horizontal: context.screenWidth * 0.05),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              const Text(
-                "We are a small team and we make apps for people to enjoy.",
-                textAlign: TextAlign.center,
-              ),
-              height15Per(context: context),
-              const Text(
-                "Can you give us a good review?",
-                textAlign: TextAlign.center,
-              ),
-            ],
-          ),
-        ),
-      ),
-      actions: [
-        Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          mainAxisSize: MainAxisSize.max,
-          children: [
-            noButton,
-            sureButton,
-          ],
-        ),
-      ],
-    );
-
-    // show the dialog
-    showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return alert;
-      },
-    );
-  }
-
-
   // Future<void> parameter
   Future<void> addCustomListDialog(BuildContext context) async {
     return showDialog(
@@ -269,7 +194,8 @@ class AlertHelper {
         });
   }
 
-  Future<void> addItemToCustomListDialog(BuildContext context) async {
+  Future<void> addItemToCustomListDialog(
+      {required BuildContext context, required String itemName}) async {
     return showDialog(
         context: context,
         builder: (context) {
@@ -277,31 +203,41 @@ class AlertHelper {
             backgroundColor: AppColors.blueBackground,
             title: const Text('Add to a list'),
             titleTextStyle: AppTextStyle.customListNameTitle(),
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(12),
+            ),
             content: BlocBuilder<FavoritesBloc, FavoritesState>(
               builder: (context, state) {
                 if (state is CustomListNamesLoadedState) {
                   return SizedBox(
-                    height: context.screenWidth * 0.3,
-                    width: context.screenWidth * 0.8,
+                    height: 400.w,
+                    width: 500.w,
                     child: ListView.builder(
                       shrinkWrap: true,
                       itemCount: state.customListNames.length,
                       itemBuilder: (context, index) {
-                        return ListTile(
-                          title: Text(
-                            state.customListNames[index],
-                            style: AppTextStyle.customListNameTitle(),
-                          ),
-                          onTap: () {
-                            Navigator.pop(context);
-                          },
-                        );
+                        return TapWrapper(
+                            onTap: () {
+                              BlocProvider.of<FavoritesBloc>(context).add(
+                                  AddItemToCustomListEvent(
+                                      listName: state.customListNames[index],
+                                      itemName: itemName));
+                              _navigationService.showSuccessSnackbar(errorMessage: "Added to ${state.customListNames[index]} list");
+                              Navigator.pop(context);
+                            },
+                            child: CustomListsNameCard(
+                              listName: state.customListNames[index],
+                            ));
                       },
                     ),
-                  );;
+                  );
                 } else {
-                  return const Center(
-                    child: CircularProgressIndicator(),
+                  return SizedBox(
+                    height: 400.w,
+                    width: 500.w,
+                    child: const Center(
+                      child: CircularProgressIndicator(),
+                    ),
                   );
                 }
               },
@@ -318,17 +254,7 @@ class AlertHelper {
                 onPressed: () {
                   Navigator.pop(context);
                 },
-                child: const Text('CANCEL'),
-              ),
-              TextButton(
-                style: ButtonStyle(
-                  backgroundColor: MaterialStateProperty.all(AppColors.white),
-                ),
-                onPressed: () async {
-                  Navigator.pop(context);
-                  addCustomListDialog(context);
-                },
-                child: const Text('Create new list'),
+                child: Text('CANCEL',style: AppTextStyle.addCustomListDialogCancelBtnTxt(),),
               ),
             ],
           );

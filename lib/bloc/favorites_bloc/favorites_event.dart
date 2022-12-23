@@ -20,7 +20,7 @@ class DeleteCustomListEvent extends FavoritesEvent {
 class AddItemToCustomListEvent extends FavoritesEvent {
   final String itemName;
   final String listName;
-  AddItemToCustomListEvent(this.itemName, this.listName);
+  AddItemToCustomListEvent({required this.itemName, required this.listName});
 }
 
 class DeleteItemFromCustomListEvent extends FavoritesEvent {

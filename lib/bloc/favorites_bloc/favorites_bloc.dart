@@ -161,38 +161,34 @@ class FavoritesBloc extends Bloc<FavoritesEvent, FavoritesState> {
 
     on<AddItemToCustomListEvent>((event, emit) async {
       emit(CustomListNamesLoadingState());
-      try {
-        // Get the custom list
-        List customListItems = await databaseService.getCustomList(
-            userUID: authService.currentUser.uid,
-            customListName: event.listName);
-
-        List<String> customListNames = await getAllCustomLists();
-
-        // Check if the item already exists in the list
-        if (customListItems.contains(event.itemName)) {
-          navigationService.showErrorSnackbar(
-              errorMessage: 'Item already exists in the list');
-          emit(CustomListNamesLoadedState(customListNames));
-        } else {
-          // Add the item to the list
-          customListItems.add(event.itemName);
-
-          // Save the list to the database
-          await databaseService.saveCustomLists(
+        try {
+          List customListItems = await databaseService.getCustomList(
               userUID: authService.currentUser.uid,
-              listItems: customListItems,
-              customListName: event.listName);
+              customListName: event.listName.toLowerCase());
 
-          // Get the custom list
-          List<String> updatedCustomListNames = await getAllCustomLists();
+          // Check if the item already exists in the list
+          if (!customListItems.contains(event.itemName)) {
+            // Add the item to the list
+            customListItems.add(event.itemName);
 
-          // Emit the custom list state
-          emit(CustomListNamesLoadedState(updatedCustomListNames));
+            // Save the list to the database
+            await databaseService.saveCustomLists(
+                userUID: authService.currentUser.uid,
+                listItems: customListItems,
+                customListName: event.listName);
+
+            List<String> updatedCustomListNames = await getAllCustomLists();
+
+            emit(CustomListNamesLoadedState(updatedCustomListNames));
+          } else {
+            List<String> customListNames = await getAllCustomLists();
+            navigationService.showErrorSnackbar(
+                errorMessage: 'Item already exists in the list');
+            emit(CustomListNamesLoadedState(customListNames));
+          }
+        } catch (e) {
+          emit(CustomListNamesErrorState(e.toString()));
         }
-      } catch (e) {
-        emit(CustomListNamesErrorState(e.toString()));
-      }
     });
 
     on<DeleteItemFromCustomListEvent>((event, emit) async {
