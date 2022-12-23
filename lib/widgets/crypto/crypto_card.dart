@@ -16,15 +16,7 @@ class CryptoCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TapWrapper(
-      onTap: () {
-        isFavorite
-            ? BlocProvider.of<FavoritesBloc>(context, listen: false).add(
-                DeleteFavoriteEvent(
-                    '${crypto.market?.baseCurrencyCode} - ${crypto.market?.counterCurrencyCode}'))
-            : BlocProvider.of<FavoritesBloc>(context, listen: false).add(
-                AddFavoriteEvent(
-                    '${crypto.market?.baseCurrencyCode} - ${crypto.market?.counterCurrencyCode}'));
-      },
+      onTap: () {},
       child: Padding(
         padding: EdgeInsets.symmetric(
           horizontal: 10.w,

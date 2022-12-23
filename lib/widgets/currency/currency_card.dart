@@ -28,9 +28,7 @@ class CurrencyCard extends StatelessWidget {
     }
 
     return TapWrapper(
-      onTap: () {
-       isFavorite ? BlocProvider.of<FavoritesBloc>(context,listen: false).add(DeleteFavoriteEvent(currency.name!)) : BlocProvider.of<FavoritesBloc>(context,listen: false).add(AddFavoriteEvent(currency.name!));
-      },
+      onTap: () {},
       child: Padding(
         padding: EdgeInsets.symmetric(
           horizontal: 10.w,

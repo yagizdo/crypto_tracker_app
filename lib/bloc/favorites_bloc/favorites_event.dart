@@ -5,21 +5,26 @@ abstract class FavoritesEvent {}
 
 class GetFavoritesEvent extends FavoritesEvent {}
 
-class AddFavoriteEvent extends FavoritesEvent {
-  final String itemName;
-  AddFavoriteEvent(this.itemName);
-
-}
-
-class DeleteFavoriteEvent extends FavoritesEvent {
-  final String itemName;
-
-  DeleteFavoriteEvent(this.itemName);
-}
-
 class GetCustomListNamesEvent extends FavoritesEvent {}
 
 class AddCustomListEvent extends FavoritesEvent {
   final String listName;
   AddCustomListEvent(this.listName);
+}
+
+class DeleteCustomListEvent extends FavoritesEvent {
+  final String listName;
+  DeleteCustomListEvent(this.listName);
+}
+
+class AddItemToCustomListEvent extends FavoritesEvent {
+  final String itemName;
+  final String listName;
+  AddItemToCustomListEvent(this.itemName, this.listName);
+}
+
+class DeleteItemFromCustomListEvent extends FavoritesEvent {
+  final String itemName;
+  final String listName;
+  DeleteItemFromCustomListEvent(this.itemName, this.listName);
 }

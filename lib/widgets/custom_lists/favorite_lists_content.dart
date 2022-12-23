@@ -39,7 +39,7 @@ class _CustomListsContentState extends State<CustomListsContent> {
   Widget build(BuildContext context) {
     return BlocBuilder<FavoritesBloc, FavoritesState>(
       builder: (context, state) {
-        if (state is CustomListLoadingState) {
+        if (state is CustomListNamesLoadingState) {
           return Center(
             child: CircularProgressIndicator(
               color: AppColors.white,

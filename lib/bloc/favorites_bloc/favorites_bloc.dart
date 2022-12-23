@@ -55,7 +55,8 @@ class FavoritesBloc extends Bloc<FavoritesEvent, FavoritesState> {
       for (var i = 0; i < favoritesNames.length; i++) {
         for (var j = 0; j < currencies.length; j++) {
           if (favoritesNames[i] == currencies[j].name!.toUpperCase()) {
-            if (!currencyFavorites.any((element) => element.name == currencies[j].name)) {
+            if (!currencyFavorites
+                .any((element) => element.name == currencies[j].name)) {
               currencyFavorites.add(currencies[j]);
             }
           }
@@ -65,8 +66,11 @@ class FavoritesBloc extends Bloc<FavoritesEvent, FavoritesState> {
       // Get Cryptos Favorites
       for (var i = 0; i < favoritesNames.length; i++) {
         for (var j = 0; j < cryptos.length; j++) {
-          if (favoritesNames[i] == '${cryptos[j].market?.baseCurrencyCode} - ${cryptos[j].market?.counterCurrencyCode}') {
-            if (!cryptoFavorites.any((crypto) => '${crypto.market?.baseCurrencyCode} - ${crypto.market?.counterCurrencyCode}' == '${cryptos[j].market?.baseCurrencyCode} - ${cryptos[j].market?.counterCurrencyCode}')) {
+          if (favoritesNames[i] ==
+              '${cryptos[j].market?.baseCurrencyCode} - ${cryptos[j].market?.counterCurrencyCode}') {
+            if (!cryptoFavorites.any((crypto) =>
+                '${crypto.market?.baseCurrencyCode} - ${crypto.market?.counterCurrencyCode}' ==
+                '${cryptos[j].market?.baseCurrencyCode} - ${cryptos[j].market?.counterCurrencyCode}')) {
               cryptoFavorites.add(cryptos[j]);
             }
           }
@@ -96,7 +100,8 @@ class FavoritesBloc extends Bloc<FavoritesEvent, FavoritesState> {
       for (var i = 0; i < customList.length; i++) {
         for (var j = 0; j < currencies.length; j++) {
           if (customList[i] == currencies[j].name!.toUpperCase()) {
-            if (!currencyFavorites.any((element) => element.name == currencies[j].name)) {
+            if (!currencyFavorites
+                .any((element) => element.name == currencies[j].name)) {
               currencyFavorites.add(currencies[j]);
             }
           }
@@ -106,8 +111,11 @@ class FavoritesBloc extends Bloc<FavoritesEvent, FavoritesState> {
       // Get Cryptos Favorites
       for (var i = 0; i < customList.length; i++) {
         for (var j = 0; j < cryptos.length; j++) {
-          if (customList[i] == '${cryptos[j].market?.baseCurrencyCode} - ${cryptos[j].market?.counterCurrencyCode}') {
-            if (!cryptoFavorites.any((crypto) => '${crypto.market?.baseCurrencyCode} - ${crypto.market?.counterCurrencyCode}' == '${cryptos[j].market?.baseCurrencyCode} - ${cryptos[j].market?.counterCurrencyCode}')) {
+          if (customList[i] ==
+              '${cryptos[j].market?.baseCurrencyCode} - ${cryptos[j].market?.counterCurrencyCode}') {
+            if (!cryptoFavorites.any((crypto) =>
+                '${crypto.market?.baseCurrencyCode} - ${crypto.market?.counterCurrencyCode}' ==
+                '${cryptos[j].market?.baseCurrencyCode} - ${cryptos[j].market?.counterCurrencyCode}')) {
               cryptoFavorites.add(cryptos[j]);
             }
           }
@@ -122,15 +130,15 @@ class FavoritesBloc extends Bloc<FavoritesEvent, FavoritesState> {
 
     // Get All Custom Lists
     Future<List<String>> getAllCustomLists() async {
-      return await databaseService.getAllCustomLists(userUID: authService.currentUser.uid);
+      return await databaseService.getAllCustomLists(
+          userUID: authService.currentUser.uid);
     }
 
-
     on<GetCustomListNamesEvent>((event, emit) async {
-      emit(CustomListLoadingState());
+      emit(CustomListNamesLoadingState());
       try {
         List<String> customLists = await getAllCustomLists();
-        if(customLists.isEmpty) {
+        if (customLists.isEmpty) {
           emit(CustomListEmptyState());
         } else {
           emit(CustomListNamesLoadedState(customLists));
@@ -139,70 +147,100 @@ class FavoritesBloc extends Bloc<FavoritesEvent, FavoritesState> {
         emit(CustomListNamesErrorState(e.toString()));
       }
     });
-    on<GetFavoritesEvent>((event, emit) async {
-      emit(FavoritesLoadingState());
-      try {
-        await getFavorites();
-        if (favorites.isNotEmpty) {
-          emit(FavoritesLoadedState(favorites));
-        } else {
-          emit(FavoritesEmptyState());
-        }
-      } catch (e) {
-        emit(FavoritesErrorState(e.toString()));
-      }
-    });
-    on<AddFavoriteEvent>((event, emit) async {
-      if (!favoritesNames.contains(event.itemName)) {
-        favoritesNames.add(event.itemName);
-        await databaseService.saveFavorites(
-            favorites: favoritesNames, userUID: authService.currentUser.uid);
-        await getFavorites();
-        emit(FavoritesLoadedState(favorites));
-      }
-
-    });
-    on<DeleteFavoriteEvent>((event, emit) async {
-      if (favoritesNames.contains(event.itemName)) {
-        emit(FavoritesLoadingState());
-        favoritesNames.remove(event.itemName);
-        await databaseService.saveFavorites(
-            favorites: favoritesNames, userUID: authService.currentUser.uid);
-
-        // Update the favorites list and emit the updated state
-        favorites.removeWhere((favorite) {
-          if (favorite is Crypto) {
-            return '${favorite.market?.baseCurrencyCode} - ${favorite.market?.counterCurrencyCode}' == event.itemName;
-          } else {
-            return favorite.name == event.itemName;
-          }
-        });
-        if (favorites.isNotEmpty) {
-          emit(FavoritesLoadedState(favorites));
-        } else {
-          emit(FavoritesEmptyState());
-        }
-      }
-    });
 
     on<AddCustomListEvent>((event, emit) async {
-      emit(CustomListLoadingState());
+      emit(CustomListNamesLoadingState());
       try {
         // Check if the list name already exists
         List<String> customLists = await getAllCustomLists();
         if (customLists.contains(event.listName)) {
-          navigationService.showErrorSnackbar(errorMessage: 'List name already exists');
+          navigationService.showErrorSnackbar(
+              errorMessage: 'List name already exists');
           emit(CustomListNamesLoadedState(customLists));
         } else {
           // Add the list name to the database
           await databaseService.saveCustomLists(
-              userUID: authService.currentUser.uid, listItems: [], customListName: event.listName);
+              userUID: authService.currentUser.uid,
+              listItems: [],
+              customListName: event.listName);
 
           // Get the custom list
           List<String> customList = await getAllCustomLists();
 
           // Emit the custom list state
           emit(CustomListNamesLoadedState(customList));
+        }
+      } catch (e) {
+        emit(CustomListNamesErrorState(e.toString()));
+      }
+    });
+
+    on<AddItemToCustomListEvent>((event, emit) async {
+      emit(CustomListNamesLoadingState());
+      try {
+        // Get the custom list
+        List customListItems = await databaseService.getCustomList(
+            userUID: authService.currentUser.uid,
+            customListName: event.listName);
+
+        List<String> customListNames = await getAllCustomLists();
+
+        // Check if the item already exists in the list
+        if (customListItems.contains(event.itemName)) {
+          navigationService.showErrorSnackbar(
+              errorMessage: 'Item already exists in the list');
+          emit(CustomListNamesLoadedState(customListNames));
+        } else {
+          // Add the item to the list
+          customListItems.add(event.itemName);
+
+          // Save the list to the database
+          await databaseService.saveCustomLists(
+              userUID: authService.currentUser.uid,
+              listItems: customListItems,
+              customListName: event.listName);
+
+          // Get the custom list
+          List<String> updatedCustomListNames = await getAllCustomLists();
+
+          // Emit the custom list state
+          emit(CustomListNamesLoadedState(updatedCustomListNames));
+        }
+      } catch (e) {
+        emit(CustomListNamesErrorState(e.toString()));
+      }
+    });
+
+    on<DeleteItemFromCustomListEvent>((event, emit) async {
+      emit(CustomListNamesLoadingState());
+      try {
+        // Get the custom list
+        List customListItems = await databaseService.getCustomList(
+            userUID: authService.currentUser.uid,
+            customListName: event.listName);
+
+        List<String> customListNames = await getAllCustomLists();
+
+        // Check if the item exists in the list
+        if (!customListItems.contains(event.itemName)) {
+          navigationService.showErrorSnackbar(
+              errorMessage: 'Item does not exist in the list');
+          emit(CustomListNamesLoadedState(customListNames));
+        } else {
+          // Remove the item from the list
+          customListItems.remove(event.itemName);
+
+          // Save the list to the database
+          await databaseService.saveCustomLists(
+              userUID: authService.currentUser.uid,
+              listItems: customListItems,
+              customListName: event.listName);
+
+          // Get the custom list
+          List<String> updatedCustomListNames = await getAllCustomLists();
+
+          // Emit the custom list state
+          emit(CustomListNamesLoadedState(updatedCustomListNames));
         }
       } catch (e) {
         emit(CustomListNamesErrorState(e.toString()));
