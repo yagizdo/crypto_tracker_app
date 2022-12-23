@@ -59,9 +59,20 @@ class _CustomFavListsState extends State<CustomFavLists> {
 
         if (state is CustomListEmptyState) {
           return Center(
-            child: Text(
-              LocaleKeys.currency_no_item.tr(),
-              style: AppTextStyle.homeText(),
+            child: Stack(
+              alignment: Alignment.center,
+              children: [
+                Center(child: Text(LocaleKeys.currency_no_item.tr())),
+                Positioned(
+                    bottom: 120.w,
+                    right: 10.w,
+                    child: FloatingActionButton(
+                      child: const Icon(Icons.add),
+                      onPressed: () {
+                        _displayTextInputDialog(context);
+                      },
+                    )),
+              ],
             ),
           );
         }
@@ -109,7 +120,21 @@ class _CustomFavListsState extends State<CustomFavLists> {
           );
         }
         return Center(
-          child: Text(LocaleKeys.currency_no_item.tr()),
+          child: Stack(
+            children: [
+              Text(LocaleKeys.currency_no_item.tr()),
+              Positioned(
+                top: 0,
+                  //bottom: 120.w,
+                  right: 10.w,
+                  child: FloatingActionButton(
+                    child: const Icon(Icons.add),
+                    onPressed: () {
+                      _displayTextInputDialog(context);
+                    },
+                  )),
+            ],
+          ),
         );
       },
     );

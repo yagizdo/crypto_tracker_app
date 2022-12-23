@@ -137,6 +137,28 @@ class FavoritesBloc extends Bloc<FavoritesEvent, FavoritesState> {
       }
     });
 
+    on<DeleteCustomListEvent>((event, emit) async {
+      emit(CustomListNamesLoadingState());
+      try {
+        // Delete the list name from the database
+        await databaseService.deleteCustomLists(
+            userUID: authService.currentUser.uid,
+            customListName: event.listName);
+
+        // Get the custom list
+        List<String> customList = await getAllCustomLists();
+
+        if (customList.isEmpty) {
+          emit(CustomListEmptyState());
+        } else {
+          // Emit the custom list state
+          emit(CustomListNamesLoadedState(customList));
+        }
+      } catch (e) {
+        emit(CustomListNamesErrorState(e.toString()));
+      }
+    });
+
     on<AddItemToCustomListEvent>((event, emit) async {
       emit(CustomListNamesLoadingState());
       try {

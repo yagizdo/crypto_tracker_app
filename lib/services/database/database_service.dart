@@ -109,6 +109,19 @@ class DatabaseService extends IDatabaseService {
   }
 
   @override
+  Future<void> deleteCustomLists(
+      {required String userUID, required String customListName}) {
+    try {
+      return _customLists.doc(userUID).update({
+        customListName: FieldValue.delete(),
+      });
+    } catch (e) {
+      kDebugMode ? debugPrint(e.toString()) : null;
+      rethrow;
+    }
+  }
+
+  @override
   Future<List> getCustomList(
       {required String userUID, required String customListName}) {
     try {
