@@ -201,4 +201,14 @@ class AppTextStyle {
       overflow: TextOverflow.ellipsis,
     );
   }
+
+  static TextStyle addCustomListDialogBtnTxt() {
+    return TextStyle(
+      color: AppColors.white,
+      fontSize: 14.sp,
+      fontWeight: FontWeight.w500,
+      letterSpacing: -0.2.sp,
+      overflow: TextOverflow.ellipsis,
+    );
+  }
 }
