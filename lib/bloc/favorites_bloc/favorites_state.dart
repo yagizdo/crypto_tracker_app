@@ -22,3 +22,17 @@ class FavoritesErrorState extends FavoritesState {
 
   FavoritesErrorState(this.message);
 }
+
+class CustomListNamesLoadedState extends FavoritesState {
+  final List<String> customListNames;
+
+  CustomListNamesLoadedState(this.customListNames);
+}
+
+class CustomListLoadingState extends FavoritesState {}
+
+class CustomListNamesErrorState extends FavoritesState {
+  final String message;
+
+  CustomListNamesErrorState(this.message);
+}

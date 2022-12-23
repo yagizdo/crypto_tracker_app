@@ -69,7 +69,7 @@ class DatabaseService extends IDatabaseService {
   }
 
   @override
-  Future<List> getAllFavLists({required String userUID}) {
+  Future<List<String>> getAllCustomLists({required String userUID}) {
     try {
       return _customLists
           .doc(userUID)
@@ -81,7 +81,7 @@ class DatabaseService extends IDatabaseService {
 
         var keys = customListsMap.keys.toList();
 
-        List<dynamic> customListsNames = [];
+        List<String> customListsNames = [];
 
         for (var i = 0; i < keys.length; i++) {
           customListsNames.add(keys[i]);

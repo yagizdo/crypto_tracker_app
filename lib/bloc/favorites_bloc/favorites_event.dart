@@ -16,3 +16,5 @@ class DeleteFavoriteEvent extends FavoritesEvent {
 
   DeleteFavoriteEvent(this.itemName);
 }
+
+class GetCustomListNamesEvent extends FavoritesEvent {}
