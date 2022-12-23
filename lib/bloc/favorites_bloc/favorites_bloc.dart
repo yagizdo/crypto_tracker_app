@@ -71,14 +71,22 @@ class FavoritesBloc extends Bloc<FavoritesEvent, FavoritesState> {
 
     });
     on<DeleteFavoriteEvent>((event, emit) async {
-     if (favoritesNames.contains(event.itemName)) {
-       emit(FavoritesLoadingState());
-       favoritesNames.remove(event.itemName);
-       await databaseService.saveFavorites(
-           favorites: favoritesNames, userUID: authService.currentUser.uid);
-       await getFavorites();
-       emit(FavoritesLoadedState(favorites));
-     }
+      if (favoritesNames.contains(event.itemName)) {
+        emit(FavoritesLoadingState());
+        favoritesNames.remove(event.itemName);
+        await databaseService.saveFavorites(
+            favorites: favoritesNames, userUID: authService.currentUser.uid);
+
+        // Update the favorites list and emit the updated state
+        favorites.removeWhere((favorite) {
+          if (favorite is Crypto) {
+            return '${favorite.market?.baseCurrencyCode} - ${favorite.market?.counterCurrencyCode}' == event.itemName;
+          } else {
+            return favorite.name == event.itemName;
+          }
+        });
+        emit(FavoritesLoadedState(favorites));
+      }
     });
   }
 }
