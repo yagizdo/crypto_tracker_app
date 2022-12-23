@@ -14,3 +14,9 @@ class FavoritesLoadedState extends FavoritesState {
 
   FavoritesLoadedState(this.favorites);
 }
+
+class FavoritesErrorState extends FavoritesState {
+  final String message;
+
+  FavoritesErrorState(this.message);
+}

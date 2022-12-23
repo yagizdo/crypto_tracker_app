@@ -57,8 +57,13 @@ class FavoritesBloc extends Bloc<FavoritesEvent, FavoritesState> {
     }
     on<GetFavoritesEvent>((event, emit) async {
       emit(FavoritesLoadingState());
-      await getFavorites();
-      emit(FavoritesLoadedState(favorites));
+      try {
+        await getFavorites();
+        emit(FavoritesLoadedState(favorites));
+      } catch (e) {
+        print('31');
+        emit(FavoritesErrorState(e.toString()));
+      }
     });
     on<AddFavoriteEvent>((event, emit) async {
       if (!favoritesNames.contains(event.itemName)) {

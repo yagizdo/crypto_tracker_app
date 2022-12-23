@@ -51,17 +51,14 @@ class DatabaseService extends IDatabaseService {
 
   @override
   Future<List<dynamic>> getFavorites({required String userUID}) async {
-    List favorites;
     try {
-      favorites = await _favorites.doc(userUID).get().then((DocumentSnapshot documentSnapshot) {
+      return await _favorites.doc(userUID).get().then((DocumentSnapshot documentSnapshot) {
         return documentSnapshot.exists ? documentSnapshot.get('favorites') : [];
       });
     } catch (e) {
-      _navigationService.showErrorSnackbar(errorMessage: LocaleKeys.errors_custom_error.tr());
       kDebugMode ? debugPrint(e.toString()) : null;
-      return [];
+      rethrow;
     }
-    return favorites;
   }
 
   @override
