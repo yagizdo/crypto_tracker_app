@@ -57,7 +57,7 @@ class _CustomFavListsState extends State<CustomFavLists> {
           );
         }
 
-        if (state is CustomListEmptyState) {
+        if (state is CustomListNamesEmptyState) {
           return Center(
             child: Stack(
               alignment: Alignment.center,
@@ -122,10 +122,9 @@ class _CustomFavListsState extends State<CustomFavLists> {
         return Center(
           child: Stack(
             children: [
-              Text(LocaleKeys.currency_no_item.tr()),
+              Center(child: Text(LocaleKeys.currency_no_item.tr())),
               Positioned(
-                top: 0,
-                  //bottom: 120.w,
+                  bottom: 120.w,
                   right: 10.w,
                   child: FloatingActionButton(
                     child: const Icon(Icons.add),

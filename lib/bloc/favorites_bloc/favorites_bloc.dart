@@ -101,7 +101,7 @@ class FavoritesBloc extends Bloc<FavoritesEvent, FavoritesState> {
       try {
         List<String> customLists = await getAllCustomLists();
         if (customLists.isEmpty) {
-          emit(CustomListEmptyState());
+          emit(CustomListNamesEmptyState());
         } else {
           emit(CustomListNamesLoadedState(customLists));
         }
@@ -149,7 +149,7 @@ class FavoritesBloc extends Bloc<FavoritesEvent, FavoritesState> {
         List<String> customList = await getAllCustomLists();
 
         if (customList.isEmpty) {
-          emit(CustomListEmptyState());
+          emit(CustomListNamesEmptyState());
         } else {
           // Emit the custom list state
           emit(CustomListNamesLoadedState(customList));

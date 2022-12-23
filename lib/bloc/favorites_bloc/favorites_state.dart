@@ -13,6 +13,8 @@ class CustomListNamesLoadedState extends FavoritesState {
 
 class CustomListNamesLoadingState extends FavoritesState {}
 
+class CustomListNamesEmptyState extends FavoritesState {}
+
 class CustomListNamesErrorState extends FavoritesState {
   final String message;
 
