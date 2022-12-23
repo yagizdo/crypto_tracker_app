@@ -191,4 +191,14 @@ class AppTextStyle {
       overflow: TextOverflow.ellipsis,
     );
   }
+
+  static TextStyle customListNameTitle() {
+    return TextStyle(
+      color: Colors.white,
+      fontSize: 20.sp,
+      fontWeight: FontWeight.w700,
+      letterSpacing: -0.2.sp,
+      overflow: TextOverflow.ellipsis,
+    );
+  }
 }

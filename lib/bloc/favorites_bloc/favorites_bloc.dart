@@ -128,7 +128,11 @@ class FavoritesBloc extends Bloc<FavoritesEvent, FavoritesState> {
       emit(CustomListLoadingState());
       try {
         List<String> customLists = await getAllCustomLists();
-        emit(CustomListNamesLoadedState(customLists));
+        if(customLists.isEmpty) {
+          emit(CustomListEmptyState());
+        } else {
+          emit(CustomListNamesLoadedState(customLists));
+        }
       } catch (e) {
         emit(CustomListNamesErrorState(e.toString()));
       }

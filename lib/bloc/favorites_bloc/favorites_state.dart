@@ -36,3 +36,5 @@ class CustomListNamesErrorState extends FavoritesState {
 
   CustomListNamesErrorState(this.message);
 }
+
+class CustomListEmptyState extends FavoritesState {}
