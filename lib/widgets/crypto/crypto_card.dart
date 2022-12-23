@@ -15,64 +15,61 @@ class CryptoCard extends StatelessWidget {
   final bool isFavorite;
   @override
   Widget build(BuildContext context) {
-    return TapWrapper(
-      onTap: () {},
-      child: Padding(
-        padding: EdgeInsets.symmetric(
-          horizontal: 10.w,
-          vertical: 5.w,
+    return Padding(
+      padding: EdgeInsets.symmetric(
+        horizontal: 10.w,
+        vertical: 5.w,
+      ),
+      child: Container(
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(8),
+          color: AppColors.white.withOpacity(0.9),
         ),
-        child: Container(
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(8),
-            color: AppColors.white.withOpacity(0.9),
+        child: Padding(
+          padding: EdgeInsets.symmetric(
+            horizontal: 10.w,
+            vertical: 3.w,
           ),
-          child: Padding(
-            padding: EdgeInsets.symmetric(
-              horizontal: 10.w,
-              vertical: 3.w,
-            ),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Expanded(
-                    flex: 2,
-                    child: IconButton(
-                      onPressed: () {},
-                      icon: isFavorite
-                          ? Icon(
-                              Icons.star,
-                              color: Colors.yellow,
-                              size: 25.w,
-                            )
-                          : Icon(
-                              Icons.star_border,
-                              color: AppColors.blackBackground,
-                              size: 25.w,
-                            ),
-                    )),
-                Expanded(
-                    flex: 4,
-                    child: Text(
-                      '${crypto.market?.baseCurrencyCode ?? ''} - ${crypto.market?.counterCurrencyCode ?? ''}',
-                      maxLines: 2,
-                      style: AppTextStyle.cryptoTitle(),
-                    )),
-                Expanded(
-                    flex: 4,
-                    child: Text(
-                      double.parse(crypto.lastPrice!).toString(),
-                      textAlign: TextAlign.start,
-                      style: AppTextStyle.cryptoPrice(),
-                    )),
-                // Crypto change container
-                Expanded(
-                  flex: 5,
-                  child: _buildChangeContainer(
-                      cryptoChange: double.parse(crypto.change24h ?? '0')),
-                ),
-              ],
-            ),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Expanded(
+                  flex: 2,
+                  child: IconButton(
+                    onPressed: () {},
+                    icon: isFavorite
+                        ? Icon(
+                            Icons.star,
+                            color: Colors.yellow,
+                            size: 25.w,
+                          )
+                        : Icon(
+                            Icons.star_border,
+                            color: AppColors.blackBackground,
+                            size: 25.w,
+                          ),
+                  )),
+              Expanded(
+                  flex: 4,
+                  child: Text(
+                    '${crypto.market?.baseCurrencyCode ?? ''} - ${crypto.market?.counterCurrencyCode ?? ''}',
+                    maxLines: 2,
+                    style: AppTextStyle.cryptoTitle(),
+                  )),
+              Expanded(
+                  flex: 4,
+                  child: Text(
+                    double.parse(crypto.lastPrice!).toString(),
+                    textAlign: TextAlign.start,
+                    style: AppTextStyle.cryptoPrice(),
+                  )),
+              // Crypto change container
+              Expanded(
+                flex: 5,
+                child: _buildChangeContainer(
+                    cryptoChange: double.parse(crypto.change24h ?? '0')),
+              ),
+            ],
           ),
         ),
       ),

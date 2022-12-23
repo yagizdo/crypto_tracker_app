@@ -2,6 +2,7 @@ import 'package:crypto_tracker/bloc/favorites_bloc/favorites_bloc.dart';
 import 'package:crypto_tracker/services/database/database_service.dart';
 import 'package:crypto_tracker/widgets/crypto/crypto_card.dart';
 import 'package:crypto_tracker/widgets/currency/currency_card.dart';
+import 'package:crypto_tracker/widgets/main_widgets/tapWrapper.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -78,7 +79,11 @@ class _CustomListDetailState extends State<CustomListDetail> {
                     itemBuilder: (context, index) {
                       var item = state.customListItems[index];
                       if (item is Currency) {
-                        return CurrencyCard(currency: item, isFavorite: true);
+                        return TapWrapper(
+                            onTap: (){
+                              BlocProvider.of<FavoritesBloc>(context,listen: false).add(DeleteItemFromCustomListEvent(item.name!, widget.listName.toLowerCase()));
+                            },
+                            child: CurrencyCard(currency: item, isFavorite: true));
                       }
 
                       if (item is Crypto) {

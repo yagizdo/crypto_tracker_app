@@ -45,7 +45,6 @@ class FavoritesBloc extends Bloc<FavoritesEvent, FavoritesState> {
         List customList = await databaseService.getCustomList(
             userUID: authService.currentUser.uid, customListName: listName);
 
-
         // Get Currencies
         List<Currency> currencies = await currencyService.getCurrencies();
 
@@ -73,7 +72,7 @@ class FavoritesBloc extends Bloc<FavoritesEvent, FavoritesState> {
             if (customList[i] ==
                 '${cryptos[j].market?.baseCurrencyCode} - ${cryptos[j].market?.counterCurrencyCode}') {
               if (!cryptoFavorites.any((crypto) =>
-              '${crypto.market?.baseCurrencyCode} - ${crypto.market?.counterCurrencyCode}' ==
+                  '${crypto.market?.baseCurrencyCode} - ${crypto.market?.counterCurrencyCode}' ==
                   '${cryptos[j].market?.baseCurrencyCode} - ${cryptos[j].market?.counterCurrencyCode}')) {
                 cryptoFavorites.add(cryptos[j]);
               }
@@ -175,17 +174,15 @@ class FavoritesBloc extends Bloc<FavoritesEvent, FavoritesState> {
     });
 
     on<DeleteItemFromCustomListEvent>((event, emit) async {
-      emit(CustomListNamesLoadingState());
+      emit(CustomListLoadingState());
       try {
-        // Get the custom list
         List customListItems = await databaseService.getCustomList(
             userUID: authService.currentUser.uid,
-            customListName: event.listName);
-
-        List<String> customListNames = await getAllCustomLists();
+            customListName: event.listName.toLowerCase());
 
         // Check if the item exists in the list
         if (!customListItems.contains(event.itemName)) {
+          List<String> customListNames = await getAllCustomLists();
           navigationService.showErrorSnackbar(
               errorMessage: 'Item does not exist in the list');
           emit(CustomListNamesLoadedState(customListNames));
@@ -200,10 +197,10 @@ class FavoritesBloc extends Bloc<FavoritesEvent, FavoritesState> {
               customListName: event.listName);
 
           // Get the custom list
-          List<String> updatedCustomListNames = await getAllCustomLists();
+          List updatedCustomList =
+              await getCustomList(listName: event.listName.toLowerCase());
 
-          // Emit the custom list state
-          emit(CustomListNamesLoadedState(updatedCustomListNames));
+          emit(CustomListLoadedState(updatedCustomList));
         }
       } catch (e) {
         emit(CustomListNamesErrorState(e.toString()));
