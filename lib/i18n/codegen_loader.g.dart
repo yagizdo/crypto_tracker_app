@@ -101,7 +101,7 @@ class CodegenLoader extends AssetLoader{
   },
   "custom_lists": {
     "title": "Listeleriniz",
-    "item_count": "{} Öğeler"
+    "item_count": "Öğe"
   }
 };
 static const Map<String,dynamic> en = {
@@ -191,7 +191,7 @@ static const Map<String,dynamic> en = {
   },
   "custom_lists": {
     "title": "Your Lists",
-    "item_count": "{} Items"
+    "item_count": "Items"
   }
 };
 static const Map<String, Map<String,dynamic>> mapLocales = {"tr": tr, "en": en};

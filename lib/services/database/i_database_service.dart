@@ -8,4 +8,5 @@ abstract class IDatabaseService {
   Future<List<dynamic>> getFavorites({required String userUID});
   Future<List<String>> getAllCustomLists({required String userUID});
   Future<List<dynamic>> getCustomList({required String userUID, required String customListName});
+  Future<int> getListItemCount({required String listName, required String userUID});
 }

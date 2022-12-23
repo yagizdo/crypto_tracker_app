@@ -85,6 +85,6 @@
   },
   "custom_lists": {
     "title": "Your Lists",
-    "item_count": "{} Items"
+    "item_count": "Items"
   }
 }

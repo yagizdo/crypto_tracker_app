@@ -1,7 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:crypto_tracker/i18n/locale_keys.g.dart';
 import 'package:crypto_tracker/services/database/i_database_service.dart';
-import 'package:easy_localization/easy_localization.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
 
@@ -126,5 +124,12 @@ class DatabaseService extends IDatabaseService {
       kDebugMode ? debugPrint(e.toString()) : null;
       rethrow;
     }
+  }
+  @override
+  Future<int> getListItemCount({required String listName, required String userUID}) async {
+    List customList = await getCustomList(
+        userUID: userUID, customListName: listName);
+
+    return customList.length;
   }
 }
