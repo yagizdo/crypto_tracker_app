@@ -5,6 +5,7 @@ import 'package:crypto_tracker/models/currency.dart';
 import 'package:crypto_tracker/services/auth/auth_service.dart';
 import 'package:crypto_tracker/services/database/database_service.dart';
 import 'package:crypto_tracker/services/locator.dart';
+import 'package:crypto_tracker/services/navigation_service.dart';
 import 'package:crypto_tracker/services/network/crypto_service.dart';
 import 'package:crypto_tracker/services/network/currency_service.dart';
 import 'package:meta/meta.dart';
@@ -20,6 +21,7 @@ class FavoritesBloc extends Bloc<FavoritesEvent, FavoritesState> {
     CryptoService cryptoService = getIt<CryptoService>();
     CurrencyService currencyService = getIt<CurrencyService>();
     AuthService authService = getIt<AuthService>();
+    NavigationService navigationService = getIt<NavigationService>();
     // Fav Names
     List favoritesNames = [];
 
@@ -180,6 +182,30 @@ class FavoritesBloc extends Bloc<FavoritesEvent, FavoritesState> {
         } else {
           emit(FavoritesEmptyState());
         }
+      }
+    });
+
+    on<AddCustomListEvent>((event, emit) async {
+      emit(CustomListLoadingState());
+      try {
+        // Check if the list name already exists
+        List<String> customLists = await getAllCustomLists();
+        if (customLists.contains(event.listName)) {
+          navigationService.showErrorSnackbar(errorMessage: 'List name already exists');
+          emit(CustomListNamesLoadedState(customLists));
+        } else {
+          // Add the list name to the database
+          await databaseService.saveCustomLists(
+              userUID: authService.currentUser.uid, listItems: [], customListName: event.listName);
+
+          // Get the custom list
+          List<String> customList = await getAllCustomLists();
+
+          // Emit the custom list state
+          emit(CustomListNamesLoadedState(customList));
+        }
+      } catch (e) {
+        emit(CustomListNamesErrorState(e.toString()));
       }
     });
   }

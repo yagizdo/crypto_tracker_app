@@ -20,7 +20,6 @@ class CustomListsContent extends StatefulWidget {
 class _CustomListsContentState extends State<CustomListsContent> {
   late GlobalKey<FormState> _formKey;
   late TextEditingController _listNameController;
-  String _listName = '';
 
   @override
   void initState() {
@@ -113,6 +112,15 @@ class _CustomListsContentState extends State<CustomListsContent> {
     );
   }
 
+  Future<void> addCustomListName() async {
+    if (_formKey.currentState!.validate()) {
+      BlocProvider.of<FavoritesBloc>(context)
+          .add(AddCustomListEvent(_listNameController.text));
+      _listNameController.clear();
+      Navigator.pop(context);
+    }
+  }
+
   Future<void> _displayTextInputDialog(BuildContext context) async {
     return showDialog(
         context: context,
@@ -121,12 +129,21 @@ class _CustomListsContentState extends State<CustomListsContent> {
             backgroundColor: AppColors.blueBackground,
             title: const Text('Add a new list'),
             titleTextStyle: AppTextStyle.customListNameTitle(),
-            content: TextField(
-              controller: _listNameController,
-              decoration: const InputDecoration(
-                  hintText: "Enter a name for the list",
-                  labelStyle: TextStyle(color: AppColors.white),
-                  hintStyle: TextStyle(color: AppColors.white)),
+            content: Form(
+              key: _formKey,
+              child: TextFormField(
+                controller: _listNameController,
+                validator: (value) {
+                  if (value == null || value.isEmpty) {
+                    return LocaleKeys.errors_auth_validation_empty_error.tr();
+                  }
+                  return null;
+                },
+                decoration: const InputDecoration(
+                    hintText: "Enter a name for the list",
+                    labelStyle: TextStyle(color: AppColors.white),
+                    hintStyle: TextStyle(color: AppColors.white)),
+              ),
             ),
             actions: [
               TextButton(
@@ -146,8 +163,8 @@ class _CustomListsContentState extends State<CustomListsContent> {
                 style: ButtonStyle(
                   backgroundColor: MaterialStateProperty.all(AppColors.white),
                 ),
-                onPressed: () {
-                  Navigator.pop(context);
+                onPressed: () async {
+                  await addCustomListName();
                 },
                 child: const Text('Add List'),
               ),

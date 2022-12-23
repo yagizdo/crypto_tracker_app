@@ -18,3 +18,8 @@ class DeleteFavoriteEvent extends FavoritesEvent {
 }
 
 class GetCustomListNamesEvent extends FavoritesEvent {}
+
+class AddCustomListEvent extends FavoritesEvent {
+  final String listName;
+  AddCustomListEvent(this.listName);
+}
