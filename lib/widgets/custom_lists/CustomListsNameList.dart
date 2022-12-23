@@ -1,9 +1,14 @@
 import 'package:crypto_tracker/widgets/custom_lists/custom_lists_name_card.dart';
 import 'package:crypto_tracker/widgets/main_widgets/tapWrapper.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_slidable/flutter_slidable.dart';
+
+import '../../bloc/favorites_bloc/favorites_bloc.dart';
 
 class CustomListsNamesList extends StatelessWidget {
-  const CustomListsNamesList({Key? key, required this.favoriteListNames, required this.onTap})
+  const CustomListsNamesList(
+      {Key? key, required this.favoriteListNames, required this.onTap})
       : super(key: key);
   final List<dynamic> favoriteListNames;
   final ValueSetter<String> onTap;
@@ -12,12 +17,38 @@ class CustomListsNamesList extends StatelessWidget {
     return ListView.builder(
       itemCount: favoriteListNames.length,
       itemBuilder: (context, index) {
-        var listName = favoriteListNames[index];
+        String listName = favoriteListNames[index];
         return TapWrapper(
             onTap: () {
               onTap(listName);
             },
-            child: CustomListsNameCard(listName: listName));
+            child: Slidable(
+                key: UniqueKey(),
+                endActionPane: ActionPane(
+                  motion: const ScrollMotion(),
+                  dismissible: DismissiblePane(
+                    onDismissed: () {
+                      BlocProvider.of<FavoritesBloc>(context).add(
+                        DeleteCustomListEvent(
+                          listName.toLowerCase(),
+                        ),
+                      );
+                    },
+                  ), children: [
+                    SlidableAction(
+                      onPressed: (BuildContext context) {
+                        BlocProvider.of<FavoritesBloc>(context).add(
+                          DeleteCustomListEvent(
+                            listName.toLowerCase(),
+                          ),
+                        );
+                      },
+                      backgroundColor: Colors.redAccent,
+                      label: 'Cancel!',
+                    )
+                  ],
+                ),
+                child: CustomListsNameCard(listName: listName)));
       },
     );
   }
