@@ -6,6 +6,7 @@ abstract class IDatabaseService {
   Future<void> saveFavorites({required List<dynamic> favorites, required String userUID});
   Future<void> saveCustomLists({required List<dynamic> listItems, required String userUID, required String customListName});
   Future<void> deleteCustomLists({required String userUID, required String customListName});
+  Future<void> initializeUser({required String userUID});
   Future<List<dynamic>> getFavorites({required String userUID});
   Future<List<String>> getAllCustomLists({required String userUID});
   Future<List<dynamic>> getCustomList({required String userUID, required String customListName});

@@ -25,6 +25,7 @@ class DatabaseService extends IDatabaseService {
           'photoUrl': user.photoURL,
         },
       );
+      await initializeUser(userUID: user.uid);
     } catch (e) {
       var errorMessage = AuthExceptionHandler.generateExceptionMessage(e);
       _navigationService.showErrorSnackbar(errorMessage: errorMessage);
@@ -36,6 +37,8 @@ class DatabaseService extends IDatabaseService {
   Future<void> deleteUserInDatabase({required String userUID}) async {
     try {
       await _users.doc(userUID).delete();
+      await _customLists.doc(userUID).delete();
+
     } catch (e) {
       var errorMessage = AuthExceptionHandler.generateExceptionMessage(e);
       _navigationService.showErrorSnackbar(errorMessage: errorMessage);
@@ -144,5 +147,17 @@ class DatabaseService extends IDatabaseService {
         userUID: userUID, customListName: listName);
 
     return customList.length;
+  }
+
+  @override
+  Future<void> initializeUser({required String userUID}) async {
+    try {
+      await _customLists.doc(userUID).set({
+        'favorites': [],
+      });
+    } catch (e) {
+      kDebugMode ? debugPrint(e.toString()) : null;
+      rethrow;
+    }
   }
 }
