@@ -4,9 +4,9 @@ import 'dart:math';
 import 'package:crypto/crypto.dart';
 import 'package:crypto_tracker/i18n/locale_keys.g.dart';
 import 'package:crypto_tracker/services/auth/i_auth_service.dart';
+import 'package:crypto_tracker/services/database/database_service.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:sign_in_with_apple/sign_in_with_apple.dart';
 
@@ -17,8 +17,10 @@ import '../navigation_service.dart';
 class AuthService extends IAuthService {
   final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
   final NavigationService _navigationService = getIt<NavigationService>();
+  final DatabaseService _databaseService = getIt<DatabaseService>();
   late User? _user;
   get currentUser => _firebaseAuth.currentUser;
+  get isSocialLogin => _firebaseAuth.currentUser?.providerData.first.providerId != 'password';
   get isUserEmailVerified => _firebaseAuth.currentUser?.emailVerified;
 
 
@@ -61,6 +63,27 @@ class AuthService extends IAuthService {
     if (_firebaseAuth.currentUser != null) {
       await _firebaseAuth.signOut();
       await GoogleSignIn().signOut();
+    }
+  }
+
+  @override
+  Future<void> deleteAccount({required String userEmail, required String userPassword}) async {
+    final currentUser = _firebaseAuth.currentUser;
+    if (currentUser != null) {
+      String userUid = currentUser!.uid;
+      try {
+        final credential = EmailAuthProvider.credential(
+            email: userEmail, password: userPassword);
+        await currentUser.reauthenticateWithCredential(credential);
+        await _databaseService.deleteUserInDatabase(userUID: userUid);
+        await currentUser.delete();
+      } on FirebaseAuthException catch (e) {
+        var exceptionMessage = AuthExceptionHandler.generateExceptionMessage(e);
+        _navigationService.showErrorSnackbar(errorMessage: exceptionMessage);
+
+      } catch(e) {
+        _navigationService.showErrorSnackbar(errorMessage: LocaleKeys.errors_undefinied.tr());
+      }
     }
   }
 

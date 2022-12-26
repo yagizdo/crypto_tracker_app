@@ -71,7 +71,7 @@ class _ResetPasswordCompState extends State<ResetPasswordComp> {
             widget.onRegisterChanged(AuthFormState.login);
           },
           child: Container(
-            width: 250.w,
+            width: 332.9.w,
             height: 40.w,
             decoration: BoxDecoration(
               color: Colors.redAccent,
@@ -83,7 +83,7 @@ class _ResetPasswordCompState extends State<ResetPasswordComp> {
                 strokeWidth: 2.w,
               ) : Text(
                 LocaleKeys.auth_reset_password_back_btn.tr(),
-                style: AppTextStyle.loginBtnTitle(),
+                style: AppTextStyle.resetPassBackBtn(),
               ),
             ),
           ),),
@@ -119,7 +119,7 @@ class _ResetPasswordCompState extends State<ResetPasswordComp> {
         }
       },
       child: Container(
-        width: 250.w,
+        width: 332.9.w,
         height: 40.w,
         decoration: BoxDecoration(
           color: AppColors.white,

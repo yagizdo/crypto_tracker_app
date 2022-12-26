@@ -41,7 +41,7 @@ class _AuthViewState extends State<AuthView> {
       resizeresizeToAvoidBottomInset: false,
       appBar: AppBar(
         elevation: 0,
-        backgroundColor: AppColors.blackBackground,
+        backgroundColor: Colors.transparent,
         title: Text(appbarTitles[_authFormState] ?? 'No Appbar Title',
             style: AppTextStyle.loginViewTitle()),
       ),

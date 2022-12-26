@@ -31,6 +31,7 @@ abstract class  LocaleKeys {
   static const errors_auth_validation_name_length = 'errors.auth_validation_name_length';
   static const errors_auth_validation_pw_length = 'errors.auth_validation_pw_length';
   static const errors_auth_validation_pw_match = 'errors.auth_validation_pw_match';
+  static const errors_custom_error = 'errors.custom_error';
   static const errors = 'errors';
   static const auth_login_title = 'auth.login.title';
   static const auth_login_login_btn = 'auth.login.login_btn';
@@ -57,5 +58,38 @@ abstract class  LocaleKeys {
   static const auth_email_verify_cancel_btn = 'auth.email_verify.cancel_btn';
   static const auth_email_verify = 'auth.email_verify';
   static const auth = 'auth';
+  static const currency_row_name = 'currency.row_name';
+  static const currency_row_buy_price = 'currency.row_buy_price';
+  static const currency_row_change = 'currency.row_change';
+  static const currency_no_item = 'currency.no_item';
+  static const currency = 'currency';
+  static const settings_title = 'settings.title';
+  static const settings_edit_btn = 'settings.edit_btn';
+  static const settings_change_language = 'settings.change_language';
+  static const settings_logout = 'settings.logout';
+  static const settings_delete_account_alert_confirm = 'settings.delete_account.alert_confirm';
+  static const settings_delete_account_alert_cancel = 'settings.delete_account.alert_cancel';
+  static const settings_delete_account_alert_title = 'settings.delete_account.alert_title';
+  static const settings_delete_account_warning_one = 'settings.delete_account.warning_one';
+  static const settings_delete_account_warning_two = 'settings.delete_account.warning_two';
+  static const settings_delete_account_warning_three = 'settings.delete_account.warning_three';
+  static const settings_delete_account_btn_txt = 'settings.delete_account.btn_txt';
+  static const settings_delete_account = 'settings.delete_account';
+  static const settings = 'settings';
+  static const custom_lists_title = 'custom_lists.title';
+  static const custom_lists_item_count = 'custom_lists.item_count';
+  static const custom_lists_add_custom_list_dialog_title = 'custom_lists.add_custom_list_dialog.title';
+  static const custom_lists_add_custom_list_dialog_hint = 'custom_lists.add_custom_list_dialog.hint';
+  static const custom_lists_add_custom_list_dialog_add_btn = 'custom_lists.add_custom_list_dialog.add_btn';
+  static const custom_lists_add_custom_list_dialog_list_name_already_exists_txt = 'custom_lists.add_custom_list_dialog.list_name_already_exists_txt';
+  static const custom_lists_add_custom_list_dialog = 'custom_lists.add_custom_list_dialog';
+  static const custom_lists_dialog_cancel_btn = 'custom_lists.dialog_cancel_btn';
+  static const custom_lists_add_to_custom_list_dialog_title = 'custom_lists.add_to_custom_list_dialog.title';
+  static const custom_lists_add_to_custom_list_dialog_added_succes_txt = 'custom_lists.add_to_custom_list_dialog.added_succes_txt';
+  static const custom_lists_add_to_custom_list_dialog_added_error_txt = 'custom_lists.add_to_custom_list_dialog.added_error_txt';
+  static const custom_lists_add_to_custom_list_dialog = 'custom_lists.add_to_custom_list_dialog';
+  static const custom_lists_delete_item_error_txt = 'custom_lists.delete_item_error_txt';
+  static const custom_lists_slidable_remove_txt = 'custom_lists.slidable_remove_txt';
+  static const custom_lists = 'custom_lists';
 
 }

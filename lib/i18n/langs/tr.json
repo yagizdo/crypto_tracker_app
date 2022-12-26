@@ -29,7 +29,8 @@
     "auth_validation_empty_error": "Bu alan boş olamaz!",
     "auth_validation_name_length": "İsim en az 3 karakter olmalıdır.",
     "auth_validation_pw_length": "Şifre en az 6 karakter olmalıdır.",
-    "auth_validation_pw_match": "Parolalar uyuşmuyor."
+    "auth_validation_pw_match": "Parolalar uyuşmuyor.",
+    "custom_error": "Bir şeyler yanlış gitti!"
   },
   "auth": {
     "login": {
@@ -60,5 +61,44 @@
       "resend_email_btn": "E-postayı tekrar gönder",
       "cancel_btn": "Vazgeç"
     }
+  },
+  "currency": {
+    "row_name": "İsim",
+    "row_buy_price": "Alım Fiyatı {}",
+    "row_change": "Değişim",
+    "no_item": "Veri yok"
+  },
+  "settings": {
+    "title": "Ayarlar",
+    "edit_btn": "Profili Düzenle",
+    "change_language": "Dili değiştir",
+    "logout": "Çıkış Yap",
+    "delete_account": {
+      "alert_confirm": "Hesabımı silmek istiyorum.",
+      "alert_cancel": "Vazgeç",
+      "alert_title": "Hesabı Silmeyi Onayla",
+      "warning_one": "Verileriniz tamamen silinecek",
+      "warning_two": "Favorileriniz dahil tüm listeleriniz silinecek",
+      "warning_three": "Verilerinizi kurtaramayacaksınız",
+      "btn_txt": "Hesabımı sil"
+    }
+  },
+  "custom_lists": {
+    "title": "Listeleriniz",
+    "item_count": "Öğe",
+    "add_custom_list_dialog": {
+      "title": "Yeni liste ekle",
+      "hint": "Liste için bir ad girin",
+      "add_btn": "Listeyi ekle",
+      "list_name_already_exists_txt": "Liste adı zaten var"
+    },
+    "dialog_cancel_btn": "Vazgeç",
+    "add_to_custom_list_dialog": {
+      "title": "Listeye ekle",
+      "added_succes_txt": "{} listesine eklendi",
+      "added_error_txt": "Öğe zaten listede var"
+    },
+    "delete_item_error_txt": "Öğe listede yok",
+    "slidable_remove_txt": "Listeyi sil"
   }
 }

@@ -1,14 +1,26 @@
+import 'package:crypto_tracker/i18n/locale_keys.g.dart';
+import 'package:crypto_tracker/services/locator.dart';
+import 'package:crypto_tracker/services/navigation_service.dart';
 import 'package:crypto_tracker/utils/extensions/context_extension.dart';
+import 'package:crypto_tracker/widgets/custom_lists/custom_lists_name_card.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import '../utils/app_constants.dart';
+import '../bloc/favorites_bloc/favorites_bloc.dart';
+import '../utils/app_colors.dart';
+import '../utils/app_textstyles.dart';
 import '../widgets/main_widgets/tapWrapper.dart';
 
 class AlertHelper {
   AlertHelper._();
 
   static final shared = AlertHelper._();
+
+  final TextEditingController _listNameController = TextEditingController();
+  final NavigationService _navigationService = getIt<NavigationService>();
 
   void showCupertinoChooseDialog(
       {required BuildContext context,
@@ -24,7 +36,7 @@ class AlertHelper {
               onPressed: () {
                 Navigator.pop(context);
               },
-              child: const Text("Cancel"),
+              child: Text(LocaleKeys.settings_delete_account_alert_cancel.tr()),
             ),
             actions: actions,
           );
@@ -133,81 +145,119 @@ class AlertHelper {
     ));
   }
 
-  showRatingDialog(BuildContext context) {
-    // set up the buttons
-    Widget noButton = TextButton(
-      child: const Text(
-        "NO",
-      ),
-      onPressed: () {
-        Navigator.pop(context);
-      },
-    );
-    Widget sureButton = TapWrapper(
-        onTap: () {},
-        child: Container(
-          alignment: Alignment.center,
-          width: context.screenWidth * 0.3,
-          height: context.screenWidth * 0.08,
-          decoration: BoxDecoration(
-            color: Colors.pink,
-            borderRadius: BorderRadius.circular(30.5),
-          ),
-          child: const Text(
-            'SURE',
-          ),
-        ));
-
-    // set up the AlertDialog
-    Widget alert = AlertDialog(
-      title: const Text(
-        "We hope you’re enjoying!",
-        textAlign: TextAlign.center,
-      ),
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(12),
-        side:
-            BorderSide(color: Colors.white, width: context.screenWidth * 0.005),
-      ),
-      content: Container(
-        alignment: Alignment.center,
-        height: context.screenWidth * 0.45,
-        child: Padding(
-          padding: EdgeInsets.symmetric(horizontal: context.screenWidth * 0.05),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              const Text(
-                "We are a small team and we make apps for people to enjoy.",
-                textAlign: TextAlign.center,
+  // Future<void> parameter
+  Future<void> addCustomListDialog(BuildContext context) async {
+    return showDialog(
+        context: context,
+        builder: (context) {
+          return AlertDialog(
+            backgroundColor: AppColors.blueBackground,
+            title: Text(LocaleKeys.custom_lists_add_custom_list_dialog_title.tr()),
+            titleTextStyle: AppTextStyle.customListNameTitle(),
+            content: TextField(
+              controller: _listNameController,
+              decoration: InputDecoration(
+                  hintText: LocaleKeys.custom_lists_add_custom_list_dialog_hint.tr(),
+                  labelStyle: const TextStyle(color: AppColors.white),
+                  hintStyle: const TextStyle(color: AppColors.white)),
+            ),
+            actions: [
+              TextButton(
+                style: ButtonStyle(
+                  textStyle: MaterialStateProperty.all(
+                    AppTextStyle.addCustomListDialogBtnTxt(),
+                  ),
+                  foregroundColor: MaterialStateProperty.all(AppColors.white),
+                  backgroundColor: MaterialStateProperty.all(Colors.redAccent),
+                ),
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+                child: Text(LocaleKeys.custom_lists_dialog_cancel_btn.tr()),
               ),
-              height15Per(context: context),
-              const Text(
-                "Can you give us a good review?",
-                textAlign: TextAlign.center,
+              TextButton(
+                style: ButtonStyle(
+                  backgroundColor: MaterialStateProperty.all(AppColors.white),
+                ),
+                onPressed: () async {
+                  if (_listNameController.text.isNotEmpty) {
+                    BlocProvider.of<FavoritesBloc>(context)
+                        .add(AddCustomListEvent(_listNameController.text));
+                    _listNameController.clear();
+                    Navigator.pop(context);
+                  }
+                },
+                child: Text(LocaleKeys.custom_lists_add_custom_list_dialog_add_btn.tr()),
               ),
             ],
-          ),
-        ),
-      ),
-      actions: [
-        Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          mainAxisSize: MainAxisSize.max,
-          children: [
-            noButton,
-            sureButton,
-          ],
-        ),
-      ],
-    );
+          );
+        });
+  }
 
-    // show the dialog
-    showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return alert;
-      },
-    );
+  Future<void> addItemToCustomListDialog(
+      {required BuildContext context, required String itemName}) async {
+    return showDialog(
+        context: context,
+        builder: (context) {
+          return AlertDialog(
+            backgroundColor: AppColors.blueBackground,
+            title: Text(LocaleKeys.custom_lists_add_to_custom_list_dialog_title.tr()),
+            titleTextStyle: AppTextStyle.customListNameTitle(),
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(12),
+            ),
+            content: BlocBuilder<FavoritesBloc, FavoritesState>(
+              builder: (context, state) {
+                if (state is CustomListNamesLoadedState) {
+                  return SizedBox(
+                    height: 400.w,
+                    width: 500.w,
+                    child: ListView.builder(
+                      shrinkWrap: true,
+                      itemCount: state.customListNames.length,
+                      itemBuilder: (context, index) {
+                        return TapWrapper(
+                            onTap: () {
+                              BlocProvider.of<FavoritesBloc>(context).add(
+                                  AddItemToCustomListEvent(
+                                      listName: state.customListNames[index],
+                                      itemName: itemName));
+                              _navigationService.showSuccessSnackbar(errorMessage: LocaleKeys.custom_lists_add_to_custom_list_dialog_added_succes_txt.tr(args: [state.customListNames[index]]));
+                              Navigator.pop(context);
+                            },
+                            child: CustomListsNameCard(
+                              listName: state.customListNames[index],
+                            ));
+                      },
+                    ),
+                  );
+                } else {
+                  return SizedBox(
+                    height: 400.w,
+                    width: 500.w,
+                    child: const Center(
+                      child: CircularProgressIndicator(),
+                    ),
+                  );
+                }
+              },
+            ),
+            actions: [
+              TextButton(
+                style: ButtonStyle(
+                  textStyle: MaterialStateProperty.all(
+                    AppTextStyle.addCustomListDialogBtnTxt(),
+                  ),
+                  foregroundColor: MaterialStateProperty.all(AppColors.white),
+                  backgroundColor: MaterialStateProperty.all(Colors.redAccent),
+                ),
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+                child: Text(LocaleKeys.custom_lists_dialog_cancel_btn.tr(),style: AppTextStyle.addCustomListDialogCancelBtnTxt(),),
+              ),
+            ],
+          );
+        });
   }
 }

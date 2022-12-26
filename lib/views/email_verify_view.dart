@@ -61,7 +61,8 @@ class _EmailVerifyViewState extends State<EmailVerifyView> {
   Widget build(BuildContext context) {
     return MainLayout(
       appBar: AppBar(
-        backgroundColor: AppColors.blackBackground,
+        backgroundColor: Colors.transparent,
+        elevation: 0,
         title: Text(LocaleKeys.auth_email_verify_title.tr(),style: TextStyle(color: CupertinoColors.white,fontSize: 20.sp,fontWeight: FontWeight.bold)),
       ),
       content: Center(

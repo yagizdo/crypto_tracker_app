@@ -1,13 +1,10 @@
-import 'package:crypto_tracker/utils/app_textstyles.dart';
+import 'package:crypto_tracker/bloc/favorites_bloc/favorites_bloc.dart';
 import 'package:crypto_tracker/widgets/main_widgets/main_layout.dart';
-import 'package:crypto_tracker/widgets/main_widgets/tapWrapper.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../services/auth/auth_service.dart';
-import '../services/locator.dart';
-import '../utils/app_colors.dart';
-import 'onboarding_view.dart';
+import '../widgets/custom_lists/custom_list_content.dart';
+
 
 class HomeView extends StatefulWidget {
   const HomeView({Key? key}) : super(key: key);
@@ -17,46 +14,17 @@ class HomeView extends StatefulWidget {
 }
 
 class _HomeViewState extends State<HomeView> {
-  final AuthService _authService = getIt<AuthService>();
+
+  @override
+  void initState() {
+    super.initState();
+    BlocProvider.of<FavoritesBloc>(context,listen: false).add(GetCustomListNamesEvent());
+  }
   @override
   Widget build(BuildContext context) {
-    return MainLayout(
-      appBar: _buildHomeAppBar(),
+    return const MainLayout(
       content: Center(
-        child: Text(
-          'Home',
-          style: AppTextStyle.homeText(),
-        ),
-      ),
-    );
-  }
-
-  PreferredSize _buildHomeAppBar() {
-    return PreferredSize(
-      preferredSize: Size(0, 80.w),
-      child: Padding(
-        padding: EdgeInsets.only(top: 50.w),
-        child: AppBar(
-          backgroundColor: AppColors.blackBackground,
-          elevation: 0,
-          title: Text(
-            'Home',
-            style: TextStyle(
-              color: AppColors.white,
-              fontSize: 30.sp,
-              fontWeight: FontWeight.w600,
-            ),
-          ),
-          actions: [
-            Padding(
-              padding: EdgeInsets.only(right: 10.w),
-              child: TapWrapper(onTap: (){
-                _authService.logout();
-                Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => OnboardingView()));
-              }, child: const Icon(Icons.logout)),
-            )
-          ],
-        ),
+        child: CustomListContent(),
       ),
     );
   }

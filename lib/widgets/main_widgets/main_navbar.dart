@@ -1,61 +1,50 @@
+import 'package:dot_navigation_bar/dot_navigation_bar.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:persistent_bottom_nav_bar_v2/persistent-tab-view.dart';
 
 import '../../utils/app_colors.dart';
 
 class MainNavbar extends StatelessWidget {
-  const MainNavbar({Key? key, required this.tabs}) : super(key: key);
-  final List<Widget> tabs;
+  MainNavbar({Key? key, required this.onTabChanged, required this.currentIndex}) : super(key: key);
+  final ValueSetter<int> onTabChanged;
+  int currentIndex;
   @override
   Widget build(BuildContext context) {
-    return PersistentTabView(
-      context,
-      navBarStyle: NavBarStyle.style3,
-      //backgroundColor: AppColors.blackBackground,
-      decoration: const NavBarDecoration(
-        gradient: LinearGradient(
-          colors: [AppColors.blackBackground, AppColors.navbarColorsOne],
-        ),
+    return DotNavigationBar(
+      backgroundColor: AppColors.white,
+      borderRadius: 15.w,
+      curve: Curves.easeIn,
+      duration: const Duration(milliseconds: 200),
+      selectedItemColor: AppColors.blueBackground,
+      unselectedItemColor: AppColors.blackBackground.withOpacity(0.5),
+      paddingR:
+      EdgeInsets.only(right: 20.w, left: 20.w, top: 8.w, bottom: 8.w),
+      marginR: EdgeInsets.only(
+        right: 15.w,
+        left: 15.w,
+        bottom: 20.w,
       ),
-      screens: tabs,
-      screenTransitionAnimation: const ScreenTransitionAnimation( // Screen transition animation on change of selected tab.
-        animateTabTransition: true,
-        curve: Curves.linear,
-        duration: Duration(milliseconds: 200),
+      itemPadding: EdgeInsets.symmetric(
+        horizontal: 15.w,
+        vertical: 5.w,
       ),
-      navBarHeight: 60.w,
+      currentIndex: currentIndex,
+      onTap: onTabChanged,
       items: [
-        // Home
-        PersistentBottomNavBarItem(
-            activeColorPrimary: CupertinoColors.systemBackground,
-            inactiveColorPrimary: CupertinoColors.inactiveGray,
-            activeColorSecondary: Colors.white,
-            iconSize: 23.w,
-            icon: const Icon(Icons.home),
-            textStyle: TextStyle(fontSize: 11.sp),
-            title: 'Home'),
-
-        // Coins
-        PersistentBottomNavBarItem(
-            activeColorPrimary: CupertinoColors.white,
-            inactiveColorPrimary: CupertinoColors.inactiveGray,
-            activeColorSecondary: CupertinoColors.white,
-            icon: const Icon(Icons.sports_football),
-            textStyle: TextStyle(fontSize: 11.sp),
-            title: 'Coins'),
-
-        // Settings
-        PersistentBottomNavBarItem(
-            activeColorPrimary: CupertinoColors.white,
-            inactiveColorPrimary: CupertinoColors.inactiveGray,
-            activeColorSecondary: Colors.white,
-            textStyle: TextStyle(fontSize: 11.sp),
-            icon: const Icon(Icons.settings),
-            title: 'Settings'),
+        DotNavigationBarItem(
+          icon: const Icon(Icons.star),
+        ),
+        DotNavigationBarItem(
+          icon: const Icon(Icons.attach_money),
+        ),
+        DotNavigationBarItem(
+          icon: const Icon(Icons.currency_bitcoin_outlined),
+        ),
+        DotNavigationBarItem(
+          icon: const Icon(Icons.settings),
+        ),
       ],
     );
-    ;
   }
 }

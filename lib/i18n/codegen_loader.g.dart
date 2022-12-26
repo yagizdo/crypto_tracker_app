@@ -45,7 +45,8 @@ class CodegenLoader extends AssetLoader{
     "auth_validation_empty_error": "Bu alan boş olamaz!",
     "auth_validation_name_length": "İsim en az 3 karakter olmalıdır.",
     "auth_validation_pw_length": "Şifre en az 6 karakter olmalıdır.",
-    "auth_validation_pw_match": "Parolalar uyuşmuyor."
+    "auth_validation_pw_match": "Parolalar uyuşmuyor.",
+    "custom_error": "Bir şeyler yanlış gitti!"
   },
   "auth": {
     "login": {
@@ -76,6 +77,45 @@ class CodegenLoader extends AssetLoader{
       "resend_email_btn": "E-postayı tekrar gönder",
       "cancel_btn": "Vazgeç"
     }
+  },
+  "currency": {
+    "row_name": "İsim",
+    "row_buy_price": "Alım Fiyatı {}",
+    "row_change": "Değişim",
+    "no_item": "Veri yok"
+  },
+  "settings": {
+    "title": "Ayarlar",
+    "edit_btn": "Profili Düzenle",
+    "change_language": "Dili değiştir",
+    "logout": "Çıkış Yap",
+    "delete_account": {
+      "alert_confirm": "Hesabımı silmek istiyorum.",
+      "alert_cancel": "Vazgeç",
+      "alert_title": "Hesabı Silmeyi Onayla",
+      "warning_one": "Verileriniz tamamen silinecek",
+      "warning_two": "Favorileriniz dahil tüm listeleriniz silinecek",
+      "warning_three": "Verilerinizi kurtaramayacaksınız",
+      "btn_txt": "Hesabımı sil"
+    }
+  },
+  "custom_lists": {
+    "title": "Listeleriniz",
+    "item_count": "Öğe",
+    "add_custom_list_dialog": {
+      "title": "Yeni liste ekle",
+      "hint": "Liste için bir ad girin",
+      "add_btn": "Listeyi ekle",
+      "list_name_already_exists_txt": "Liste adı zaten var"
+    },
+    "dialog_cancel_btn": "Vazgeç",
+    "add_to_custom_list_dialog": {
+      "title": "Listeye ekle",
+      "added_succes_txt": "{} listesine eklendi",
+      "added_error_txt": "Öğe zaten listede var"
+    },
+    "delete_item_error_txt": "Öğe listede yok",
+    "slidable_remove_txt": "Listeyi sil"
   }
 };
 static const Map<String,dynamic> en = {
@@ -109,7 +149,8 @@ static const Map<String,dynamic> en = {
     "auth_validation_empty_error": "This field cannot be empty!",
     "auth_validation_name_length": "Name must be at least 3 characters.",
     "auth_validation_pw_length": "Password must be at least 6 characters.",
-    "auth_validation_pw_match": "Passwords do not match."
+    "auth_validation_pw_match": "Passwords do not match.",
+    "custom_error": "Something went wrong!"
   },
   "auth": {
     "login": {
@@ -140,6 +181,45 @@ static const Map<String,dynamic> en = {
       "resend_email_btn": "Resend Email",
       "cancel_btn": "Cancel"
     }
+  },
+  "currency": {
+    "row_name": "Name",
+    "row_buy_price": "Buy Price {}",
+    "row_change": "Change",
+    "no_item": "No Data"
+  },
+  "settings": {
+    "title": "Settings",
+    "edit_btn": "Edit Profile",
+    "change_language": "Change Language",
+    "logout": "Logout",
+    "delete_account": {
+      "alert_confirm": "I want to delete my account.",
+      "alert_cancel": "Cancel",
+      "alert_title": "Confirm Delete Account",
+      "warning_one": "Your data will be completely deleted",
+      "warning_two": "All your lists, including your favorites, will be deleted",
+      "warning_three": "You will not be able to recover your data",
+      "btn_txt": "Delete my account"
+    }
+  },
+  "custom_lists": {
+    "title": "Your Lists",
+    "item_count": "Items",
+    "add_custom_list_dialog": {
+      "title": "Add a new list",
+      "hint": "Enter a name for the list",
+      "add_btn": "Add List",
+      "list_name_already_exists_txt": "List name already exists"
+    },
+    "dialog_cancel_btn": "Cancel",
+    "add_to_custom_list_dialog": {
+      "title": "Add to a list",
+      "added_succes_txt": "Added to {} list",
+      "added_error_txt": "Item already exists in the list"
+    },
+    "delete_item_error_txt": "Item does not exist in the list",
+    "slidable_remove_txt": "Delete list"
   }
 };
 static const Map<String, Map<String,dynamic>> mapLocales = {"tr": tr, "en": en};

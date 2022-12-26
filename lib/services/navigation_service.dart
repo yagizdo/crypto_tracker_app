@@ -1,3 +1,4 @@
+import 'package:crypto_tracker/views/auth_view.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -7,6 +8,20 @@ class NavigationService {
   Future<dynamic> navigateTo(String routeName) {
     return navigatorKey.currentState!.pushReplacementNamed(routeName);
   }
+  
+  Future<dynamic> navigatePush(Widget route) {
+    return navigatorKey.currentState!.push(MaterialPageRoute(builder: (context) => route));
+  }
+
+  Future<dynamic> navigateBackToAuth() {
+    return navigatorKey.currentState!.pushAndRemoveUntil(MaterialPageRoute(builder: (context) => const AuthView()), (route) => false);
+  }
+
+  // Use this method to navigate back to the previous screen
+  void goBack() {
+    return navigatorKey.currentState!.pop();
+  }
+
 
   void showErrorSnackbar({required String errorMessage}) {
     SnackBar snackbar = SnackBar(

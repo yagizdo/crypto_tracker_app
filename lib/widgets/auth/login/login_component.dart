@@ -73,6 +73,7 @@ class _LoginComponentState extends State<LoginComponent> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
+        height3Per(context: context),
         _loginFormComp(),
         height2Per(context: context),
         Padding(
@@ -81,7 +82,10 @@ class _LoginComponentState extends State<LoginComponent> {
               onPressed: () {
                 widget.onRegisterChanged(AuthFormState.resetPassword);
               },
-    child: Text(LocaleKeys.auth_login_forgot_pass_txt.tr())),
+              child: Text(
+                LocaleKeys.auth_login_forgot_pass_txt.tr(),
+                style: AppTextStyle.authTextButton(),
+              )),
         ),
         height5Per(context: context),
         _loginButton(),
@@ -90,7 +94,10 @@ class _LoginComponentState extends State<LoginComponent> {
             onPressed: () {
               widget.onRegisterChanged(AuthFormState.register);
             },
-            child: Text(LocaleKeys.auth_login_dont_have_acc_txt.tr())),
+            child: Text(
+              LocaleKeys.auth_login_dont_have_acc_txt.tr(),
+              style: AppTextStyle.authTextButton(),
+            )),
         height5Per(context: context),
         HorizontalOrLine(
           label: LocaleKeys.auth_login_or_txt.tr().toUpperCase(),
@@ -140,7 +147,7 @@ class _LoginComponentState extends State<LoginComponent> {
         }
       },
       child: Container(
-        width: 250.w,
+        width: 332.9.w,
         height: 40.w,
         decoration: BoxDecoration(
           color: Colors.white,
