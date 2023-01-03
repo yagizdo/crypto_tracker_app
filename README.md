@@ -52,7 +52,8 @@ Run App
 
 
 ## App Video
-Soon..
+
+https://user-images.githubusercontent.com/31064552/210360464-ce96ba9f-6e6f-41c8-a414-640af6cb6e73.mp4
 
 
 ## Contributing
