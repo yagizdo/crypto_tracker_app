@@ -1,6 +1,6 @@
 # Crypto Tracker
 
-Crypto Tracker App I made with Flutter.
+Crypto Tracker App I made to learn how to use Firebase auth and Firebase Firestore.
 
 
 ## Run Locally
