@@ -6,12 +6,14 @@ import 'package:crypto_tracker/widgets/custom_lists/custom_lists_name_card.dart'
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../bloc/favorites_bloc/favorites_bloc.dart';
 import '../utils/app_colors.dart';
 import '../utils/app_textstyles.dart';
+import '../utils/extensions/validation_query.dart';
 import '../widgets/main_widgets/tapWrapper.dart';
 
 class AlertHelper {
@@ -21,6 +23,7 @@ class AlertHelper {
 
   final TextEditingController _listNameController = TextEditingController();
   final NavigationService _navigationService = getIt<NavigationService>();
+  final _formKey = GlobalKey<FormState>();
 
   void showCupertinoChooseDialog(
       {required BuildContext context,
@@ -154,12 +157,20 @@ class AlertHelper {
             backgroundColor: AppColors.blueBackground,
             title: Text(LocaleKeys.custom_lists_add_custom_list_dialog_title.tr()),
             titleTextStyle: AppTextStyle.customListNameTitle(),
-            content: TextField(
-              controller: _listNameController,
-              decoration: InputDecoration(
-                  hintText: LocaleKeys.custom_lists_add_custom_list_dialog_hint.tr(),
-                  labelStyle: const TextStyle(color: AppColors.white),
-                  hintStyle: const TextStyle(color: AppColors.white)),
+            content: Form(
+              key: _formKey,
+              child: TextFormField(
+                controller: _listNameController,
+                inputFormatters: [
+                  // Add custom query formatter in Validation Query class
+                  FilteringTextInputFormatter.allow(ValidationQuery.customListNameValidationQuery),
+
+                ],
+                decoration: InputDecoration(
+                    hintText: LocaleKeys.custom_lists_add_custom_list_dialog_hint.tr(),
+                    labelStyle: const TextStyle(color: AppColors.white),
+                    hintStyle: const TextStyle(color: AppColors.white)),
+              ),
             ),
             actions: [
               TextButton(
